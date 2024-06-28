@@ -130,32 +130,33 @@ def get_path(id, date):
 def collect_result(driver, links):
     result = []
     for link in links:
-        con = sqlite3.connect(USER_DATA)
-        cur = con.cursor()
-        current_datetime = get_date()
-        sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
-        webpage = sql_result.fetchone()
-        if not webpage or not compare_date(webpage[1]): #if the entry was not found or the entry is too old, get new one
-            text = scrape_text(driver, link)
-            if webpage: #if the entry was found but is too old
-                print("old file detected and deleted")
-                cur.execute("DELETE FROM webpage WHERE url = ?", [link])
-
-            cur.execute("INSERT INTO webpage (url, date) VALUES (?, ?)", [link, current_datetime])
-            
+        if link:
+            con = sqlite3.connect(USER_DATA)
+            cur = con.cursor()
+            current_datetime = get_date()
             sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
             webpage = sql_result.fetchone()
-            path = get_path(webpage[0], current_datetime)
-            with open(path, "wb") as f:
-                pickle.dump(text, f)
-            print("new file created: " + path)
-            con.commit()
-        else:
-            path = get_path(webpage[0], webpage[1])
-            print("reading existing file: " + path)
-            with open(path, "rb") as f:
-                text = pickle.load(f)
-        result.append(text)
+            if not webpage or not compare_date(webpage[1]): #if the entry was not found or the entry is too old, get new one
+                text = scrape_text(driver, link)
+                if webpage: #if the entry was found but is too old
+                    print("old file detected and deleted")
+                    cur.execute("DELETE FROM webpage WHERE url = ?", [link])
+
+                cur.execute("INSERT INTO webpage (url, date) VALUES (?, ?)", [link, current_datetime])
+                
+                sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
+                webpage = sql_result.fetchone()
+                path = get_path(webpage[0], current_datetime)
+                with open(path, "wb") as f:
+                    pickle.dump(text, f)
+                print("new file created: " + path)
+                con.commit()
+            else:
+                path = get_path(webpage[0], webpage[1])
+                print("reading existing file: " + path)
+                with open(path, "rb") as f:
+                    text = pickle.load(f)
+            result.append(text)
        
     return result
 

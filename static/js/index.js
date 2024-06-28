@@ -12,11 +12,29 @@
         qs("#login p").addEventListener("click", displayRegister);
         qs("#textbox input").addEventListener("change", toggleSubmit);
         id("textbox").addEventListener("submit", makeRequest);
-        qs("#ui button").addEventListener("click", signOut);
+        id("signout-btn").addEventListener("click", signOut);
+        id("clear-btn").addEventListener("click", clearHistory);
 
         await checkCookie();
     }
     
+    async function clearHistory() {
+        try {
+            let params = new FormData();
+            params.append("username", (await cookieStore.get("username")).value);
+            let res = await fetch("/clear", {
+                method: "POST",
+                body: params
+            });
+            await statusCheck(res);
+            await makeChatRequest();
+            id("chat").innerHTML = "";
+        } catch (err) {
+            console.log(err);
+            handleError("chat");
+        }
+    }
+
     async function checkCookie() {
         if (await cookieStore.get("username")) {
             await displayHome();
@@ -66,7 +84,7 @@
             populateSidebar(res);
         } catch (err) {
             console.log(err);
-            handleError();
+            handleError("chat");
         }
     }
 
@@ -115,7 +133,7 @@
             await statusCheck(res);
             await makeChatRequest();
         } catch (err) {
-            handleError();
+            handleError("chat");
         }
     }
     function populateChat(res) {
@@ -145,7 +163,7 @@
             await displayHome();
         } catch (err) {
             console.log(err);
-            handleError();
+            handleError("register");
         }
     }
 
@@ -167,7 +185,7 @@
             await displayHome();
         } catch (err) {
             console.log(err);
-            handleError();
+            handleError("login");
         }
     }
 
@@ -202,7 +220,7 @@
             await makeChatRequest();
         } catch (err) {
             console.log(err);
-            handleError();
+            handleError("chat");
         }
     }
 
@@ -255,15 +273,15 @@
             }
         } catch (err) {
             console.log(err);
-            handleError();
+            handleError("chat");
         }
     }
 
-    function handleError() {
+    function handleError(section) {
         let error = document.createElement("p");
         error.textContent = "An Error Occured. Try Again Later!";
         error.classList.add("error");
-        id("chat").prepend(error);
+        id(section).prepend(error);
     }
     /**
      * Returns the element that has the ID attribute with the specified value.

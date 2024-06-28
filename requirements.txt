@@ -1,0 +1,19 @@
+# Flask and related packages
+Flask==2.3.2
+Flask-Cors==4.0.1
+
+# Web scraping
+selenium==4.10.0
+beautifulsoup4==4.12.2
+
+# Google Generative AI
+google-generativeai==0.3.0
+
+# Natural Language Processing
+spacy==3.5.2
+
+# Security
+argon2-cffi==21.3.0
+
+# Other dependencies
+pickle5==0.0.11  # pickle does not need to be installed separately, it's part of Python's standard library

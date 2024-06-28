@@ -1,7 +1,9 @@
 #third-party lib
 from flask import Flask, render_template, request, Response, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 #python lib
 import uuid
@@ -35,10 +37,12 @@ def register():
                 password = hash_password(password)
                 cur.execute("INSERT INTO user (username, password, email) VALUES (?, ?, ?)", [username, password, email])
                 con.commit()
+                con.close()
                 return Response("successful", status=200, mimetype="text/plain")
             else:
                 return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
         except:
+            logging.error("An error occured", exc_info=True)
             return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
     else:
         return Response(HTTP_ERROR_MSG, status=400, mimetype="text/plain")
@@ -53,6 +57,7 @@ def login():
                 con = sqlite3.connect(USER_DATA)
                 cur = con.cursor()
                 res = cur.execute("SELECT password FROM user WHERE username = ?", [username])
+                con.close()
                 if is_valid_password(password, res.fetchone()[0]):
                     return Response("successful", status=200, mimetype="text/plain")
                 else:
@@ -80,6 +85,7 @@ def get_response():
             cur = con.cursor()
             cur.execute("INSERT INTO chat (username, query, response, date) VALUES (?, ?, ?, ?)", [username, query, res, current_datetime])
             con.commit()
+            con.close()
 
             return Response(res, status=200, mimetype="text/plain")
         except:
@@ -97,11 +103,12 @@ def get_all_chat(username):
         results = results.fetchall()
         if not results:
             results = []
+        con.close()
         return jsonify([list(result) for result in results])
     except:
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
 
-@app.route("/delete", methods=['POST'])
+@app.route("/delete", methods=["POST"])
 def delete():
     id = request.form["id"]
     if id:
@@ -110,8 +117,26 @@ def delete():
             cur = con.cursor()
             cur.execute("DELETE FROM chat WHERE id = ?", [id])
             con.commit()
+            con.close()
             return Response("successful", status=200, mimetype="text/plain")
         except:
+            return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
+    else:
+        return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
+
+@app.route("/clear", methods=["POST"])
+def clear():
+    username = request.form["username"]
+    if username:
+        try:
+            con = sqlite3.connect(USER_DATA)
+            cur = con.cursor()
+            cur.execute("DELETE FROM chat WHERE username = ?", [username])
+            con.commit()
+            con.close()
+            return Response("successful", status=200, mimetype="text/plain")
+        except:
+            logging.error("An error occured", exc_info=True)
             return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
     else:
         return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
