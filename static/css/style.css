@@ -1,0 +1,129 @@
+body {
+    background-color: rgb(91, 91, 91);
+    color: white;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+#textbox, #textbox button, #textbox input {
+    width: 50%;
+    margin: auto;
+}
+
+#textbox button, #textbox input {
+    border-radius: 5px;
+    height: 25px;
+}
+
+#textbox input, button {
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 20px;
+}
+
+#chat {
+    height: 80vh;
+    width: 80vw;
+    margin: auto;
+    border: gray solid 5px;
+    background-color: lightgray;
+    overflow-y: auto;
+}
+
+.chat-entry {
+    display: flex;
+    height: auto;
+    width: 80vw;
+    border-radius: 5px;
+    padding: 10px;
+    line-height: 1.5;
+    white-space: break-spaces;
+    color: black;
+    font-size: 19px
+}
+
+.response {
+    background-color: darkgray;
+}
+
+.question{
+    background-color: white;
+}
+
+.error {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
+#login, #register {
+    margin: auto;
+    height: 200px;
+    width: 300px;
+    border: solid gray 3px;
+    background-color: rgb(231, 228, 201);
+    border-radius: 10px;
+}
+
+form {
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#login p {
+    color: blue;
+}
+
+#login p:hover {
+    color: green;
+}
+
+button {
+    border-radius: 50px;
+    margin: 10px;
+}
+
+#login p {
+    text-align: center;
+}
+
+#home > section {
+    display: flex;
+}
+
+#sidebar {
+    border: white solid 3px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+}
+
+#sidebar h2 {
+    text-decoration: underline;
+}
+
+#sidebar h3 {
+    font-size: 16px;
+}
+
+#sidebar h2:hover, #sidebar h3:hover {
+    color: rgb(187, 178, 178);
+}
+
+img {
+    margin: 20px;
+    height: 50px;
+    width: 50px;
+}
+
+h1 {
+    text-align: center;
+}
