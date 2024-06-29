@@ -57,8 +57,9 @@ def login():
                 con = sqlite3.connect(USER_DATA)
                 cur = con.cursor()
                 res = cur.execute("SELECT password FROM user WHERE username = ?", [username])
+                real_password = res.fetchone()[0]
                 con.close()
-                if is_valid_password(password, res.fetchone()[0]):
+                if is_valid_password(password, real_password):
                     return Response("successful", status=200, mimetype="text/plain")
                 else:
                     return Response("Wrong username or password", status=400, mimetype="text/plain")
@@ -77,6 +78,7 @@ def get_response():
     if query and username:
         try:
             driver, links = search_google(query)
+            links = [link for link in links if link is not None]
             result = collect_result(driver, links)
             res = get_AI_response(query, result)
             current_datetime = get_date()
@@ -87,7 +89,7 @@ def get_response():
             con.commit()
             con.close()
 
-            return Response(res, status=200, mimetype="text/plain")
+            return jsonify([res, links])
         except:
             logging.error("An error occurred", exc_info=True)
             return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")

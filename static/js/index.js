@@ -213,8 +213,10 @@
                 body: params
             });
             await statusCheck(res);
-            res = await res.text();
-            displayEntry(res, true);
+            res = await res.json();
+            let aiResponse = res[0];
+            let links = res[1];
+            displayEntry(aiResponse, true, links);
             qs("#textbox button").disabled = false;
             qs("#textbox input").value = "";
             await makeChatRequest();
@@ -224,10 +226,22 @@
         }
     }
 
-    function displayEntry(res, response) {
+    function displayEntry(res, response, links=null) {
         let resTextbox = document.createElement("article");
         let text = document.createElement("p");
         text.textContent = res;
+
+        if (links) {
+            text.textContent = text.textContent + "\n" +  "References: ";
+            for (let i = 0; i < links.length; i++) {
+                text.textContent = text.textContent + "\n" + (i+1) + ") ";
+                let urlElement = document.createElement("a");
+                urlElement.href = links[i];
+                urlElement.textContent = links[i];
+                text.appendChild(urlElement);
+            }
+        }
+
         resTextbox.appendChild(text);
         resTextbox.classList.add("chat-entry");
         if (response) {
@@ -241,7 +255,7 @@
             img.src = "static/images/user.png";
             resTextbox.prepend(img);
         }
-        id("chat").prepend(resTextbox);
+        id("chat").appendChild(resTextbox);
     }
 
     async function feedQuestions(e) {
@@ -281,7 +295,7 @@
         let error = document.createElement("p");
         error.textContent = "An Error Occured. Try Again Later!";
         error.classList.add("error");
-        id(section).prepend(error);
+        id(section).appendChild(error);
     }
     /**
      * Returns the element that has the ID attribute with the specified value.
