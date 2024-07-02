@@ -9,6 +9,7 @@ CORS(app)
 import uuid
 import sqlite3
 import logging
+import json
 
 #my lib
 from main import *
@@ -82,10 +83,11 @@ def get_response():
             result = collect_result(driver, links)
             res = get_AI_response(query, result)
             current_datetime = get_date()
-
+            json_links = json.dumps(links)
+            
             con = sqlite3.connect(USER_DATA)
             cur = con.cursor()
-            cur.execute("INSERT INTO chat (username, query, response, date) VALUES (?, ?, ?, ?)", [username, query, res, current_datetime])
+            cur.execute("INSERT INTO chat (username, query, response, date, links) VALUES (?, ?, ?, ?, ?)", [username, query, res, current_datetime, json_links])
             con.commit()
             con.close()
 

@@ -141,7 +141,7 @@
         for(let i = 0; i < res.length; i++) {
             let entry = res[i];
             displayEntry(entry[2], false);
-            displayEntry(entry[3], true);
+            displayEntry(entry[3], true, JSON.parse(entry[5]));
         }
     }
 
@@ -201,6 +201,7 @@
     async function makeRequest(e) {
         try{
             e.preventDefault();
+            qs("#chat > img").classList.remove("hidden");
             let query = qs("#textbox input").value;
             displayEntry(query, false);
             qs("#textbox button").disabled = true;
@@ -217,6 +218,7 @@
             let aiResponse = res[0];
             let links = res[1];
             displayEntry(aiResponse, true, links);
+            qs("#chat > img").classList.add("hidden");
             qs("#textbox button").disabled = false;
             qs("#textbox input").value = "";
             await makeChatRequest();
@@ -232,12 +234,17 @@
         text.textContent = res;
 
         if (links) {
-            text.textContent = text.textContent + "\n" +  "References: ";
+            // Create a text node for the initial text and the "References:" label
+            text.appendChild(document.createTextNode("\nReferences: "));
             for (let i = 0; i < links.length; i++) {
-                text.textContent = text.textContent + "\n" + (i+1) + ") ";
+                // Create a text node for the link index and description
+                text.appendChild(document.createTextNode("\n" + (i + 1) + ") "));
+        
                 let urlElement = document.createElement("a");
                 urlElement.href = links[i];
                 urlElement.textContent = links[i];
+                
+                // Append the anchor element
                 text.appendChild(urlElement);
             }
         }
