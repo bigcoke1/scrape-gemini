@@ -72,6 +72,7 @@
         id("home").classList.remove("hidden");
         id("login").classList.add("hidden");
         id("register").classList.add("hidden");
+        id("chat").innerHTML = "";
 
         await makeChatRequest();
     }
@@ -202,9 +203,9 @@
     async function makeRequest(e) {
         try{
             e.preventDefault();
-            qs("#chat > img").classList.remove("hidden");
             let query = qs("#textbox input").value;
             displayEntry(query, false);
+            let loading = displayLoading();
             qs("#textbox button").disabled = true;
             let username = (await cookieStore.get("username")).value;
             let params = new FormData();
@@ -218,8 +219,9 @@
             res = await res.json();
             let aiResponse = res[0];
             let links = res[1];
+            loading.remove();
             displayEntry(aiResponse, true, links);
-            qs("#chat > img").classList.add("hidden");
+
             qs("#textbox button").disabled = false;
             qs("#textbox input").value = "";
             await makeChatRequest();
@@ -227,6 +229,25 @@
             console.log(err);
             handleError("chat");
         }
+    }
+
+    function displayLoading() {
+        let resTextbox = document.createElement("article");
+        let aiImage = document.createElement("img");
+        aiImage.src = "static/images/AI.png";
+        resTextbox.prepend(aiImage);
+
+        let loadingImage = document.createElement("img");
+        loadingImage.src = "static/images/loading.gif";
+        resTextbox.appendChild(loadingImage);
+        resTextbox.classList.add("chat-entry");
+        resTextbox.classList.add("response");
+        resTextbox.classList.add("shadow");
+
+        id("chat").appendChild(resTextbox);
+        id("chat").scrollTop = id("chat").scrollHeight;
+
+        return resTextbox;
     }
 
     function displayEntry(res, response, links=null) {
@@ -263,6 +284,7 @@
             img.src = "static/images/user.png";
             resTextbox.appendChild(img);
         }
+        resTextbox.classList.add("shadow");
         id("chat").appendChild(resTextbox);
     }
 
@@ -314,6 +336,7 @@
             qs("#register p").classList.add("hidden");
         }, 3000);
     }
+
     /**
      * Returns the element that has the ID attribute with the specified value.
      * @param {string} id - element ID.

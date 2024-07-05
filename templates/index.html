@@ -31,7 +31,7 @@
             <button>Return to Log In</button>
         </section>
         <section id="home" class="hidden">
-            <section id="ui">
+            <section id="ui" class="shadow">
                 <h1>Scrape Gemini</h1>
                 <section id="ui-buttons">
                     <button id="signout-btn">Sign out</button>
@@ -39,14 +39,12 @@
                 </section>
             </section>
             <section>
-                <section id="sidebar"></section>
-                <section id="chat" class="shadow">
-                    <img src="/static/images/loading.gif" alt="loading" class="hidden">
-                </section>
+                <section id="sidebar" class="shadow"></section>
+                <section id="chat" class="shadow"></section>
             </section>
             <form id="textbox">
-                <input type="text" placeholder="ask a question..." name="query">
-                <button id="submit" disabled>Submit</button>
+                <input type="text" placeholder="ask a question..." name="query" class="shadow">
+                <button id="submit" disabled class="shadow">Submit</button>
             </form>
         </section>
     </body>

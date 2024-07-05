@@ -10,10 +10,12 @@ import pickle
 import google.generativeai as genai
 import spacy
 from argon2 import PasswordHasher
+import dropbox
 
 ph = PasswordHasher()
 USER_DATA = "user_data.db"
 nlp = spacy.load('en_core_web_sm')
+dbx = dropbox.Dropbox(os.environ("DROPBOX_API_KEY"))
 
 #python
 from datetime import datetime, timedelta
@@ -120,12 +122,43 @@ def get_date():
 
     return current_datetime
 
-def get_path(id, date):
+
+def get_local_path(id, date):
     data_folder = "data"
-    path = str(id) + "-" + date + ".pickle"  
+    path = str(id) + "-" + date + ".pickle"
     path = os.path.join(data_folder, path)
 
     return path
+
+
+def get_dropbox_path(id, date):
+    data_folder = "/scrape-gemini-cache/"
+    path = data_folder + str(id) + "-" + date + ".pickle"
+    
+    return path
+
+def download_and_upload(text, local_path, dropbox_path):
+    with open(local_path, "wb") as f:
+        pickle.dump(text, f)
+    
+    with open(local_path, "rb") as f:
+        dbx.files_upload(f.read(), dropbox_path)
+
+    os.remove(local_path)
+    print("new file created: " + dropbox_path)
+
+def download_and_read(local_path, dropbox_path):
+    metadata, res = dbx.files_download(dropbox_path)
+    print("reading existing file: " + dropbox_path)
+
+    with open(local_path, "wb") as f:
+        pickle.dump(res.content)
+
+    with open(local_path, "rb") as f:
+        text = pickle.load(f)
+    
+    os.remove(local_path)
+    return text
 
 def collect_result(driver, links):
     result = []
@@ -141,21 +174,27 @@ def collect_result(driver, links):
                 if webpage: #if the entry was found but is too old
                     print("old file detected and deleted")
                     cur.execute("DELETE FROM webpage WHERE url = ?", [link])
+                    dropbox_path = get_dropbox_path(webpage[0], webpage[1])
+                    try:
+                        dbx.files_delete_v2(dropbox_path)
+                    except Exception as e:
+                        print(f"An Error Occured: {e}")
 
                 cur.execute("INSERT INTO webpage (url, date) VALUES (?, ?)", [link, current_datetime])
                 
                 sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
                 webpage = sql_result.fetchone()
-                path = get_path(webpage[0], current_datetime)
-                with open(path, "wb") as f:
-                    pickle.dump(text, f)
-                print("new file created: " + path)
+
+                local_path = get_local_path(webpage[0], current_datetime)
+                dropbox_path = get_dropbox_path(webpage[0], current_datetime)
+
+                download_and_upload(text, local_path, dropbox_path)
                 con.commit()
             else:
-                path = get_path(webpage[0], webpage[1])
-                print("reading existing file: " + path)
-                with open(path, "rb") as f:
-                    text = pickle.load(f)
+                dropbox_path = get_dropbox_path(webpage[0], webpage[1])
+                local_path = get_local_path(webpage[0], webpage[1])
+                text = download_and_read(local_path, dropbox_path)
+
             result.append(text)
        
     return result
