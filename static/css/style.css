@@ -1,10 +1,11 @@
 body {
-    background-color: rgb(91, 91, 91);
-    color: white;
+    background-color: white;
+    color: #333333;
     font-family: "Roboto Condensed", sans-serif;
+    overflow-x: hidden;
 }
 
-#textbox, #textbox button, #textbox input {
+#textbox, #textbox button, #textbox input{
     width: 50%;
     margin: auto;
 }
@@ -12,6 +13,10 @@ body {
 #textbox button, #textbox input {
     border-radius: 5px;
     height: 25px;
+    padding: 5px;
+    width: 500px;
+    height: 50px;
+    margin: 5px;
 }
 
 #textbox input, button {
@@ -20,12 +25,16 @@ body {
 }
 
 #chat {
-    height: 80vh;
-    width: 80vw;
-    margin: auto;
-    border: gray solid 5px;
-    background-color: lightgray;
+    height: 550px;
+    width: 1200px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border: #79c2d0 solid 5px;
+    background-color: #cfe9ec;
     overflow-y: auto;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 10px;
 }
 
 .chat-entry {
@@ -41,15 +50,18 @@ body {
 }
 
 .response {
-    background-color: darkgray;
+    background-color: #a7bcb9;
+    justify-content: flex-start;
 }
 
 .question{
-    background-color: white;
+    background-color: #e0ebeb;
+    justify-content: flex-end;
 }
 
 .error {
     color: red;
+    margin: 10px 0;
 }
 
 .hidden {
@@ -57,12 +69,13 @@ body {
 }
 
 #login, #register {
+    width: 350px;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+    text-align: center;
     margin: auto;
-    height: 200px;
-    width: 300px;
-    border: solid gray 3px;
-    background-color: rgb(231, 228, 201);
-    border-radius: 10px;
 }
 
 form {
@@ -74,17 +87,50 @@ form {
     align-items: center;
 }
 
-#login p {
+.shadow {
+    box-shadow: 3px 3px 3px gray;
+}
+
+#login > button, #register > button {
+    border: none;
     color: blue;
+    font-size: 15px;
+    background-color: transparent;
 }
 
-#login p:hover {
-    color: green;
+#login > button:hover, #register > button:hover {
+    color: rgb(115, 104, 238);
 }
 
-button {
-    border-radius: 50px;
-    margin: 10px;
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: gray;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border-color: #5dacbd; /* Focus color */
+    outline: none; /* Remove default outline */
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #5dacbd; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #4b94a1; /* Hover color */
 }
 
 #login p {
@@ -96,13 +142,14 @@ button {
 }
 
 #sidebar {
-    border: white solid 3px;
+    background-color: #bbe4e9;
+    border: #333333 solid 3px;
     width: 200px;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     align-items: center;
-    height: 80vh;
+    height: 575px;
     text-align: center;
 }
 
@@ -124,6 +171,26 @@ img {
     width: 50px;
 }
 
+#chat > img {
+    justify-self: center;
+    align-self: center;
+}
+
+#ui {
+    display: flex;
+    width: 98.5%;
+    margin-bottom: 10px;
+    background-color: #5dacbd;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 h1 {
-    text-align: center;
+    font-size: 25px;
+}
+
+#ui button {
+    margin: 5px;
 }

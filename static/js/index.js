@@ -9,7 +9,8 @@
     async function init() {
         qs("#register form").addEventListener("submit", makeRegisterRequest);
         qs("#login form").addEventListener("submit", makeLoginRequest);
-        qs("#login p").addEventListener("click", displayRegister);
+        qs("#login > button").addEventListener("click", displayRegister);
+        qs("#register > button").addEventListener("click", displayLogin);
         qs("#textbox input").addEventListener("change", toggleSubmit);
         id("textbox").addEventListener("submit", makeRequest);
         id("signout-btn").addEventListener("click", signOut);
@@ -163,7 +164,7 @@
             await displayHome();
         } catch (err) {
             console.log(err);
-            handleError("register");
+            displayLoginError();
         }
     }
 
@@ -185,7 +186,7 @@
             await displayHome();
         } catch (err) {
             console.log(err);
-            handleError("login");
+            displayLoginError();
         }
     }
 
@@ -260,7 +261,7 @@
             resTextbox.classList.add("question");
             let img = document.createElement("img");
             img.src = "static/images/user.png";
-            resTextbox.prepend(img);
+            resTextbox.appendChild(img);
         }
         id("chat").appendChild(resTextbox);
     }
@@ -303,6 +304,15 @@
         error.textContent = "An Error Occured. Try Again Later!";
         error.classList.add("error");
         id(section).appendChild(error);
+    }
+
+    function displayLoginError() {
+        qs("#login p").classList.remove("hidden");
+        qs("#register p").classList.remove("hidden");
+        setTimeout(() => {
+            qs("#login p").classList.add("hidden");
+            qs("#register p").classList.add("hidden");
+        }, 3000);
     }
     /**
      * Returns the element that has the ID attribute with the specified value.

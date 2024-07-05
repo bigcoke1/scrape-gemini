@@ -6,34 +6,41 @@
         rel="stylesheet">
         <link rel="stylesheet" href="../static/css/style.css">
         <script src="../static/js/index.js"></script>
-        <title>Eason's Project</title>
+        <title>Scrape-Gemini</title>
     </head>
     <body>
-        <h1>Eason's Project</h1>
-        <section id="login">
+        <section id="login" class="shadow">
+            <h1>Scrape-Gemini</h1>
             <form id="login-form">
                 Username<input type="text" name="username">
                 Password<input type="password" name="password">
-                <button>Log In</button>
+                <button class="shadow">Log In</button>
             </form>
-            <p>Register for a new account!</p>
+            <p class="error hidden">Wrong Username or Password!</p>
+            <button>Register for a new account!</button>
         </section>
-        <section id="register" class="hidden">
+        <section id="register" class="hidden shadow">
+            <h1>Scrape-Gemini</h1>
             <form id="register-form">
                 Username<input type="text" name="username">
                 Password<input type="password" name="password">
                 Email<input type="email" name="email">
-                <button>Register</button>
+                <button class="shadow">Register</button>
             </form>
+            <p class="error hidden">Please Enter All Required Fields!</p>
+            <button>Return to Log In</button>
         </section>
         <section id="home" class="hidden">
             <section id="ui">
-                <button id="signout-btn">Sign out</button>
-                <button id="clear-btn">Clear history</button>
+                <h1>Scrape Gemini</h1>
+                <section id="ui-buttons">
+                    <button id="signout-btn">Sign out</button>
+                    <button id="clear-btn">Clear history</button>
+                </section>
             </section>
             <section>
                 <section id="sidebar"></section>
-                <section id="chat">
+                <section id="chat" class="shadow">
                     <img src="/static/images/loading.gif" alt="loading" class="hidden">
                 </section>
             </section>
