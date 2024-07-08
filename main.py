@@ -15,13 +15,18 @@ import dropbox
 ph = PasswordHasher()
 USER_DATA = "user_data.db"
 nlp = spacy.load('en_core_web_sm')
-dbx = dropbox.Dropbox(os.environ("DROPBOX_API_KEY"))
 
 #python
 from datetime import datetime, timedelta
 import os
 import re
 import sqlite3
+
+#my lib
+from dropbox_refresh import refresh_access_token
+
+dropbox_acess_token, expires_at = refresh_access_token()
+dbx = dropbox.Dropbox(dropbox_acess_token)
 
 STOP_WORDS = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", 
               "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", 
@@ -50,7 +55,7 @@ ADBLOCK_PATH = "Adblock Plus - free ad blocker 4.2.0.0.crx"
 def search_google(query):
     chrome_options = Options()
     chrome_options.add_extension(ADBLOCK_PATH)
-    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless=new")
     prefs = {
         "download.default_directory": "/dev/null",
         "download.prompt_for_download": False,
@@ -110,7 +115,9 @@ def scrape_text(driver, link):
     text = soup.get_text()
     lines = [line for line in text.splitlines() if line.strip()]
     for line in lines:
+        print("before: " + line)
         line = clean_data(line)
+        print("after: " + line)
 
     text = " ".join(lines)
     return text
@@ -149,16 +156,23 @@ def download_and_upload(text, local_path, dropbox_path):
 
 def download_and_read(local_path, dropbox_path):
     metadata, res = dbx.files_download(dropbox_path)
-    print("reading existing file: " + dropbox_path)
+    print("Reading existing file: " + dropbox_path)
 
     with open(local_path, "wb") as f:
-        pickle.dump(res.content)
+        f.write(res.content)  # Write the raw content to the local file
 
-    with open(local_path, "rb") as f:
-        text = pickle.load(f)
-    
-    os.remove(local_path)
-    return text
+    try:
+        # Try to load the content as a pickle
+        with open(local_path, "rb") as f:
+            content = pickle.load(f)
+        os.remove(local_path)
+        return content  # Return the unpickled content directly
+    except (pickle.UnpicklingError, EOFError):
+        # If it's not a pickle file, read it as plain text
+        with open(local_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        os.remove(local_path)
+        return content  # Return the text content
 
 def collect_result(driver, links):
     result = []
