@@ -35,7 +35,7 @@ def register():
         
             res = cur.execute("SELECT username FROM user WHERE username = ?", [username])
             if username and password and email and not res.fetchone():
-                password = hash_password(password)
+                password = ph.hash(password)
                 cur.execute("INSERT INTO user (username, password, email) VALUES (?, ?, ?)", [username, password, email])
                 con.commit()
                 con.close()
@@ -60,7 +60,7 @@ def login():
                 res = cur.execute("SELECT password FROM user WHERE username = ?", [username])
                 real_password = res.fetchone()[0]
                 con.close()
-                if is_valid_password(password, real_password):
+                if ph.verify(real_password, password):
                     return Response("successful", status=200, mimetype="text/plain")
                 else:
                     return Response("Wrong username or password", status=400, mimetype="text/plain")
@@ -78,9 +78,10 @@ def get_response():
     username = request.form.get("username")
     if query and username:
         try:
+            search_bing(query)
             driver, links = search_google(query)
             links = [link for link in links if link is not None]
-            result = collect_result(driver, links)
+            result = collect_result(links, driver)
             res = get_AI_response(query, result)
             current_datetime = get_date()
             json_links = json.dumps(links)

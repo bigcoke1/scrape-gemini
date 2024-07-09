@@ -11,12 +11,15 @@ import google.generativeai as genai
 import spacy
 from argon2 import PasswordHasher
 import dropbox
+import requests
 
+model = genai.GenerativeModel("gemini-1.5-flash")
 ph = PasswordHasher()
 USER_DATA = "user_data.db"
 nlp = spacy.load('en_core_web_sm')
 
 #python
+import time
 from datetime import datetime, timedelta
 import os
 import re
@@ -51,8 +54,7 @@ UNWANTED_WORDS = [
 
 ADBLOCK_PATH = "Adblock Plus - free ad blocker 4.2.0.0.crx"
 
-#web crawls google search
-def search_google(query):
+def init_webdriver():
     chrome_options = Options()
     chrome_options.add_extension(ADBLOCK_PATH)
     chrome_options.add_argument("--headless=new")
@@ -64,6 +66,28 @@ def search_google(query):
     }
     chrome_options.add_experimental_option("prefs", prefs)
     driver = webdriver.Chrome(options=chrome_options)
+
+    return driver
+
+def search_bing(query):
+    search_url = "https://api.bing.microsoft.com/v7.0/search"
+    headers = {"Ocp-Apim-Subscription-Key": os.environ["AZURE_KEY"]}
+    params = {"q": query, "textDecorations": True, "textFormat": "HTML"}
+    
+    response = requests.get(search_url, headers=headers, params=params)
+    response.raise_for_status()
+    search_results = response.json()
+    
+    links = []
+    web_pages = search_results.get("webPages", {}).get("value", [])
+    for page in web_pages:
+        links.append(page["url"])
+
+    return links
+
+#web crawls google search
+def search_google(query):
+    driver = init_webdriver()
 
     driver.get("https://www.google.com")
     search_bar = driver.find_element(By.NAME, "q")
@@ -100,9 +124,11 @@ def clean_data(text):
     text = simplify_sentence(text)
     return text
 
-def compare_date(date):
-    date = datetime.strptime(date, "%m-%d-%y").date()
-    return abs(date - datetime.now().date()) <= timedelta(days=3)
+
+def summarize(text):
+    prompt = "Can you please summarize the key points and main ideas from the web content?"
+    result = model.generate_content([text] + [prompt])
+    return result.text
 
 def scrape_text(driver, link):
     driver.execute_script('''window.open(arguments[0],"_blank");''', link)
@@ -114,13 +140,15 @@ def scrape_text(driver, link):
     soup = BeautifulSoup(html, "html.parser")
     text = soup.get_text()
     lines = [line for line in text.splitlines() if line.strip()]
-    for line in lines:
-        print("before: " + line)
-        line = clean_data(line)
-        print("after: " + line)
+
+    lines = list(map(clean_data, lines))
 
     text = " ".join(lines)
     return text
+
+def compare_date(date):
+    date = datetime.strptime(date, "%m-%d-%y").date()
+    return abs(date - datetime.now().date()) <= timedelta(days=3)
 
 def get_date():
     current_datetime = datetime.now()
@@ -128,7 +156,6 @@ def get_date():
     current_datetime = current_datetime.strftime(format_string)
 
     return current_datetime
-
 
 def get_local_path(id, date):
     data_folder = "data"
@@ -174,7 +201,7 @@ def download_and_read(local_path, dropbox_path):
         os.remove(local_path)
         return content  # Return the text content
 
-def collect_result(driver, links):
+def collect_result(links, driver=None):
     result = []
     for link in links:
         if link:
@@ -185,6 +212,7 @@ def collect_result(driver, links):
             webpage = sql_result.fetchone()
             if not webpage or not compare_date(webpage[1]): #if the entry was not found or the entry is too old, get new one
                 text = scrape_text(driver, link)
+                text = summarize(text)
                 if webpage: #if the entry was found but is too old
                     print("old file detected and deleted")
                     cur.execute("DELETE FROM webpage WHERE url = ?", [link])
@@ -224,16 +252,8 @@ def split_long_string(data, max_length):
     return result
 
 def get_AI_response(query, input_list):
-    model = genai.GenerativeModel("gemini-1.5-flash")
- 
     input_list = split_long_string(input_list, 10000)
     
     query = "Using information provided above, tell me about " + query
     result = model.generate_content(input_list + [query])
     return result.text
-
-def hash_password(password):
-    return ph.hash(password)
-
-def is_valid_password(input_password, stored_password):
-    return ph.verify(stored_password, input_password)
