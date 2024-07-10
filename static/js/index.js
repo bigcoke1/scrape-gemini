@@ -3,7 +3,7 @@
 (function () {
     window.addEventListener("load", init);
 
-    const URL = "http://127.0.0.1:5000"
+    const URL = "http://www.scrape-insight.com"
     const MONTH = 2592000000;
 
     async function init() {
@@ -19,11 +19,48 @@
         await checkCookie();
     }
     
+    function setCookie(name, value, options = {}) {
+        let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+    
+        if (options.expires) {
+            cookie += `; expires=${options.expires.toUTCString()}`;
+        }
+        if (options.path) {
+            cookie += `; path=${options.path}`;
+        }
+        if (options.domain) {
+            cookie += `; domain=${options.domain}`;
+        }
+        if (options.secure) {
+            cookie += `; secure`;
+        }
+        if (options.sameSite) {
+            cookie += `; SameSite=${options.sameSite}`;
+        }
+    
+        document.cookie = cookie;
+    }
+
+    function getCookie(name) {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            let [cookieName, cookieValue] = cookie.split('=').map(c => c.trim());
+            if (cookieName === encodeURIComponent(name)) {
+                return decodeURIComponent(cookieValue);
+            }
+        }
+        return null;
+    }
+
+    function deleteCookie(name) {
+        document.cookie = `${encodeURIComponent(name)}=; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+    }
+
     async function clearHistory() {
         try {
             let params = new FormData();
-            params.append("username", (await cookieStore.get("username")).value);
-            let res = await fetch("/clear", {
+            params.append("username", getCookie("username"));
+            let res = await fetch(URL + "/clear", {
                 method: "POST",
                 body: params
             });
@@ -37,9 +74,9 @@
     }
 
     async function checkCookie() {
-        if (await cookieStore.get("username")) {
+        if (getCookie("username")) {
             await displayHome();
-            if ((await cookieStore.get("username")).value === "test") {
+            if (getCookie("username") === "test") {
                 let fileInput = document.createElement("input");
                 fileInput.type = "file";
                 fileInput.id = "file-input";
@@ -58,7 +95,7 @@
     }
 
     async function signOut() {
-        await cookieStore.delete("username");
+        deleteCookie("username");
         await checkCookie();
     }
 
@@ -79,8 +116,8 @@
 
     async function makeChatRequest() {
         try {
-            let username = (await cookieStore.get("username")).value;
-            let res = await fetch("/get-all-chat/" + username);
+            let username = getCookie("username");
+            let res = await fetch(URL + "/get-all-chat/" + username);
             await statusCheck(res);
             res = await res.json();
             populateSidebar(res);
@@ -128,7 +165,7 @@
         try {
             let params = new FormData();
             params.append("id", id);
-            let res = await fetch("/delete", {
+            let res = await fetch(URL + "/delete", {
                 method: "POST",
                 body: params
             });
@@ -157,11 +194,7 @@
             });
             await statusCheck(res);
             let username = qs("#register form input").value;
-            cookieStore.set({
-              name: "username",
-              value: username,
-              expires: Date.now() + MONTH
-            });
+            setCookie("username", username, {expires: Date.now()+MONTH});
             await displayHome();
         } catch (err) {
             console.log(err);
@@ -179,11 +212,7 @@
             });
             await statusCheck(res);
             let username = qs("#login form input").value;
-            cookieStore.set({
-              name: "username",
-              value: username,
-              expires: Date.now() + MONTH
-            });
+            setCookie("username", username, {expires: Date.now()+MONTH});
             await displayHome();
         } catch (err) {
             console.log(err);
@@ -207,7 +236,7 @@
             displayEntry(query, false);
             let loading = displayLoading();
             qs("#textbox button").disabled = true;
-            let username = (await cookieStore.get("username")).value;
+            let username = getCookie("username");
             let params = new FormData();
             params.append("query", query);
             params.append("username", username);
@@ -291,7 +320,7 @@
     async function feedQuestions(e) {
         try {
             e.preventDefault();
-            let username = (await cookieStore.get("username")).value;
+            let username = getCookie("username");
             let file = id("file-input").files[0];
             console.log(file);
             if (file) {

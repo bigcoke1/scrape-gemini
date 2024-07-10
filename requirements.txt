@@ -15,5 +15,7 @@ spacy==3.5.2
 # Security
 argon2-cffi==21.3.0
 
-# Other dependencies
-pickle5==0.0.11  # pickle does not need to be installed separately, it's part of Python's standard library
+# Additional packages
+chromedriver-autoinstaller  # Automatically installs the appropriate version of chromedriver
+dropbox  # Dropbox SDK for integrating with Dropbox API
+requests  # Simplified HTTP request library
