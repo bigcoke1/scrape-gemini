@@ -23,7 +23,7 @@
         let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
     
         if (options.expires) {
-            cookie += `; expires=${options.expires.toUTCString()}`;
+            cookie += `; expires=${options.expires}`;
         }
         if (options.path) {
             cookie += `; path=${options.path}`;
@@ -184,6 +184,15 @@
         }
     }
 
+    function setExpirationDate() {
+        let expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + MONTH);
+
+        let expires = expirationDate.toUTCString();
+
+        return expires;
+    }
+
     async function makeRegisterRequest(e) {
         try {
             e.preventDefault();
@@ -194,7 +203,7 @@
             });
             await statusCheck(res);
             let username = qs("#register form input").value;
-            setCookie("username", username, {expires: Date.now()+MONTH});
+            setCookie("username", username, {expires: setExpirationDate()});
             await displayHome();
         } catch (err) {
             console.log(err);
@@ -212,7 +221,7 @@
             });
             await statusCheck(res);
             let username = qs("#login form input").value;
-            setCookie("username", username, {expires: Date.now()+MONTH});
+            setCookie("username", username, {expires: setExpirationDate()});
             await displayHome();
         } catch (err) {
             console.log(err);
