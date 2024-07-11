@@ -131,12 +131,6 @@ def clean_data(text):
     text = simplify_sentence(text)
     return text
 
-
-def summarize(text):
-    prompt = "Can you please summarize the key points and main ideas from the web content?"
-    result = model.generate_content([text] + [prompt])
-    return result.text
-
 def scrape_text(driver, link):
     driver.execute_script('''window.open(arguments[0],"_blank");''', link)
     new_window_handle = driver.window_handles[-1]
@@ -219,7 +213,6 @@ def collect_result(links, driver=None):
             webpage = sql_result.fetchone()
             if not webpage or not compare_date(webpage[1]): #if the entry was not found or the entry is too old, get new one
                 text = scrape_text(driver, link)
-                text = summarize(text)
                 if webpage: #if the entry was found but is too old
                     print("old file detected and deleted")
                     cur.execute("DELETE FROM webpage WHERE url = ?", [link])
