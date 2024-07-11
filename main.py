@@ -52,11 +52,8 @@ UNWANTED_WORDS = [
     "advertising purposes", "Third-party cookies", "ad choices"
 ]
 
-ADBLOCK_PATH = "Adblock Plus - free ad blocker 4.2.0.0.crx"
-
 def init_webdriver():
     chrome_options = Options()
-    chrome_options.add_extension(ADBLOCK_PATH)
     chrome_options.add_argument("--headless=new")
     prefs = {
         "download.default_directory": "/dev/null",
@@ -65,6 +62,16 @@ def init_webdriver():
         "safebrowsing.enabled": True
     }
     chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--disable-infobars")
+    chrome_options.add_argument("--disable-extensions")
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--disable-software-rasterizer")
+    chrome_options.add_argument("--remote-debugging-port=9222")
+    chrome_options.add_argument("--disable-background-timer-throttling")
+    
     driver = webdriver.Chrome(options=chrome_options)
 
     return driver
@@ -123,12 +130,6 @@ def clean_data(text):
     text = pattern.sub("", text)
     text = simplify_sentence(text)
     return text
-
-
-def summarize(text):
-    prompt = "Can you please summarize the key points and main ideas from the web content?"
-    result = model.generate_content([text] + [prompt])
-    return result.text
 
 def scrape_text(driver, link):
     driver.execute_script('''window.open(arguments[0],"_blank");''', link)
@@ -212,7 +213,6 @@ def collect_result(links, driver=None):
             webpage = sql_result.fetchone()
             if not webpage or not compare_date(webpage[1]): #if the entry was not found or the entry is too old, get new one
                 text = scrape_text(driver, link)
-                text = summarize(text)
                 if webpage: #if the entry was found but is too old
                     print("old file detected and deleted")
                     cur.execute("DELETE FROM webpage WHERE url = ?", [link])
