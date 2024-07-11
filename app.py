@@ -147,4 +147,4 @@ def clear():
         return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
     
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0")

@@ -52,11 +52,8 @@ UNWANTED_WORDS = [
     "advertising purposes", "Third-party cookies", "ad choices"
 ]
 
-ADBLOCK_PATH = "Adblock Plus - free ad blocker 4.2.0.0.crx"
-
 def init_webdriver():
     chrome_options = Options()
-    chrome_options.add_extension(ADBLOCK_PATH)
     chrome_options.add_argument("--headless=new")
     prefs = {
         "download.default_directory": "/dev/null",
@@ -65,6 +62,16 @@ def init_webdriver():
         "safebrowsing.enabled": True
     }
     chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--disable-infobars")
+    chrome_options.add_argument("--disable-extensions")
+    chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--disable-software-rasterizer")
+    chrome_options.add_argument("--remote-debugging-port=9222")
+    chrome_options.add_argument("--disable-background-timer-throttling")
+    
     driver = webdriver.Chrome(options=chrome_options)
 
     return driver
