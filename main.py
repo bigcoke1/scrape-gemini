@@ -24,6 +24,8 @@ from datetime import datetime, timedelta
 import os
 import re
 import sqlite3
+import asyncio
+from multiprocessing import Pool
 
 #my lib
 from dropbox_refresh import refresh_access_token
@@ -54,6 +56,7 @@ UNWANTED_WORDS = [
 
 def init_webdriver():
     chrome_options = Options()
+    #chrome_options.add_extension("Adblock Plus - free ad blocker 4.2.0.0.crx")
     chrome_options.add_argument("--headless=new")
     prefs = {
         "download.default_directory": "/dev/null",
@@ -66,15 +69,17 @@ def init_webdriver():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--disable-infobars")
-    chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--start-maximized")
     chrome_options.add_argument("--disable-software-rasterizer")
     chrome_options.add_argument("--remote-debugging-port=9222")
     chrome_options.add_argument("--disable-background-timer-throttling")
+    chrome_options.binary_location = "/home/easonmeng/chrome-linux64/chrome"
     
     driver = webdriver.Chrome(options=chrome_options)
 
     return driver
+
+driver = init_webdriver()
 
 def search_bing(query):
     search_url = "https://api.bing.microsoft.com/v7.0/search"
@@ -94,8 +99,6 @@ def search_bing(query):
 
 #web crawls google search
 def search_google(query):
-    driver = init_webdriver()
-
     driver.get("https://www.google.com")
     search_bar = driver.find_element(By.NAME, "q")
     search_bar.clear()
@@ -131,7 +134,7 @@ def clean_data(text):
     text = simplify_sentence(text)
     return text
 
-def scrape_text(driver, link):
+def scrape_text(link):
     driver.execute_script('''window.open(arguments[0],"_blank");''', link)
     new_window_handle = driver.window_handles[-1]
     driver.switch_to.window(new_window_handle)
@@ -202,43 +205,46 @@ def download_and_read(local_path, dropbox_path):
         os.remove(local_path)
         return content  # Return the text content
 
-def collect_result(links, driver=None):
-    result = []
-    for link in links:
-        if link:
-            con = sqlite3.connect(USER_DATA)
-            cur = con.cursor()
-            current_datetime = get_date()
+def collect_result(link):
+    text = ""
+    if link:
+        print("now looking at " + link)
+        con = sqlite3.connect(USER_DATA)
+        cur = con.cursor()
+        current_datetime = get_date()
+        sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
+        webpage = sql_result.fetchone()
+        if not webpage or not compare_date(webpage[1]): #if the entry was not found or the entry is too old, get new one
+            text = scrape_text(link)
+            if webpage: #if the entry was found but is too old
+                print("old file detected and deleted")
+                cur.execute("DELETE FROM webpage WHERE url = ?", [link])
+                dropbox_path = get_dropbox_path(webpage[0], webpage[1])
+                try:
+                    dbx.files_delete_v2(dropbox_path)
+                except Exception as e:
+                    print(f"An Error Occured: {e}")
+
+            cur.execute("INSERT INTO webpage (url, date) VALUES (?, ?)", [link, current_datetime])
+            
             sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
             webpage = sql_result.fetchone()
-            if not webpage or not compare_date(webpage[1]): #if the entry was not found or the entry is too old, get new one
-                text = scrape_text(driver, link)
-                if webpage: #if the entry was found but is too old
-                    print("old file detected and deleted")
-                    cur.execute("DELETE FROM webpage WHERE url = ?", [link])
-                    dropbox_path = get_dropbox_path(webpage[0], webpage[1])
-                    try:
-                        dbx.files_delete_v2(dropbox_path)
-                    except Exception as e:
-                        print(f"An Error Occured: {e}")
 
-                cur.execute("INSERT INTO webpage (url, date) VALUES (?, ?)", [link, current_datetime])
-                
-                sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
-                webpage = sql_result.fetchone()
+            local_path = get_local_path(webpage[0], current_datetime)
+            dropbox_path = get_dropbox_path(webpage[0], current_datetime)
 
-                local_path = get_local_path(webpage[0], current_datetime)
-                dropbox_path = get_dropbox_path(webpage[0], current_datetime)
+            download_and_upload(text, local_path, dropbox_path)
+            con.commit()
+        else:
+            dropbox_path = get_dropbox_path(webpage[0], webpage[1])
+            local_path = get_local_path(webpage[0], webpage[1])
+            text = download_and_read(local_path, dropbox_path)
+    return text
 
-                download_and_upload(text, local_path, dropbox_path)
-                con.commit()
-            else:
-                dropbox_path = get_dropbox_path(webpage[0], webpage[1])
-                local_path = get_local_path(webpage[0], webpage[1])
-                text = download_and_read(local_path, dropbox_path)
-
-            result.append(text)
-       
+def iter_result(links):
+    result = links.copy()
+    with Pool(5) as p:
+       result = p.map(collect_result, result)
     return result
 
 def split_long_string(data, max_length):

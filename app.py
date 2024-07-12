@@ -78,10 +78,9 @@ def get_response():
     username = request.form.get("username")
     if query and username:
         try:
-            search_bing(query)
-            driver, links = search_google(query)
+            links = search_google(query)
             links = [link for link in links if link is not None]
-            result = collect_result(links, driver)
+            result = iter_result(links)
             res = get_AI_response(query, result)
             current_datetime = get_date()
             json_links = json.dumps(links)
@@ -91,7 +90,6 @@ def get_response():
             cur.execute("INSERT INTO chat (username, query, response, date, links) VALUES (?, ?, ?, ?, ?)", [username, query, res, current_datetime, json_links])
             con.commit()
             con.close()
-
             return jsonify([res, links])
         except:
             logging.error("An error occurred", exc_info=True)
