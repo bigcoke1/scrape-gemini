@@ -110,6 +110,7 @@ def search_google(query):
     links = [title.find_element(By.XPATH, "./..") for title in titles]
     links = [link.get_attribute("href") for link in links]
 
+    driver.quit()
     return links
 
 def simplify_sentence(text):
@@ -235,6 +236,7 @@ def collect_result(link):
 
             download_and_upload(text, local_path, dropbox_path)
             con.commit()
+            con.close()
         else:
             dropbox_path = get_dropbox_path(webpage[0], webpage[1])
             local_path = get_local_path(webpage[0], webpage[1])

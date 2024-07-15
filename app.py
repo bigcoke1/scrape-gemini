@@ -10,6 +10,9 @@ import uuid
 import sqlite3
 import logging
 import json
+from threading import Thread
+import sched
+import signal
 
 #my lib
 from main import *
@@ -144,6 +147,27 @@ def clear():
             return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
     else:
         return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
+
+def restart_app():
+    print("Restarting the web app...")
     
+    # Restart the Flask application
+    os.kill(os.getpid(), signal.SIGINT)  # Send interrupt signal to current process
+    time.sleep(2)  # Give some time for the process to terminate gracefully
+    os.system("python3 app.py")
+
+    print("Web app restarted.")
+
+def schedule_restart(interval_hours):
+    s = sched.scheduler(time.time, time.sleep)
+    while True:
+        s.enter(interval_hours * 3600, 1, restart_app)
+        s.run()
+
+def keep_alive():
+  t = Thread(target=schedule_restart, args=(6))
+  t.start()
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    keep_alive()
+    app.run(host="0.0.0.0", port=5000)
