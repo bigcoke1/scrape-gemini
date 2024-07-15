@@ -80,6 +80,7 @@ def get_response():
         try:
             links = search_google(query)
             links = [link for link in links if link is not None]
+            links = links[:5]
             result = iter_result(links)
             res = get_AI_response(query, result)
             current_datetime = get_date()

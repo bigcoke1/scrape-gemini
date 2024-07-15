@@ -221,3 +221,161 @@ Access Token expires at: Tue Jul 16 00:51:49 2024
 [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
 [33mPress CTRL+C to quit[0m
+127.0.0.1 - - [15/Jul/2024 20:53:14] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 20:53:14] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:53:14] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:53:14] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 20:53:17] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 20:53:17] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:53:17] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:53:17] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 20:54:33] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:54:33] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:54:33] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+ERROR:root:An error occurred
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 81, in get_response
+    links = search_google(query)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/scrape-gemini/main.py", line 103, in search_google
+    driver.get("https://www.google.com")
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 355, in get
+    self.execute(Command.GET, {"url": url})
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 346, in execute
+    self.error_handler.check_response(response)
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/errorhandler.py", line 245, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=126.0.6478.126)
+Stacktrace:
+#0 0x55ec3f9e4c7a <unknown>
+#1 0x55ec3f6c7e2c <unknown>
+#2 0x55ec3f69d0d4 <unknown>
+#3 0x55ec3f73fa8d <unknown>
+#4 0x55ec3f755ca6 <unknown>
+#5 0x55ec3f737363 <unknown>
+#6 0x55ec3f707247 <unknown>
+#7 0x55ec3f707b9e <unknown>
+#8 0x55ec3f9ab24b <unknown>
+#9 0x55ec3f9af2f1 <unknown>
+#10 0x55ec3f996afe <unknown>
+#11 0x55ec3f9afe52 <unknown>
+#12 0x55ec3f97b79f <unknown>
+#13 0x55ec3f9d4638 <unknown>
+#14 0x55ec3f9d4810 <unknown>
+#15 0x55ec3f9e3dac <unknown>
+#16 0x7f5b8b865134 <unknown>
+
+127.0.0.1 - - [15/Jul/2024 20:54:33] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:54:33] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:54:33] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:54:33] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:54:39] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:54:39] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:54:50] "GET / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:54:50] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 20:54:50] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:54:50] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:54:50] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:54:50] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:54:50] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:54:50] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 20:57:02] "GET / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:57:02] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 20:57:02] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:57:02] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:57:02] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:57:02] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:57:02] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:57:02] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 20:57:16] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:57:16] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:57:16] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:57:16] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 20:57:16] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:57:16] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+ERROR:root:An error occurred
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 81, in get_response
+    links = search_google(query)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/scrape-gemini/main.py", line 103, in search_google
+    driver.get("https://www.google.com")
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 355, in get
+    self.execute(Command.GET, {"url": url})
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 346, in execute
+    self.error_handler.check_response(response)
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/errorhandler.py", line 245, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=126.0.6478.126)
+Stacktrace:
+#0 0x55ec3f9e4c7a <unknown>
+#1 0x55ec3f6c7e2c <unknown>
+#2 0x55ec3f69d0d4 <unknown>
+#3 0x55ec3f73fa8d <unknown>
+#4 0x55ec3f755ca6 <unknown>
+#5 0x55ec3f737363 <unknown>
+#6 0x55ec3f707247 <unknown>
+#7 0x55ec3f707b9e <unknown>
+#8 0x55ec3f9ab24b <unknown>
+#9 0x55ec3f9af2f1 <unknown>
+#10 0x55ec3f996afe <unknown>
+#11 0x55ec3f9afe52 <unknown>
+#12 0x55ec3f97b79f <unknown>
+#13 0x55ec3f9d4638 <unknown>
+#14 0x55ec3f9d4810 <unknown>
+#15 0x55ec3f9e3dac <unknown>
+#16 0x7f5b8b865134 <unknown>
+
+127.0.0.1 - - [15/Jul/2024 20:57:16] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [15/Jul/2024 20:57:16] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+New Access Token: sl.B5Ea1WKYR-yl4PbowW8n38wJA198ymzcN09abPOuk64yC2QuCykZ8po0CC-wM_NVTm788KqfJzWScw2KpBdtCG9JhKXSoxu8s0vSfIVphvlL3KuZ1LNYOoCBf3xSKi_i2FnaUz3eNyxy
+Access Token expires at: Tue Jul 16 00:59:20 2024
+ * Debug mode: off
+Address already in use
+Port 5000 is in use by another program. Either identify and stop that program, or start the server with a different port.
+New Access Token: sl.B5HlXzP0Rn1M67MnV0raps2qxZ5dZm5kPDz0i-ZGfDn3SwPAAu9QshEXbur727j3inlXLlAFoZ4OnKK4EWB4bzMHCJzjUd8Qdhvm5CtI5GWt29vHRoXPl-94wAz5vQtsYWM1PctdjolM
+Access Token expires at: Tue Jul 16 01:00:41 2024
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [15/Jul/2024 21:00:51] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 21:00:51] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 21:00:51] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 21:00:51] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 21:01:03] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 21:01:03] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 21:01:03] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 21:02:08] "POST /getresponse HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 21:02:15] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 21:02:15] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 21:02:15] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 21:02:15] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [15/Jul/2024 21:02:16] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [15/Jul/2024 21:02:16] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+now looking at https://support.google.com/domains/answer/7630973?hl=en#:~:text=To%20use%20HTTPS%20with%20your,need%20to%20be%20renewed%20periodically.
+now looking at https://rockcontent.com/blog/convert-http-to-https/
+now looking at https://www.brafton.com/blog/distribution/how-to-convert-http-to-https-a-quick-guide/
+now looking at https://blog.dnsimple.com/2016/08/https-redirects/
+now looking at https://stackoverflow.com/questions/70298313/how-to-redirect-https-to-new-domain
+new file created: /scrape-gemini-cache/208-07-15-24.pickle
+now looking at https://serverfault.com/questions/167395/redirect-https-to-another-https
+new file created: /scrape-gemini-cache/209-07-15-24.pickle
+now looking at https://blog.webnames.ca/how-to-enable-https-url-forwarding-on-a-domain-name/
+new file created: /scrape-gemini-cache/210-07-15-24.pickle
+now looking at https://community.hubspot.com/t5/Blog-Website-Page-Publishing/How-to-redirect-http-to-https/m-p/183400
+new file created: /scrape-gemini-cache/211-07-15-24.pickle
+now looking at https://forums.interworx.com/t/change-a-domain-pointer-to-https-instead-of-http/22369
+new file created: /scrape-gemini-cache/212-07-15-24.pickle
+now looking at https://www.semrush.com/blog/redirect-http-to-https/
+new file created: /scrape-gemini-cache/213-07-15-24.pickle
+new file created: /scrape-gemini-cache/214-07-15-24.pickle
+new file created: /scrape-gemini-cache/215-07-15-24.pickle
+new file created: /scrape-gemini-cache/216-07-15-24.pickle
+new file created: /scrape-gemini-cache/217-07-15-24.pickle
+10 elements in result
+no duplicates?: True

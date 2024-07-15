@@ -80,8 +80,6 @@ def init_webdriver():
 
     return driver
 
-driver = init_webdriver()
-
 def search_bing(query):
     search_url = "https://api.bing.microsoft.com/v7.0/search"
     headers = {"Ocp-Apim-Subscription-Key": os.environ["AZURE_KEY"]}
@@ -100,6 +98,7 @@ def search_bing(query):
 
 #web crawls google search
 def search_google(query):
+    driver = init_webdriver()
     driver.get("https://www.google.com")
     search_bar = driver.find_element(By.NAME, "q")
     search_bar.clear()
