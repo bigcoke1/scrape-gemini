@@ -66,14 +66,14 @@ def init_webdriver():
         "safebrowsing.enabled": True
     }
     chrome_options.add_experimental_option("prefs", prefs)
-    chrome_options.add_argument("--no-sandbox")
+    """    chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-gpu")
     chrome_options.add_argument("--disable-infobars")
     chrome_options.add_argument("--start-maximized")
     chrome_options.add_argument("--disable-software-rasterizer")
     chrome_options.add_argument("--remote-debugging-port=9222")
-    chrome_options.add_argument("--disable-background-timer-throttling")
+    chrome_options.add_argument("--disable-background-timer-throttling")"""
     chrome_options.binary_location = "/home/easonmeng/chrome-linux64/chrome"
     
     driver = webdriver.Chrome(options=chrome_options)
@@ -137,9 +137,7 @@ def clean_data(text):
 
 def scrape_text(link):
     driver = init_webdriver()
-    driver.execute_script('''window.open(arguments[0],"_blank");''', link)
-    new_window_handle = driver.window_handles[-1]
-    driver.switch_to.window(new_window_handle)
+    driver.get(link)
 
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
     html = driver.page_source
@@ -253,7 +251,8 @@ def iter_result(links):
                 result.append(future.result())
             except Exception as exc:
                 print(f"An error occurred: {exc}")
-    print(len(result) == len(set(result)))
+    print(f"{len(result)} elements in result")
+    print("no duplicates?: " + str(len(result) == len(set(result))))
     return result
 
 def split_long_string(data, max_length):
