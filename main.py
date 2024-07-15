@@ -26,6 +26,7 @@ import re
 import sqlite3
 import asyncio
 from multiprocessing import Pool
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 #my lib
 from dropbox_refresh import refresh_access_token
@@ -110,7 +111,7 @@ def search_google(query):
     links = [title.find_element(By.XPATH, "./..") for title in titles]
     links = [link.get_attribute("href") for link in links]
 
-    return driver, links
+    return links
 
 def simplify_sentence(text):
     doc = nlp(text)
@@ -135,6 +136,7 @@ def clean_data(text):
     return text
 
 def scrape_text(link):
+    driver = init_webdriver()
     driver.execute_script('''window.open(arguments[0],"_blank");''', link)
     new_window_handle = driver.window_handles[-1]
     driver.switch_to.window(new_window_handle)
@@ -148,6 +150,7 @@ def scrape_text(link):
     lines = list(map(clean_data, lines))
 
     text = " ".join(lines)
+    driver.quit()
     return text
 
 def compare_date(date):
@@ -242,9 +245,15 @@ def collect_result(link):
     return text
 
 def iter_result(links):
-    result = links.copy()
-    with Pool(5) as p:
-       result = p.map(collect_result, result)
+    result = []
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = {executor.submit(collect_result, link): link for link in links}
+        for future in as_completed(futures):
+            try:
+                result.append(future.result())
+            except Exception as exc:
+                print(f"An error occurred: {exc}")
+    print(len(result) == len(set(result)))
     return result
 
 def split_long_string(data, max_length):

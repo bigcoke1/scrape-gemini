@@ -1,0 +1,217 @@
+New Access Token: sl.B44VkPP9vLmfBbx3aAcPGLU9d5h-QCHKj1anXivp58a0EugNIZknFFnXsskhEznUjtZqr15w3dESKN1H5CxRS5ick5ET17uIBQ6c-UnhdOrpUB8DpiV5cKFl0csd2w542Sjc8zRol22p
+Access Token expires at: Sat Jul 13 02:54:07 2024
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [12/Jul/2024 22:54:47] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 22:54:47] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 22:54:47] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 22:54:47] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 22:55:16] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 22:55:16] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 22:55:16] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+ERROR:root:An error occurred
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 83, in get_response
+    result = iter_result(links)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/scrape-gemini/main.py", line 251, in iter_result
+    result.append(collect_result(link))
+                  ^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/scrape-gemini/main.py", line 211, in collect_result
+    print("now looking at " + link)
+          ~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: can only concatenate str (not "WebDriver") to str
+127.0.0.1 - - [12/Jul/2024 22:55:18] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:55:18] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+127.0.0.1 - - [12/Jul/2024 22:57:17] "GET / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:57:17] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 22:57:17] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:57:17] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 22:57:17] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:57:17] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 22:57:17] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:57:17] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 22:57:22] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:57:22] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 22:57:22] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:57:22] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 22:57:22] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:57:22] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+ERROR:root:An error occurred
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 83, in get_response
+    result = iter_result(links)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/scrape-gemini/main.py", line 251, in iter_result
+    print(link)
+                
+  File "/home/easonmeng/scrape-gemini/main.py", line 211, in collect_result
+    print("now looking at " + link)
+          ~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: can only concatenate str (not "WebDriver") to str
+127.0.0.1 - - [12/Jul/2024 22:57:24] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 22:57:24] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+New Access Token: sl.B46WlA_wnm9VGJbJ099IowTIl8YOTvxc6nrCbetAKaIKlkQv2NAdKArV7FRHklJyQi-uINDFBJM4M5Vst3qRxgQF5emSe3htjqi5yRc3yY9lMZYpyzdUWqr_L3d3D834kQE7kUge0Vla
+Access Token expires at: Sat Jul 13 03:01:18 2024
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [12/Jul/2024 23:01:30] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 23:01:30] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:01:30] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:01:33] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 23:01:33] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:01:33] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 23:01:33] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 23:01:40] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:01:40] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:01:40] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+now looking at https://www.imdb.com/list/ls565349251/
+Reading existing file: /scrape-gemini-cache/162-07-11-24.pickle
+now looking at https://www.the-numbers.com/market/2020/top-grossing-movies
+now looking at https://www.boxofficemojo.com/year/
+Reading existing file: /scrape-gemini-cache/161-07-11-24.pickle
+now looking at https://editorial.rottentomatoes.com/guide/best-movies-2020/
+new file created: /scrape-gemini-cache/165-07-12-24.pickle
+now looking at https://en.wikipedia.org/wiki/2020s_in_film
+new file created: /scrape-gemini-cache/166-07-12-24.pickle
+now looking at https://en.wikipedia.org/wiki/2020_in_film
+now looking at https://www.reddit.com/r/boxoffice/comments/18vgubx/not_counting_2020_since_2015_there_has_been_at/
+new file created: /scrape-gemini-cache/167-07-12-24.pickle
+ERROR:root:An error occurred
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 536, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/connection.py", line 464, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/http/client.py", line 1374, in getresponse
+    response.begin()
+  File "/usr/lib/python3.11/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.11/multiprocessing/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/multiprocessing/pool.py", line 48, in mapstar
+    return list(map(*args))
+           ^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/scrape-gemini/main.py", line 218, in collect_result
+    text = scrape_text(link)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/scrape-gemini/main.py", line 138, in scrape_text
+    driver.execute_script('''window.open(arguments[0],"_blank");''', link)
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 406, in execute_script
+    return self.execute(command, {"script": script, "args": converted_args})["value"]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 344, in execute
+    response = self.command_executor.execute(driver_command, params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/remote_connection.py", line 290, in execute
+    return self._request(command_info[0], url, body=data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/selenium/webdriver/remote/remote_connection.py", line 311, in _request
+    response = self._conn.request(method, url, body=body, headers=headers)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/_request_methods.py", line 144, in request
+    return self.request_encode_body(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/_request_methods.py", line 279, in request_encode_body
+    return self.urlopen(method, url, **extra_kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/poolmanager.py", line 443, in urlopen
+    response = conn.urlopen(method, u.request_uri, **kw)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 843, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/connectionpool.py", line 536, in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/myenv/lib/python3.11/site-packages/urllib3/connection.py", line 464, in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/http/client.py", line 1374, in getresponse
+    response.begin()
+  File "/usr/lib/python3.11/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 83, in get_response
+    result = iter_result(links)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/easonmeng/scrape-gemini/main.py", line 247, in iter_result
+    result = p.map(collect_result, result)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/multiprocessing/pool.py", line 367, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/multiprocessing/pool.py", line 774, in get
+    raise self._value
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+127.0.0.1 - - [12/Jul/2024 23:01:54] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [12/Jul/2024 23:01:54] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+New Access Token: sl.B47fXHwurTqVkhrSmxMiP9HOoPr0m1gFiyKoLQ1HSEe0QSTJdyBYdIv-Qj2OJDTtdpezjS_5C-6kFNA6dirzi3ACQr5Nx11G_OvCQ6hn3ZaQ6uzsNQmvJrK6b3qpuYl4MouYw6peN5L0
+Access Token expires at: Sat Jul 13 03:08:10 2024
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [12/Jul/2024 23:08:31] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 23:08:31] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:08:31] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:08:31] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 23:08:36] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:08:36] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:08:36] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [12/Jul/2024 23:08:56] "POST /getresponse HTTP/1.0" 200 -
+127.0.0.1 - - [12/Jul/2024 23:08:56] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+now looking at https://www.boxofficemojo.com/year/2020/
+now looking at https://en.wikipedia.org/wiki/2020_in_film
+now looking at https://www.imdb.com/list/ls565349251/
+now looking at https://www.the-numbers.com/market/2020/top-grossing-movies
+now looking at https://en.wikipedia.org/wiki/2020s_in_film
+Reading existing file: /scrape-gemini-cache/162-07-11-24.pickle
+now looking at http://www.boxofficereport.com/domestic2020s.html
+Reading existing file: /scrape-gemini-cache/166-07-12-24.pickle
+now looking at https://www.boxofficemojo.com/year/
+Reading existing file: /scrape-gemini-cache/168-07-12-24.pickle
+now looking at https://www.reddit.com/r/boxoffice/comments/18vgubx/not_counting_2020_since_2015_there_has_been_at/
+Reading existing file: /scrape-gemini-cache/161-07-11-24.pickle
+now looking at https://community.cbr.com/showthread.php?133450-Predict-what-will-be-the-highest-grossing-movie-in-2020-will-be
+Reading existing file: /scrape-gemini-cache/167-07-12-24.pickle
+new file created: /scrape-gemini-cache/169-07-12-24.pickle
+new file created: /scrape-gemini-cache/170-07-12-24.pickle
+new file created: /scrape-gemini-cache/171-07-12-24.pickle
+new file created: /scrape-gemini-cache/172-07-12-24.pickle
