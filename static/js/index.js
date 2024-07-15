@@ -3,7 +3,7 @@
 (function () {
     window.addEventListener("load", init);
 
-    const URL = "http://www.scrape-insight.com"
+    const URL = "https://www.scrape-insight.com"
     const MONTH = 2592000000;
 
     async function init() {
