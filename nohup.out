@@ -551,3 +551,80 @@ Access Token expires at: Tue Jul 16 22:18:30 2024
 127.0.0.1 - - [16/Jul/2024 18:19:45] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
 127.0.0.1 - - [16/Jul/2024 18:19:53] "POST /getresponse HTTP/1.0" 200 -
 127.0.0.1 - - [16/Jul/2024 18:19:53] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:24:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:25:57] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:29:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:32:19] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:34:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:39:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:44:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:49:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:54:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 18:59:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:04:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:09:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:10:38] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:10:41] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:10:42] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 19:14:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:19:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:24:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:29:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:34:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:39:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:44:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:44:38] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:44:38] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 19:44:38] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 19:44:38] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:49:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:54:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 19:59:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:04:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:09:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:14:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:19:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:20:32] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:20:32] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 20:20:32] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 20:20:32] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:23:46] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 20:23:46] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 20:23:47] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:23:51] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 20:24:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:29:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:34:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:39:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:44:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:49:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:54:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:55:34] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 20:55:35] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 20:55:36] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 20:59:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:04:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:06:16] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:06:16] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 21:06:16] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 21:06:16] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:06:22] "GET / HTTP/1.0" 200 -
+New Access Token: sl.B5JpDpyKX7TjboxrvAhtVhP5OjPhaixheRAtsERjaIxS0vNpT2s4JeGPxk1qHzDz3V51VwfhqiBnv1BQ1l82Lus3x6RQUtkoMfmkDabVN15d6RBjYQ93K2AyF1u6KtS8eX5cUcU2OLAY
+Access Token expires at: Wed Jul 17 01:08:27 2024
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [16/Jul/2024 21:08:34] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:08:34] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 21:08:34] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [16/Jul/2024 21:08:34] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:09:00] "HEAD / HTTP/1.0" 200 -
+New Access Token: sl.B5JMArnzfB5NxwI8RLHnd_RjNwfLcM1c3QhI80x_r7DnHD0pBKBHYVN-GHlvt83s0FK83jY6Rk2sfjkSlgdRnnWfxj9FKWEsu5MSuj4fXGsSC4MOS1hVURlKn1R6wa2hkhB34OBHWz4v
+Access Token expires at: Wed Jul 17 01:09:27 2024
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [16/Jul/2024 21:14:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:19:00] "HEAD / HTTP/1.0" 200 -

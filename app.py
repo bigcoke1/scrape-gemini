@@ -167,7 +167,7 @@ def restart_app():
     # Restart the Flask application
     os.kill(os.getpid(), signal.SIGINT)  # Send interrupt signal to current process
     time.sleep(2)  # Give some time for the process to terminate gracefully
-    os.system("python3 app.py")
+    os.system("nohup python3 app.py")
 
     print("Web app restarted.")
 
