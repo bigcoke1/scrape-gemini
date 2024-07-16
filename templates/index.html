@@ -6,11 +6,11 @@
         rel="stylesheet">
         <link rel="stylesheet" href="../static/css/style.css">
         <script src="../static/js/index.js"></script>
-        <title>Scrape-Gemini</title>
+        <title>Scrape-Insight</title>
     </head>
     <body>
         <section id="login" class="shadow">
-            <h1>Scrape-Gemini</h1>
+            <h1>Scrape-Insight</h1>
             <form id="login-form">
                 Username<input type="text" name="username">
                 Password<input type="password" name="password">
@@ -34,8 +34,8 @@
             <section id="ui" class="shadow">
                 <h1>Scrape Gemini</h1>
                 <section id="ui-buttons">
-                    <button id="signout-btn">Sign out</button>
                     <button id="clear-btn">Clear history</button>
+                    <button id="account-btn">Account</button>
                 </section>
             </section>
             <section>
@@ -46,6 +46,12 @@
                 <input type="text" placeholder="ask a question..." name="query" class="shadow">
                 <button id="submit" disabled class="shadow">Submit</button>
             </form>
+        </section>
+        <section id="account" class="hidden">
+            <p>Username: </p>
+            <p>Email: </p>
+            <button id="home-btn">Home</button>
+            <button id="signout-btn">Sign out</button>
         </section>
     </body>
 </html>

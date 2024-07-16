@@ -53,11 +53,14 @@ body {
     justify-content: flex-start;
 }
 
-.question{
+.question {
     background-color: #e0ebeb;
     justify-content: flex-end;
 }
 
+.question .sub-textbox {
+    align-items: flex-end;
+}
 .error {
     color: red;
     margin: 10px 0;
@@ -67,7 +70,7 @@ body {
     display: none;
 }
 
-#login, #register {
+#login, #register, #account {
     width: 350px;
     padding: 20px;
     background-color: #ffffff;
@@ -90,7 +93,7 @@ form {
     box-shadow: 3px 3px 3px gray;
 }
 
-#login > button, #register > button {
+#login > button, #register > button, #account button {
     border: none;
     color: blue;
     font-size: 15px;
@@ -118,17 +121,9 @@ input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focu
 
 form button {
     width: 100%;
-    padding: 10px;
-    margin: 20px 0;
-    background-color: #5dacbd; /* Button color */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
 }
 
-button:hover {
+form button:hover, .sub-textbox button:hover {
     background-color: #4b94a1; /* Hover color */
 }
 
@@ -191,4 +186,28 @@ h1 {
 
 #ui button {
     margin: 5px;
+}
+
+.sub-textbox {
+    display: flex;
+    flex-direction: column;
+    width: 100%
+}
+
+.sub-textbox button {
+    height: 50px;
+    width: 30%;
+    align-self: center;
+
+}
+
+.sub-textbox button, form button, #account button {
+    padding: 10px;
+    margin: 20px 0;
+    background-color: #5dacbd; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
 }

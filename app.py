@@ -148,6 +148,19 @@ def clear():
     else:
         return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
 
+@app.route("/account/<username>", methods=["GET"])
+def account(username):
+    try:
+        con = sqlite3.connect(USER_DATA)
+        cur = con.cursor()
+        response = cur.execute("SELECT email FROM user WHERE username = ?", [username])
+        email = response.fetchone()[0]
+        con.close()
+        return Response(email, status=200, mimetype="text/plain")
+    except:
+        logging.error("An error occured", exc_info=True)
+        return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
+
 def restart_app():
     print("Restarting the web app...")
     

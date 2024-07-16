@@ -15,10 +15,32 @@
         id("textbox").addEventListener("submit", makeRequest);
         id("signout-btn").addEventListener("click", signOut);
         id("clear-btn").addEventListener("click", clearHistory);
+        id("account-btn").addEventListener("click", displayAccount);
+        id("home-btn").addEventListener("click", displayHome);
 
         await checkCookie();
     }
     
+    async function displayAccount() {
+        id("home").classList.add("hidden");
+        id("login").classList.add("hidden");
+        id("register").classList.add("hidden");
+        id("account").classList.remove("hidden");
+
+        let accountInfo = qsa("#account p");
+        accountInfo[0].textContent = "Username: " + getCookie("username");
+        let email = await makeAccountRequest(getCookie("username"));
+        accountInfo[1].textContent = "Email: " + email;
+
+    }
+
+    async function makeAccountRequest(username) {
+        let res = await fetch(URL + "/account/" + username);
+        await statusCheck(res);
+        res = await res.text();
+        return res;
+    }
+
     function setCookie(name, value, options = {}) {
         let cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
     
@@ -69,7 +91,7 @@
             id("chat").innerHTML = "";
         } catch (err) {
             console.log(err);
-            handleError("chat");
+            handleError();
         }
     }
 
@@ -92,6 +114,7 @@
         id("home").classList.add("hidden");
         id("login").classList.remove("hidden");
         id("register").classList.add("hidden");
+        id("account").classList.add("hidden");
     }
 
     async function signOut() {
@@ -103,6 +126,7 @@
         id("home").classList.add("hidden");
         id("login").classList.add("hidden");
         id("register").classList.remove("hidden");
+        id("account").classList.add("hidden");
     }
 
     async function displayHome() {
@@ -110,6 +134,7 @@
         id("login").classList.add("hidden");
         id("register").classList.add("hidden");
         id("chat").innerHTML = "";
+        id("account").classList.add("hidden");
 
         await makeChatRequest();
     }
@@ -123,7 +148,7 @@
             populateSidebar(res);
         } catch (err) {
             console.log(err);
-            handleError("chat");
+            handleError();
         }
     }
 
@@ -172,7 +197,7 @@
             await statusCheck(res);
             await makeChatRequest();
         } catch (err) {
-            handleError("chat");
+            handleError();
         }
     }
     function populateChat(res) {
@@ -180,7 +205,7 @@
         for(let i = 0; i < res.length; i++) {
             let entry = res[i];
             displayEntry(entry[2], false);
-            displayEntry(entry[3], true, JSON.parse(entry[5]));
+            displayEntry(entry[3], true, JSON.parse(entry[5]), entry[2]);
         }
     }
 
@@ -243,30 +268,34 @@
             e.preventDefault();
             let query = qs("#textbox input").value;
             displayEntry(query, false);
-            let loading = displayLoading();
-            qs("#textbox button").disabled = true;
-            let username = getCookie("username");
-            let params = new FormData();
-            params.append("query", query);
-            params.append("username", username);
-            let res = await fetch(URL + "/getresponse", {
-                method: "POST",
-                body: params
-            });
-            await statusCheck(res);
-            res = await res.json();
-            let aiResponse = res[0];
-            let links = res[1];
-            loading.remove();
-            displayEntry(aiResponse, true, links);
+            await generateResponse();
 
             qs("#textbox button").disabled = false;
             qs("#textbox input").value = "";
-            await makeChatRequest();
         } catch (err) {
             console.log(err);
-            handleError("chat");
+            handleError();
         }
+    }
+
+    async function generateResponse(query) {
+        let loading = displayLoading();
+        qs("#textbox button").disabled = true;
+        let username = getCookie("username");
+        let params = new FormData();
+        params.append("query", query);
+        params.append("username", username);
+        let res = await fetch(URL + "/getresponse", {
+            method: "POST",
+            body: params
+        });
+        await statusCheck(res);
+        res = await res.json();
+        let aiResponse = res[0];
+        let links = res[1];
+        loading.remove();
+        displayEntry(aiResponse, true, links, query);
+        await makeChatRequest();
     }
 
     function displayLoading() {
@@ -288,7 +317,7 @@
         return resTextbox;
     }
 
-    function displayEntry(res, response, links=null) {
+    function displayEntry(res, response, links=null, query=null) {
         let resTextbox = document.createElement("article");
         let text = document.createElement("p");
         text.textContent = res;
@@ -308,14 +337,23 @@
                 text.appendChild(urlElement);
             }
         }
-
-        resTextbox.appendChild(text);
+        let subTextbox = document.createElement("section");
+        subTextbox.appendChild(text);
+        subTextbox.classList.add("sub-textbox")
+        resTextbox.appendChild(subTextbox);
         resTextbox.classList.add("chat-entry");
         if (response) {
             resTextbox.classList.add("response");
             let img = document.createElement("img");
             img.src = "static/images/AI.png";
             resTextbox.prepend(img);
+            let newAnswerButton = document.createElement("button");
+            newAnswerButton.textContent = "Regenerate Response";
+            newAnswerButton.addEventListener("click", () => {
+                resTextbox.remove();
+                generateResponse(query);
+            });
+            subTextbox.appendChild(newAnswerButton);
         } else {
             resTextbox.classList.add("question");
             let img = document.createElement("img");
@@ -355,15 +393,15 @@
             }
         } catch (err) {
             console.log(err);
-            handleError("chat");
+            handleError();
         }
     }
 
-    function handleError(section) {
+    function handleError() {
         let error = document.createElement("p");
         error.textContent = "An Error Occured. Try Again Later!";
         error.classList.add("error");
-        id(section).appendChild(error);
+        id("chat").appendChild(error);
     }
 
     function displayLoginError() {
