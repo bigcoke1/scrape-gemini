@@ -350,6 +350,7 @@
             let newAnswerButton = document.createElement("button");
             newAnswerButton.textContent = "Regenerate Response";
             newAnswerButton.addEventListener("click", () => {
+                id("chat").appendChild(resTextbox.previousElementSibling);
                 resTextbox.remove();
                 generateResponse(query);
             });
