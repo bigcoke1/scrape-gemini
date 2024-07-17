@@ -212,7 +212,9 @@
             let format = entry[7];
             displayEntry(question, false);
             let chartBox = displayEntry(response, true, JSON.parse(entry[5]), entry[2]);
-            generateChart(question, data, format, chartBox)
+            if (data && format) {
+                generateChart(question, data, format, chartBox)
+            }
         }
     }
 
@@ -414,8 +416,8 @@
         let chart;
         if (format === "bar graph"){
             chart = new google.visualization.BarChart(chartBox);
-            options[bars] = "horizontal";
-            options[bar] = {
+            options["bars"] = "horizontal";
+            options["bar"] = {
                 groupWidth: '80%'
             }
         } else if (format === "line graph") {
