@@ -628,3 +628,425 @@ Access Token expires at: Wed Jul 17 01:09:27 2024
 [33mPress CTRL+C to quit[0m
 127.0.0.1 - - [16/Jul/2024 21:14:00] "HEAD / HTTP/1.0" 200 -
 127.0.0.1 - - [16/Jul/2024 21:19:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:24:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:27:16] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:36:13] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:52:52] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:53:13] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 21:54:24] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 22:05:19] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 22:09:15] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 22:23:13] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 22:53:13] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 23:00:35] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 23:09:05] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 23:09:09] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 23:09:09] "[33mGET /server HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:09] "[33mGET /.vscode/sftp.json HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:10] "[33mGET /about HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:10] "[33mGET /debug/default/view?panel=config HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:11] "[33mGET /v2/_catalog HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:11] "[33mGET /ecp/Current/exporttool/microsoft.exchange.ediscovery.exporttool.application HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:12] "[33mGET /server-status HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:12] "[33mGET /login.action HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:12] "[33mGET /_all_dbs HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:13] "[33mGET /.DS_Store HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:13] "[33mGET /.env HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:14] "[33mGET /.git/config HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:14] "[33mGET /s/2393e2630323e2836313e24333/_/;/META-INF/maven/com.atlassian.jira/jira-webapp-dist/pom.properties HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:15] "[33mGET /config.json HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:15] "[33mGET /telescope/requests HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:09:16] "GET /?rest_route=/wp/v2/users/ HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 23:18:07] "[33mGET /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:08] "[33mGET /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:09] "[33mGET /vendor/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:11] "[33mGET /vendor/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:12] "[33mGET /vendor/phpunit/phpunit/LICENSE/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:14] "[33mGET /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:16] "[33mGET /phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:17] "[33mGET /phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:18] "[33mGET /phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:19] "[33mGET /phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:21] "[33mGET /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:22] "[33mGET /lib/phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:23] "[33mGET /lib/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:25] "[33mGET /lib/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:26] "[33mGET /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:28] "[33mGET /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:29] "[33mGET /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:30] "[33mGET /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:31] "[33mGET /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:32] "[33mGET /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:34] "[33mGET /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:36] "[33mGET /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:37] "[33mGET /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:39] "[33mGET /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:41] "[33mGET /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:42] "[33mGET /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:43] "[33mGET /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:45] "[33mGET /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:46] "[33mGET /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:47] "[33mGET /admin/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:49] "[33mGET /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:50] "[33mGET /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:51] "[33mGET /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:53] "[33mGET /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:54] "[33mGET /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:55] "[33mGET /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:56] "[33mGET /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:58] "[33mGET /index.php?s=/index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=Hello HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:18:59] "[33mGET /public/index.php?s=/index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=Hello HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:19:00] "[33mGET /index.php?lang=../../../../../../../../usr/local/lib/php/pearcmd&+config-create+/&/<?echo(md5("hi"));?>+/tmp/index1.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:19:01] "[33mGET /index.php?lang=../../../../../../../../tmp/index1 HTTP/1.0[0m" 404 -
+127.0.0.1 - - [16/Jul/2024 23:23:13] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 23:46:35] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [16/Jul/2024 23:56:20] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 00:30:17] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 01:00:16] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 01:22:54] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 01:27:44] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 01:27:45] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 01:27:46] "[33mGET /ads.txt HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 01:27:47] "[33mGET /app-ads.txt HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 01:27:47] "[33mGET /sellers.json HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 01:27:49] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 01:46:13] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 01:56:42] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:12:27] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:14:05] "[33mGET /robots.txt HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 02:16:13] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:21:52] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:21:52] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:21:52] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:21:52] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:22:02] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:22:02] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:22:02] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+Unable to refresh access token without                 refresh token and app key
+ERROR:root:An error occurred
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 94, in get_response
+    cur.execute("INSERT INTO chat (username, query, response, date, links) VALUES (?, ?, ?, ?, ?)", [username, query, res, current_datetime, json_links])
+sqlite3.OperationalError: database is locked
+127.0.0.1 - - [17/Jul/2024 02:22:39] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:22:39] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+127.0.0.1 - - [17/Jul/2024 02:22:44] "GET / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:22:44] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:22:44] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:22:44] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:22:44] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:22:44] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:22:45] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:22:45] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:24:57] "GET / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:24:57] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:25:45] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:25:45] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:25:45] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:25:45] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:25:45] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:25:45] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+WARNING:dropbox:Unable to refresh access token without                 refresh token and app key
+ERROR:root:An error occurred
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 94, in get_response
+    cur.execute("INSERT INTO chat (username, query, response, date, links) VALUES (?, ?, ?, ?, ?)", [username, query, res, current_datetime, json_links])
+sqlite3.OperationalError: database is locked
+127.0.0.1 - - [17/Jul/2024 02:26:18] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 02:26:18] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+New Access Token: sl.B5IaSEnvobk9x4a-NSaJY3jZiu4HKDXqKrDNksTwTaKbJCpsBTTb6VlkVnvvHMEjjxM-zTyM0r8pj6E5Hq9HDEz24rkM4CzuYo9ROW3sfYFITwDHNZVKWxDbm5qMdRscpPr_kZfmVYQe
+Access Token expires at: Wed Jul 17 06:29:53 2024
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [17/Jul/2024 02:30:34] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:30:34] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:30:34] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:30:34] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:30:38] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:30:38] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:30:38] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:31:13] "POST /getresponse HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:31:14] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+now looking at https://www.dictionary.com/browse/undefined
+now looking at https://www.merriam-webster.com/dictionary/undefined
+now looking at https://www.merriam-webster.com/thesaurus/undefined
+now looking at https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined
+now looking at https://en.wikipedia.org/wiki/Undefined_(mathematics)
+new file created: /scrape-gemini-cache/245-07-17-24.pickle
+new file created: /scrape-gemini-cache/246-07-17-24.pickle
+new file created: /scrape-gemini-cache/247-07-17-24.pickle
+new file created: /scrape-gemini-cache/248-07-17-24.pickle
+new file created: /scrape-gemini-cache/249-07-17-24.pickle
+5 elements in result
+no duplicates?: True
+New Access Token: sl.B5IwBTXvSUE_Bngv7mtv5cB5rS_xZeF5hOeFHuHRWkjq9ctBP7Z4WNP6tN5f82V3du9OkxAHt4FRTgFMFBrlja58XzELF2OHgk8SwNQy8mBQW2isfGYu3ZTJwj5nXNCQzxYaaaSlLM5N
+Access Token expires at: Wed Jul 17 06:32:44 2024
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [17/Jul/2024 02:32:52] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:32:52] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:32:52] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:32:52] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:32:56] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:32:56] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:32:56] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 02:33:19] "POST /getresponse HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:33:19] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:36:16] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:36:16] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 02:37:08] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:42:54] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 02:46:37] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 03:17:39] "[33mGET /.git/config HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 03:20:32] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 03:48:54] "[33mGET /.git/config HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 03:50:32] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 04:07:29] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 04:20:32] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 04:52:43] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 05:22:43] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 05:50:23] "[33mGET /.env HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 05:52:43] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 05:53:30] "[33mGET /.env HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 05:59:54] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 05:59:58] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 05:59:58] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 06:22:43] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 06:45:20] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 07:15:20] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 07:31:01] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 07:49:55] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 07:49:56] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 07:52:00] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 08:02:05] "[33mGET /owa/auth/logon.aspx HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 08:14:48] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 08:16:27] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 08:16:32] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 08:16:33] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 08:24:22] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 08:32:34] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 08:32:34] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 08:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 09:03:59] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 09:04:15] "[33mGET /aspera/faspex/ HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 09:13:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 09:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 10:05:39] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 10:13:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 10:15:43] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 10:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 11:13:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 11:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 11:55:55] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 11:56:56] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 12:08:45] "[33mGET /.env HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:10:18] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 12:13:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 12:15:11] "[33mGET /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:11] "[33mGET /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:12] "[33mGET /vendor/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:12] "[33mGET /vendor/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:13] "[33mGET /vendor/phpunit/phpunit/LICENSE/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:13] "[33mGET /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:14] "[33mGET /phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:14] "[33mGET /phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:14] "[33mGET /phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:15] "[33mGET /phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:15] "[33mGET /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:16] "[33mGET /lib/phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:16] "[33mGET /lib/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:16] "[33mGET /lib/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:17] "[33mGET /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:18] "[33mGET /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:18] "[33mGET /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:19] "[33mGET /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:19] "[33mGET /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:19] "[33mGET /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:20] "[33mGET /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:20] "[33mGET /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:21] "[33mGET /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:21] "[33mGET /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:22] "[33mGET /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:22] "[33mGET /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:22] "[33mGET /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:23] "[33mGET /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:23] "[33mGET /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:24] "[33mGET /admin/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:24] "[33mGET /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:24] "[33mGET /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:25] "[33mGET /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:25] "[33mGET /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:26] "[33mGET /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:26] "[33mGET /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:26] "[33mGET /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:27] "[33mGET /index.php?s=/index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=Hello HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:27] "[33mGET /public/index.php?s=/index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=Hello HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:28] "[33mGET /index.php?lang=../../../../../../../../usr/local/lib/php/pearcmd&+config-create+/&/<?echo(md5("hi"));?>+/tmp/index1.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:15:28] "[33mGET /index.php?lang=../../../../../../../../tmp/index1 HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:17:53] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 12:24:31] "[33mGET /webui/ HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:28:24] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:29:58] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 12:33:41] "[33mGET /geoserver/web/ HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:37:23] "[33mGET /.git/config HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:23] "[33mGET /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:24] "[33mGET /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:24] "[33mGET /vendor/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:25] "[33mGET /vendor/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:25] "[33mGET /vendor/phpunit/phpunit/LICENSE/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:26] "[33mGET /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:26] "[33mGET /phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:26] "[33mGET /phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:26] "[33mGET /phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:27] "[33mGET /phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:28] "[33mGET /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:28] "[33mGET /lib/phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:28] "[33mGET /lib/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:28] "[33mGET /lib/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:29] "[33mGET /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:29] "[33mGET /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:29] "[33mGET /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:29] "[33mGET /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:30] "[33mGET /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:30] "[33mGET /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:30] "[33mGET /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:32] "[33mGET /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:33] "[33mGET /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:33] "[33mGET /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:33] "[33mGET /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:33] "[33mGET /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:33] "[33mGET /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:34] "[33mGET /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:34] "[33mGET /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:34] "[33mGET /admin/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:34] "[33mGET /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:34] "[33mGET /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:35] "[33mGET /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:35] "[33mGET /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:36] "[33mGET /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:36] "[33mGET /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:37] "[33mGET /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:37] "[33mGET /index.php?s=/index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=Hello HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:37] "[33mGET /public/index.php?s=/index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=Hello HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:38] "[33mGET /index.php?lang=../../../../../../../../usr/local/lib/php/pearcmd&+config-create+/&/<?echo(md5("hi"));?>+/tmp/index1.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:41:38] "[33mGET /index.php?lang=../../../../../../../../tmp/index1 HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 12:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 12:58:57] "[33mGET /.git/config HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 13:07:42] "[33mGET /_profiler/phpinfo HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 13:08:56] "[33mGET /_profiler/phpinfo HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 13:10:44] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 13:13:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 13:18:08] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 13:18:11] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 13:18:11] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 13:21:01] "[33mGET /robots.txt HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 13:27:34] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 13:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 14:13:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 14:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 15:09:25] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 15:09:27] "[33mGET /robots.txt HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 15:09:28] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 15:12:20] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 15:12:43] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 15:12:43] "GET /static/css/style.css HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 15:12:43] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 15:12:47] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 15:13:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 15:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:13:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:33:03] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:33:03] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:33:03] "GET /static/css/style.css HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:33:03] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:23] "[33mGET /vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:23] "[33mGET /vendor/phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:24] "[33mGET /vendor/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:24] "[33mGET /vendor/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:25] "[33mGET /vendor/phpunit/phpunit/LICENSE/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:25] "[33mGET /vendor/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:26] "[33mGET /phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:26] "[33mGET /phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:26] "[33mGET /phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:28] "[33mGET /phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:28] "[33mGET /lib/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:28] "[33mGET /lib/phpunit/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:29] "[33mGET /lib/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:30] "[33mGET /lib/phpunit/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:30] "[33mGET /lib/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:31] "[33mGET /laravel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:31] "[33mGET /www/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:32] "[33mGET /ws/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:32] "[33mGET /yii/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:32] "[33mGET /zend/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:33] "[33mGET /ws/ec/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:33] "[33mGET /V2/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:34] "[33mGET /tests/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:34] "[33mGET /test/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:35] "[33mGET /testing/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:36] "[33mGET /api/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:36] "[33mGET /demo/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:36] "[33mGET /cms/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:37] "[33mGET /crm/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:37] "[33mGET /admin/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:38] "[33mGET /backup/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:38] "[33mGET /blog/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:39] "[33mGET /workspace/drupal/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:39] "[33mGET /panel/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:39] "[33mGET /public/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:41] "[33mGET /apps/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:41] "[33mGET /app/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:41] "[33mGET /index.php?s=/index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=Hello HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:42] "[33mGET /public/index.php?s=/index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=Hello HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:42] "[33mGET /index.php?lang=../../../../../../../../usr/local/lib/php/pearcmd&+config-create+/&/<?echo(md5("hi"));?>+/tmp/index1.php HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:33:43] "[33mGET /index.php?lang=../../../../../../../../tmp/index1 HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:34:11] "POST /register HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:34:11] "GET /get-all-chat/yong.kang HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:34:21] "GET /account/yong.kang HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:34:23] "GET /get-all-chat/yong.kang HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:34:48] "GET /static/images/AI.png HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:34:48] "GET /static/images/user.png HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:34:48] "GET /static/images/loading.gif HTTP/1.0" 200 -
+Unable to refresh access token without                 refresh token and app key
+ERROR:root:An error occurred
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 94, in get_response
+    cur.execute("INSERT INTO chat (username, query, response, date, links) VALUES (?, ?, ?, ?, ?)", [username, query, res, current_datetime, json_links])
+sqlite3.OperationalError: database is locked
+127.0.0.1 - - [17/Jul/2024 16:35:17] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:35:17] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+127.0.0.1 - - [17/Jul/2024 16:42:15] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:42:15] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 16:42:15] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:42:15] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [17/Jul/2024 16:42:15] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:42:15] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+ERROR:root:An error occurred
+Traceback (most recent call last):
+  File "/home/easonmeng/scrape-gemini/app.py", line 94, in get_response
+    cur.execute("INSERT INTO chat (username, query, response, date, links) VALUES (?, ?, ?, ?, ?)", [username, query, res, current_datetime, json_links])
+sqlite3.OperationalError: database is locked
+127.0.0.1 - - [17/Jul/2024 16:42:35] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:42:35] "[35m[1mPOST /getresponse HTTP/1.0[0m" 500 -
+127.0.0.1 - - [17/Jul/2024 16:43:30] "GET / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:43:30] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:43:50] "HEAD / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:43:50] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 16:49:25] "[33mGET /.env HTTP/1.0[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:49:25] "[33mGET /.env HTTP/1.0[0m" 404 -
+127.0.0.1 - - [17/Jul/2024 16:49:25] "[31m[1mPOST / HTTP/1.0[0m" 405 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 16:49:25] "[31m[1mPOST / HTTP/1.0[0m" 405 -
+127.0.0.1 - - [17/Jul/2024 17:09:02] "GET / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 17:09:02] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 17:09:12] "GET /static/js/index.js HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 17:09:12] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 17:09:26] "GET /static/js/index.js HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 17:09:26] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 17:09:39] "GET /static/js/index.js HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 17:09:39] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [17/Jul/2024 17:13:50] "HEAD / HTTP/1.0" 200 -
+INFO:werkzeug:127.0.0.1 - - [17/Jul/2024 17:13:50] "HEAD / HTTP/1.0" 200 -

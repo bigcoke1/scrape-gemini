@@ -10,7 +10,6 @@ import pickle
 import google.generativeai as genai
 import spacy
 from argon2 import PasswordHasher
-import dropbox
 import requests
 
 model = genai.GenerativeModel("gemini-1.5-flash")
@@ -30,9 +29,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 #my lib
 from dropbox_refresh import refresh_access_token
-
-dropbox_acess_token, expires_at = refresh_access_token()
-dbx = dropbox.Dropbox(dropbox_acess_token)
 
 STOP_WORDS = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", 
               "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", 
@@ -79,22 +75,6 @@ def init_webdriver():
     driver = webdriver.Chrome(options=chrome_options)
 
     return driver
-
-def search_bing(query):
-    search_url = "https://api.bing.microsoft.com/v7.0/search"
-    headers = {"Ocp-Apim-Subscription-Key": os.environ["AZURE_KEY"]}
-    params = {"q": query, "textDecorations": True, "textFormat": "HTML"}
-    
-    response = requests.get(search_url, headers=headers, params=params)
-    response.raise_for_status()
-    search_results = response.json()
-    
-    links = []
-    web_pages = search_results.get("webPages", {}).get("value", [])
-    for page in web_pages:
-        links.append(page["url"])
-
-    return links
 
 #web crawls google search
 def search_google(query):
@@ -169,43 +149,6 @@ def get_local_path(id, date):
 
     return path
 
-
-def get_dropbox_path(id, date):
-    data_folder = "/scrape-gemini-cache/"
-    path = data_folder + str(id) + "-" + date + ".pickle"
-    
-    return path
-
-def download_and_upload(text, local_path, dropbox_path):
-    with open(local_path, "wb") as f:
-        pickle.dump(text, f)
-    
-    with open(local_path, "rb") as f:
-        dbx.files_upload(f.read(), dropbox_path)
-
-    os.remove(local_path)
-    print("new file created: " + dropbox_path)
-
-def download_and_read(local_path, dropbox_path):
-    metadata, res = dbx.files_download(dropbox_path)
-    print("Reading existing file: " + dropbox_path)
-
-    with open(local_path, "wb") as f:
-        f.write(res.content)  # Write the raw content to the local file
-
-    try:
-        # Try to load the content as a pickle
-        with open(local_path, "rb") as f:
-            content = pickle.load(f)
-        os.remove(local_path)
-        return content  # Return the unpickled content directly
-    except (pickle.UnpicklingError, EOFError):
-        # If it's not a pickle file, read it as plain text
-        with open(local_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        os.remove(local_path)
-        return content  # Return the text content
-
 def collect_result(link):
     text = ""
     if link:
@@ -220,9 +163,9 @@ def collect_result(link):
             if webpage: #if the entry was found but is too old
                 print("old file detected and deleted")
                 cur.execute("DELETE FROM webpage WHERE url = ?", [link])
-                dropbox_path = get_dropbox_path(webpage[0], webpage[1])
+                path = get_local_path(webpage[0], webpage[1])
                 try:
-                    dbx.files_delete_v2(dropbox_path)
+                    os.remove(path)
                 except Exception as e:
                     print(f"An Error Occured: {e}")
 
@@ -231,16 +174,17 @@ def collect_result(link):
             sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
             webpage = sql_result.fetchone()
 
-            local_path = get_local_path(webpage[0], current_datetime)
-            dropbox_path = get_dropbox_path(webpage[0], current_datetime)
-
-            download_and_upload(text, local_path, dropbox_path)
+            path = get_local_path(webpage[0], current_datetime)
+            with open(path, "wb") as f:
+                pickle.dump(text, f)
+            print("new file created: " + path)
             con.commit()
             con.close()
         else:
-            dropbox_path = get_dropbox_path(webpage[0], webpage[1])
-            local_path = get_local_path(webpage[0], webpage[1])
-            text = download_and_read(local_path, dropbox_path)
+            path = get_local_path(webpage[0], webpage[1])
+            print("reading existing file: " + path)
+            with open(path, "rb") as f:
+                text = pickle.load(f)
     return text
 
 def iter_result(links):

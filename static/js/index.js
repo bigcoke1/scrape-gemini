@@ -268,7 +268,7 @@
             e.preventDefault();
             let query = qs("#textbox input").value;
             displayEntry(query, false);
-            await generateResponse();
+            await generateResponse(query);
 
             qs("#textbox button").disabled = false;
             qs("#textbox input").value = "";
