@@ -210,9 +210,9 @@
             let response = entry[3];
             let data = entry[6];
             let format = entry[7];
-            displayEntry(entry[2], false);
-            let chartBox = displayEntry(entry[3], true, JSON.parse(entry[5]), entry[2]);
-            generateChart(data, format, chartBox)
+            displayEntry(question, false);
+            let chartBox = displayEntry(response, true, JSON.parse(entry[5]), entry[2]);
+            generateChart(question, data, format, chartBox)
         }
     }
 
@@ -305,7 +305,7 @@
         loading.remove();
         let chartBox = displayEntry(textResponse, true, links, query);
         console.log(dataResponse);
-        generateChart(dataResponse, format, chartBox);
+        generateChart(query, dataResponse, format, chartBox);
         await makeChatRequest();
     }
 
@@ -380,17 +380,60 @@
         return chartBox;
     }
 
-    function generateChart(dataResponse, format, chartBox) {
+    function generateChart(query, dataResponse, format, chartBox) {
         dataResponse = JSON.parse(dataResponse);
-        dataResponse = dataResponse.slice(0, 6);
+        //dataResponse = dataResponse.slice(0, 6);
         let data = google.visualization.arrayToDataTable(dataResponse);
+        let numColumns = dataResponse.length - 1;
+
+        let minHeight = 400;
+        let additionalHeight = 30 * numColumns;
+        let chartHeight = Math.max(minHeight, minHeight + additionalHeight);
+
         let options = {
+            title: query,
+            titleTextStyle: {
+                fontSize: 20
+            },
+            height: chartHeight,
             chartArea: {
-                height: 600
+              width: '60%', // Adjust the width of the chart area
+              height: '70%' // Adjust the height of the chart area
+            },
+            legend: {
+              position: 'top' // Position the legend at the top for more space
+            },
+            colors: ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099'], // Customize bar colors
+            animation: {
+              startup: true,
+              duration: 1000,
+              easing: 'out'
             }
+        };
+
+        let chart;
+        if (format === "bar graph"){
+            chart = new google.visualization.BarChart(chartBox);
+            options[bars] = "horizontal";
+            options[bar] = {
+                groupWidth: '80%'
+            }
+        } else if (format === "line graph") {
+            chart = new google.visualization.LineChart(chartBox);
+            options['curveType'] = 'function'; // Set curve type for line chart
+            options['lineWidth'] = 2; // Set line width
+        } else if (format === "pie chart") {
+            chart = new google.visualization.PieChart(chartBox);
+            options['pieSliceText'] = 'label'; // Show label on pie slices
+            options['pieHole'] = 0.4; // Set pie hole (donut chart)
+        } else if (format === "scatterplot") {
+            chart = new google.visualization.ScatterChart(chartBox);
+            options['pointSize'] = 5; // Set size of points
+            options['legend'] = { position: 'none' }; // Hide legend
         }
-        let chart = new google.visualization.BarChart(chartBox);
+
         chart.draw(data, options);
+        chartBox.style.height = chartHeight + "px";
     }
 
     async function feedQuestions(e) {

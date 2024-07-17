@@ -233,14 +233,8 @@ def get_AI_response(query, input_list):
     query = f"""Using information provided above, tell me about {query}
             (if applicable and appropraite, at the end of the response, give me a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
             and don't include the code, just a string representation of the array in this section 
-            and don't include introductions like: **Google.Visualization.ArrayToDataTable string representation**)
 
-            Correct Example response:
-            "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            [["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
-
-            Wrong Example Response:
+            Example Response:
             "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
             blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
             **Google.Visualization.ArrayToDataTable string representation:**
@@ -249,7 +243,10 @@ def get_AI_response(query, input_list):
     result = model.generate_content(input_list + [query])
 
     result = result.text
-    textual_response = result[:result.index("[")]
+    end_index = result.index("**Google.Visualization.Array")
+    if end_index == -1:
+        end_index = result.index("[")
+    textual_response = result[:end_index]
     data_response = result[result.index("["):result.rfind("]")+1]
 
     return textual_response, data_response, top_format
