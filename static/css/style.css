@@ -191,7 +191,8 @@ h1 {
 .sub-textbox {
     display: flex;
     flex-direction: column;
-    width: 100%
+    width: 100%;
+    overflow-x: hidden; 
 }
 
 .sub-textbox button {
@@ -210,4 +211,8 @@ h1 {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+}
+
+.chart {
+    margin-top: 10px;
 }

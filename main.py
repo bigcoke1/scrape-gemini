@@ -26,6 +26,7 @@ import sqlite3
 import asyncio
 from multiprocessing import Pool
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import json
 
 #my lib
 from dropbox_refresh import refresh_access_token
@@ -211,8 +212,44 @@ def split_long_string(data, max_length):
     return result
 
 def get_AI_response(query, input_list):
+    prompt_format = """
+        Give me a JSON (and only the JSON enclosed with '{}' with no explanation) of what type of visual display the user is asking 
+        (i.e. bar graph, pie chart, scatterplot, line graph, histogram, table, and 2 more displays you think it's possible)
+        where each key is the type of visual display and each value is the probability that the user is asking for that display.
+        Give me an empty response if you think a visual display here would not be appropriate (when textual displays make more sense)
+        The prompt is
+    """ + query
+    format = model.generate_content(prompt_format)
+    format = format.text
+    format_dict = json.loads(format)
+    if format_dict:
+        top_format = max(format_dict, key=format_dict.get)
+        print(top_format)
+    else:
+        print("textual display")
+
     input_list = split_long_string(input_list, 10000)
     
-    query = "Using information provided above, tell me about " + query
+    query = f"""Using information provided above, tell me about {query}
+            (if applicable and appropraite, at the end of the response, give me a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
+            and don't include the code, just a string representation of the array in this section 
+            and don't include introductions like: **Google.Visualization.ArrayToDataTable string representation**)
+
+            Correct Example response:
+            "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            [["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
+
+            Wrong Example Response:
+            "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+            **Google.Visualization.ArrayToDataTable string representation:**
+            [["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
+    """
     result = model.generate_content(input_list + [query])
-    return result.text
+
+    result = result.text
+    textual_response = result[:result.index("[")]
+    data_response = result[result.index("["):result.rfind("]")+1]
+
+    return textual_response, data_response, top_format

@@ -6,6 +6,8 @@
     const URL = "https://www.scrape-insight.com"
     const MONTH = 2592000000;
 
+    google.charts.load('current', {'packages':['corechart']});
+
     async function init() {
         qs("#register form").addEventListener("submit", makeRegisterRequest);
         qs("#login form").addEventListener("submit", makeLoginRequest);
@@ -204,8 +206,13 @@
         id("chat").innerHTML = "";
         for(let i = 0; i < res.length; i++) {
             let entry = res[i];
+            let question = entry[2];
+            let response = entry[3];
+            let data = entry[6];
+            let format = entry[7];
             displayEntry(entry[2], false);
-            displayEntry(entry[3], true, JSON.parse(entry[5]), entry[2]);
+            let chartBox = displayEntry(entry[3], true, JSON.parse(entry[5]), entry[2]);
+            generateChart(data, format, chartBox)
         }
     }
 
@@ -291,10 +298,14 @@
         });
         await statusCheck(res);
         res = await res.json();
-        let aiResponse = res[0];
-        let links = res[1];
+        let textResponse = res[0];
+        let dataResponse = res[1];
+        let format = res[2];
+        let links = res[3];
         loading.remove();
-        displayEntry(aiResponse, true, links, query);
+        let chartBox = displayEntry(textResponse, true, links, query);
+        console.log(dataResponse);
+        generateChart(dataResponse, format, chartBox);
         await makeChatRequest();
     }
 
@@ -338,6 +349,7 @@
             }
         }
         let subTextbox = document.createElement("section");
+        let chartBox = document.createElement("section");
         subTextbox.appendChild(text);
         subTextbox.classList.add("sub-textbox")
         resTextbox.appendChild(subTextbox);
@@ -354,6 +366,8 @@
                 resTextbox.remove();
                 generateResponse(query);
             });
+            chartBox.classList.add("chart");
+            subTextbox.prepend(chartBox);
             subTextbox.appendChild(newAnswerButton);
         } else {
             resTextbox.classList.add("question");
@@ -363,6 +377,20 @@
         }
         resTextbox.classList.add("shadow");
         id("chat").appendChild(resTextbox);
+        return chartBox;
+    }
+
+    function generateChart(dataResponse, format, chartBox) {
+        dataResponse = JSON.parse(dataResponse);
+        dataResponse = dataResponse.slice(0, 6);
+        let data = google.visualization.arrayToDataTable(dataResponse);
+        let options = {
+            chartArea: {
+                height: 600
+            }
+        }
+        let chart = new google.visualization.BarChart(chartBox);
+        chart.draw(data, options);
     }
 
     async function feedQuestions(e) {

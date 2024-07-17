@@ -85,16 +85,17 @@ def get_response():
             links = [link for link in links if link is not None]
             links = links[:5]
             result = iter_result(links)
-            res = get_AI_response(query, result)
+            text_response, data_response, format = get_AI_response(query, result)
             current_datetime = get_date()
             json_links = json.dumps(links)
             
             con = sqlite3.connect(USER_DATA)
             cur = con.cursor()
-            cur.execute("INSERT INTO chat (username, query, response, date, links) VALUES (?, ?, ?, ?, ?)", [username, query, res, current_datetime, json_links])
+            cur.execute("INSERT INTO chat (username, query, response, date, links, data, format) VALUES (?, ?, ?, ?, ?, ?, ?)", 
+                        [username, query, text_response, current_datetime, json_links, data_response, format])
             con.commit()
             con.close()
-            return jsonify([res, links])
+            return jsonify([text_response, data_response, format, links])
         except:
             logging.error("An error occurred", exc_info=True)
             return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
