@@ -10,7 +10,6 @@ import pickle
 import google.generativeai as genai
 import spacy
 from argon2 import PasswordHasher
-import requests
 
 model = genai.GenerativeModel("gemini-1.5-flash")
 ph = PasswordHasher()
@@ -18,17 +17,12 @@ USER_DATA = "user_data.db"
 nlp = spacy.load('en_core_web_sm')
 
 #python
-import time
 from datetime import datetime, timedelta
 import os
 import re
 import sqlite3
-from multiprocessing import Pool
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
-
-#my lib
-from dropbox_refresh import refresh_access_token
 
 STOP_WORDS = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", 
               "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", 
@@ -222,10 +216,11 @@ def get_AI_response(query, input_list):
     format = format.text
     format_dict = json.loads(format)
     if format_dict:
-        top_format = max(format_dict, key=format_dict.get)
-        print(top_format)
+        top_format = max(format_dict, key=format_dict.get)     
     else:
-        print("textual display")
+        top_format = "textual display"
+    
+    print(top_format)
 
     input_list = split_long_string(input_list, 10000)
     
@@ -279,6 +274,8 @@ def process_response(result, top_format):
         data_response = parse_to_table(data_response)
     else:        
         textual_response, data_response = separate_response(result, top_format, "[", "]")
+        if top_format == "textual display":
+            data_response = None
 
-    top_format = top_format if textual_response and data_response else None
+    top_format = top_format if textual_response and data_response else "textual display"
     return textual_response, data_response, top_format

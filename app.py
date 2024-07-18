@@ -11,8 +11,6 @@ import sqlite3
 import logging
 import json
 from threading import Thread
-import sched
-import signal
 
 #my lib
 from main import *

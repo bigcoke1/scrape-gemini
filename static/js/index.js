@@ -205,15 +205,20 @@
     function populateChat(res) {
         id("chat").innerHTML = "";
         for(let i = 0; i < res.length; i++) {
-            let entry = res[i];
-            let question = entry[2];
-            let response = entry[3];
-            let data = entry[6];
-            let format = entry[7];
-            displayEntry(question, false);
-            let chartBox = displayEntry(response, true, JSON.parse(entry[5]), entry[2]);
-            if (data && format) {
-                generateChart(question, data, format, chartBox)
+            try {
+                let entry = res[i];
+                let question = entry[2];
+                let response = entry[3];
+                let data = entry[6];
+                let format = entry[7];
+                displayEntry(question, false);
+                let chartBox = displayEntry(response, true, JSON.parse(entry[5]), entry[2]);
+                if (data) {
+                    generateChart(question, data, format, chartBox);
+                }
+            } catch (err) {
+                console.log(err);
+                continue;
             }
         }
     }
@@ -306,7 +311,9 @@
         let links = res[3];
         loading.remove();
         let chartBox = displayEntry(textResponse, true, links, query);
-        generateChart(query, dataResponse, format, chartBox);
+        if (dataResponse) {
+            generateChart(query, dataResponse, format, chartBox);
+        }
         await makeChatRequest();
     }
 
