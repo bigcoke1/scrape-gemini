@@ -23,7 +23,6 @@ from datetime import datetime, timedelta
 import os
 import re
 import sqlite3
-import asyncio
 from multiprocessing import Pool
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
@@ -241,12 +240,45 @@ def get_AI_response(query, input_list):
             [["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
     """
     result = model.generate_content(input_list + [query])
-
     result = result.text
-    end_index = result.index("**Google.Visualization.Array")
-    if end_index == -1:
-        end_index = result.index("[")
-    textual_response = result[:end_index]
-    data_response = result[result.index("["):result.rfind("]")+1]
 
+    return process_response(result, top_format)
+
+def separate_response(result, format, lstopper, rstopper):
+    end_index = result.find("Google.Visualization.Array")
+    if end_index == -1:
+        end_index = result.find(lstopper)
+    else:
+        end_index = result.rfind("\n", 0, end_index+1)
+    
+    if format == "table" and end_index != -1:
+        textual_response = result[:result.find(lstopper)]
+        data_response = result[result.find(lstopper) + 1:result.rfind(rstopper)]
+    elif end_index != -1:
+        textual_response = result[:end_index]
+        data_response = result[result.find(lstopper):result.rfind(rstopper) + 1]
+    else:
+        textual_response = result
+        data_response = None
+    return textual_response, data_response
+
+def parse_to_table(data_response):
+    if data_response:
+        rows = data_response.split("|\n|")
+        table = [[element.strip() for element in row.split("|")] for row in rows]
+        del table[1]
+        table = json.dumps(table)
+        return table
+    else:
+        return None
+
+def process_response(result, top_format):
+    print(result)
+    if top_format == "table":
+        textual_response, data_response = separate_response(result, top_format, "|", "|")
+        data_response = parse_to_table(data_response)
+    else:        
+        textual_response, data_response = separate_response(result, top_format, "[", "]")
+
+    top_format = top_format if textual_response and data_response else None
     return textual_response, data_response, top_format

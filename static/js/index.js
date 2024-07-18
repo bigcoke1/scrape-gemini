@@ -306,7 +306,6 @@
         let links = res[3];
         loading.remove();
         let chartBox = displayEntry(textResponse, true, links, query);
-        console.log(dataResponse);
         generateChart(query, dataResponse, format, chartBox);
         await makeChatRequest();
     }
@@ -334,43 +333,23 @@
         let resTextbox = document.createElement("article");
         let text = document.createElement("p");
         text.textContent = res;
-
+        let linkBox = document.createElement("p");
         if (links) {
-            // Create a text node for the initial text and the "References:" label
-            text.appendChild(document.createTextNode("\nReferences: "));
-            for (let i = 0; i < links.length; i++) {
-                // Create a text node for the link index and description
-                text.appendChild(document.createTextNode("\n" + (i + 1) + ") "));
-        
-                let urlElement = document.createElement("a");
-                urlElement.href = links[i];
-                urlElement.textContent = links[i];
-                
-                // Append the anchor element
-                text.appendChild(urlElement);
-            }
+            populateLinks(linkBox, links);
         }
+
         let subTextbox = document.createElement("section");
         let chartBox = document.createElement("section");
+
         subTextbox.appendChild(text);
-        subTextbox.classList.add("sub-textbox")
+        subTextbox.classList.add("sub-textbox");
+        subTextbox.appendChild(chartBox);
+        subTextbox.appendChild(linkBox);
+
         resTextbox.appendChild(subTextbox);
         resTextbox.classList.add("chat-entry");
         if (response) {
-            resTextbox.classList.add("response");
-            let img = document.createElement("img");
-            img.src = "static/images/AI.png";
-            resTextbox.prepend(img);
-            let newAnswerButton = document.createElement("button");
-            newAnswerButton.textContent = "Regenerate Response";
-            newAnswerButton.addEventListener("click", () => {
-                id("chat").appendChild(resTextbox.previousElementSibling);
-                resTextbox.remove();
-                generateResponse(query);
-            });
-            chartBox.classList.add("chart");
-            subTextbox.prepend(chartBox);
-            subTextbox.appendChild(newAnswerButton);
+            populateResponse(resTextbox, subTextbox, chartBox, query);
         } else {
             resTextbox.classList.add("question");
             let img = document.createElement("img");
@@ -384,7 +363,6 @@
 
     function generateChart(query, dataResponse, format, chartBox) {
         dataResponse = JSON.parse(dataResponse);
-        //dataResponse = dataResponse.slice(0, 6);
         let data = google.visualization.arrayToDataTable(dataResponse);
         let numColumns = dataResponse.length - 1;
 
@@ -432,10 +410,61 @@
             chart = new google.visualization.ScatterChart(chartBox);
             options['pointSize'] = 5; // Set size of points
             options['legend'] = { position: 'none' }; // Hide legend
+        } else if (format === "table") {
+            generateTable(dataResponse, chartBox);
+            return;
         }
 
         chart.draw(data, options);
         chartBox.style.height = chartHeight + "px";
+    }
+
+    function generateTable(data, chartBox) {
+        let table = document.createElement("table");
+        data.forEach((row, rowIndex) => {
+            let tr = document.createElement("tr");
+
+            row.forEach(cell => {
+                let cellElement = rowIndex === 0 ? document.createElement("th"): document.createElement("td");
+                cellElement.textContent = cell;
+                tr.appendChild(cellElement);
+            });
+
+            table.appendChild(tr);
+        });
+        chartBox.appendChild(table);
+    }
+
+    function populateLinks(linkBox, links) {
+        // Create a text node for the initial text and the "References:" label
+        linkBox.appendChild(document.createTextNode("\nReferences: "));
+        for (let i = 0; i < links.length; i++) {
+            // Create a text node for the link index and description
+            linkBox.appendChild(document.createTextNode("\n" + (i + 1) + ") "));
+
+            let urlElement = document.createElement("a");
+            urlElement.href = links[i];
+            urlElement.textContent = links[i];
+            
+            // Append the anchor element
+            linkBox.appendChild(urlElement);
+        }
+    }
+
+    function populateResponse(resTextbox, subTextbox, chartBox, query) {
+        resTextbox.classList.add("response");
+        let img = document.createElement("img");
+        img.src = "static/images/AI.png";
+        resTextbox.prepend(img);
+        let newAnswerButton = document.createElement("button");
+        newAnswerButton.textContent = "Regenerate Response";
+        newAnswerButton.addEventListener("click", () => {
+            id("chat").appendChild(resTextbox.previousElementSibling);
+            resTextbox.remove();
+            generateResponse(query);
+        });
+        chartBox.classList.add("chart");
+        subTextbox.appendChild(newAnswerButton);
     }
 
     async function feedQuestions(e) {
