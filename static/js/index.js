@@ -383,6 +383,7 @@
         checkLength(dataResponse);
 
         let data = google.visualization.arrayToDataTable(dataResponse);
+        let chartHeight = 600;
 
         let options = {
             title: query,
@@ -407,7 +408,7 @@
 
         let chart;
         if (format === "bar graph"){
-            flexHeight(dataResponse.length - 1, options);
+            chartHeight = flexHeight(dataResponse.length - 1, options);
             chart = new google.visualization.BarChart(chartBox);
             options["bars"] = "horizontal";
             options["bar"] = {
@@ -427,7 +428,7 @@
             options['legend'] = { position: 'none' }; // Hide legend
         } else if (format === "table") {
             chart = new google.visualization.Table(chartBox);
-            flexHeight(dataResponse.length - 1, options);
+            chartHeight = flexHeight(dataResponse.length - 1, options);
             options['allowHtml'] = true; // Allows HTML in table cells
             options['showRowNumber'] = true; // Show row numbers
             options['cssClassNames'] = {
@@ -494,6 +495,7 @@
         let additionalHeight = 30 * numRows;
         let chartHeight = Math.max(minHeight, minHeight + additionalHeight);
         options["height"] = chartHeight;
+        return chartHeight;
     }
 
     function populateResponse(resTextbox, subTextbox, chartBox, query) {

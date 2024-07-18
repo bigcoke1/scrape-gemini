@@ -214,9 +214,9 @@ h1 {
 }
 
 .chart {
-    margin-top: 20px;
     font-family: "Roboto Condensed", sans-serif;
     align-self: center;
+    width: 100%;
 }
 
 table {
