@@ -6,7 +6,7 @@
     const URL = "https://www.scrape-insight.com"
     const MONTH = 2592000000;
 
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['corechart', 'geochart', 'table', 'gauge']});
 
     async function init() {
         qs("#register form").addEventListener("submit", makeRegisterRequest);
@@ -383,18 +383,13 @@
         checkLength(dataResponse);
 
         let data = google.visualization.arrayToDataTable(dataResponse);
-        let numRows = dataResponse.length - 1;
-
-        let minHeight = 400;
-        let additionalHeight = 30 * numRows;
-        let chartHeight = Math.max(minHeight, minHeight + additionalHeight);
 
         let options = {
             title: query,
             titleTextStyle: {
                 fontSize: 20
             },
-            height: chartHeight,
+            height: 600,
             chartArea: {
               width: '60%', // Adjust the width of the chart area
               height: '70%' // Adjust the height of the chart area
@@ -412,6 +407,7 @@
 
         let chart;
         if (format === "bar graph"){
+            flexHeight(dataResponse.length - 1, options);
             chart = new google.visualization.BarChart(chartBox);
             options["bars"] = "horizontal";
             options["bar"] = {
@@ -430,8 +426,17 @@
             options['pointSize'] = 5; // Set size of points
             options['legend'] = { position: 'none' }; // Hide legend
         } else if (format === "table") {
-            generateTable(dataResponse, chartBox);
-            return;
+            chart = new google.visualization.Table(chartBox);
+            flexHeight(dataResponse.length - 1, options);
+            options['allowHtml'] = true; // Allows HTML in table cells
+            options['showRowNumber'] = true; // Show row numbers
+            options['cssClassNames'] = {
+                headerRow: 'header-row',
+                tableRow: 'table-row',
+                oddTableRow: 'odd-table-row',
+                selectedTableRow: 'selected-table-row',
+                hoverTableRow: 'hover-table-row'
+            };
         } else if (format === "area chart") {
             chart = new google.visualization.AreaChart(chartBox);
             options['isStacked'] = true; // Stack area chart
@@ -468,24 +473,6 @@
         chartBox.style.height = chartHeight + "px";
     }
 
-    function generateTable(data, chartBox) {
-        let table = document.createElement("table");
-        checkLength(data);
-
-        data.forEach((row, rowIndex) => {
-            let tr = document.createElement("tr");
-
-            row.forEach(cell => {
-                let cellElement = rowIndex === 0 ? document.createElement("th"): document.createElement("td");
-                cellElement.textContent = cell;
-                tr.appendChild(cellElement);
-            });
-
-            table.appendChild(tr);
-        });
-        chartBox.appendChild(table);
-    }
-
     function populateLinks(linkBox, links) {
         // Create a text node for the initial text and the "References:" label
         linkBox.appendChild(document.createTextNode("\nReferences: "));
@@ -500,6 +487,13 @@
             // Append the anchor element
             linkBox.appendChild(urlElement);
         }
+    }
+
+    function flexHeight(numRows, options) {
+        let minHeight = 400;
+        let additionalHeight = 30 * numRows;
+        let chartHeight = Math.max(minHeight, minHeight + additionalHeight);
+        options["height"] = chartHeight;
     }
 
     function populateResponse(resTextbox, subTextbox, chartBox, query) {

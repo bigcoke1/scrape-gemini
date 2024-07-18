@@ -163,7 +163,8 @@ def get_AI_response(query, input_list):
     print(query)
     prompt_format = """
         Give me a JSON (and only the JSON enclosed with '{}' with no explanation) of what type of visual display the user is asking 
-        (i.e. bar graph, pie chart, scatterplot, line graph, histogram, table, textual display, and 2 more displays you think it's possible)
+        (i.e. bar graph, pie chart, scatterplot, line graph, histogram, table, textual display, area chart, bubble chart, 
+        histogram, geo chart, donut chart, and gauge chart)
         where each key is the type of visual display and each value is the probability that the user is asking for that display.
         The prompt is: 
     """ + query
@@ -227,7 +228,18 @@ def parse_to_table(data_response):
         return None
 
 def process_response(result, top_format):
-    if top_format == "table":
+    try:
+        textual_response, data_response = separate_response(result, top_format, "|", "|")
+        data_response = parse_to_table(data_response)
+        if not textual_response or not data_response:
+            raise Exception
+    except:
+        textual_response, data_response = separate_response(result, top_format, "[", "]")
+    finally:
+        top_format = top_format if textual_response and data_response else "textual display"
+        return textual_response, data_response, top_format
+    
+    """if top_format == "table":
         try:
             textual_response, data_response = separate_response(result, top_format, "|", "|")
             data_response = parse_to_table(data_response)
@@ -236,7 +248,7 @@ def process_response(result, top_format):
     else:        
         textual_response, data_response = separate_response(result, top_format, "[", "]")
         if top_format == "textual display":
-            data_response = None
+            data_response = None"""
 
     top_format = top_format if textual_response and data_response else "textual display"
     return textual_response, data_response, top_format
