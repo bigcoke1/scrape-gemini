@@ -368,13 +368,25 @@
         return chartBox;
     }
 
+    function checkLength(dataResponse) {
+        let numColumns = dataResponse[0].length;
+        for (let i = 0; i < dataResponse.length; i++) {
+            if (dataResponse[i].length != numColumns) {
+                dataResponse.splice(i, 1);
+                i--;
+            }
+        }
+    }
+
     function generateChart(query, dataResponse, format, chartBox) {
         dataResponse = JSON.parse(dataResponse);
+        checkLength(dataResponse);
+
         let data = google.visualization.arrayToDataTable(dataResponse);
-        let numColumns = dataResponse.length - 1;
+        let numRows = dataResponse.length - 1;
 
         let minHeight = 400;
-        let additionalHeight = 30 * numColumns;
+        let additionalHeight = 30 * numRows;
         let chartHeight = Math.max(minHeight, minHeight + additionalHeight);
 
         let options = {
@@ -420,6 +432,36 @@
         } else if (format === "table") {
             generateTable(dataResponse, chartBox);
             return;
+        } else if (format === "area chart") {
+            chart = new google.visualization.AreaChart(chartBox);
+            options['isStacked'] = true; // Stack area chart
+        } else if (format === "bubble chart") {
+            chart = new google.visualization.BubbleChart(chartBox);
+            options['bubble'] = { opacity: 0.3 }; // Set bubble opacity
+        } else if (format === "histogram") {
+            chart = new google.visualization.Histogram(chartBox);
+            options['histogram'] = { bucketSize: 1 }; // Set bucket size
+        } else if (format === "geo chart") {
+            chart = new google.visualization.GeoChart(chartBox);
+            options['colorAxis'] = { colors: ['#e5f5f9', '#2ca25f'] }; // Set color axis range
+        } else if (format === "donut chart") {
+            chart = new google.visualization.PieChart(chartBox);
+            options['pieHole'] = 0.4; // Set hole size for donut chart
+        } else if (format === "gauge chart") {
+            chart = new google.visualization.Gauge(chartBox);
+            options['min'] = 0;
+            options['max'] = 100;
+            options['greenFrom'] = 80;
+            options['greenTo'] = 100;
+            options['yellowFrom'] = 60;
+            options['yellowTo'] = 80;
+            options['redFrom'] = 0;
+            options['redTo'] = 60;
+        } else {
+            let error = document.createElement("p");
+            error.textContent = "Graphic Type Not Supported Yet";
+            error.classList.add("error");
+            chartBox.appendChild(error);
         }
 
         chart.draw(data, options);
@@ -428,6 +470,8 @@
 
     function generateTable(data, chartBox) {
         let table = document.createElement("table");
+        checkLength(data);
+
         data.forEach((row, rowIndex) => {
             let tr = document.createElement("tr");
 

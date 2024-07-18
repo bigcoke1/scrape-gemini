@@ -8,42 +8,22 @@ from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
 import pickle
 import google.generativeai as genai
-import spacy
+
 from argon2 import PasswordHasher
 
 model = genai.GenerativeModel("gemini-1.5-flash")
 ph = PasswordHasher()
 USER_DATA = "user_data.db"
-nlp = spacy.load('en_core_web_sm')
 
 #python
 from datetime import datetime, timedelta
 import os
-import re
 import sqlite3
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 
-STOP_WORDS = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", 
-              "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", 
-              "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that", 
-              "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
-                "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", 
-                "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through",
-                "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", 
-                "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", 
-                "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", 
-                "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"]
-UNWANTED_WORDS = [
-    "Advertisement", "advertisement", "ads", "Ad", "ad", "Buy our product", "Buy now", "Shop now", 
-    "Click here", "Subscribe", "Sign up", "Join now", "Limited offer", "Sale", "Discount", "Promo", 
-    "Deal", "Coupon", "Exclusive offer", "Special offer", "Free trial", "Get your free", "Order now", 
-    "Hurry up", "Offer ends soon", "Best price", "Save money", "Use code", "Powered by", "Sponsored by",
-    "We use cookies", "cookie policy", "cookies to improve", "cookies for better experience", 
-    "cookie settings", "cookie consent", "accept cookies", "This site uses cookies", "privacy policy", 
-    "terms of service", "terms and conditions", "Read more", "Learn more", "More info", 
-    "advertising purposes", "Third-party cookies", "ad choices"
-]
+#my lib
+from cleaning import *
 
 def init_webdriver():
     chrome_options = Options()
@@ -73,11 +53,8 @@ def init_webdriver():
 #web crawls google search
 def search_google(query):
     driver = init_webdriver()
-    driver.get("https://www.google.com")
-    search_bar = driver.find_element(By.NAME, "q")
-    search_bar.clear()
-    search_bar.send_keys(query)
-    search_bar.send_keys(Keys.RETURN)
+    temp_query = clean_query(query).replace(" ", "+")
+    driver.get("https://www.google.com/search?q=" + temp_query)
 
     titles = WebDriverWait(driver, 5).until(lambda driver: driver.find_elements(By.CSS_SELECTOR, "#search h3"))
     titles = [title for title in titles if "".join(title.text.split())]
@@ -86,28 +63,6 @@ def search_google(query):
 
     driver.quit()
     return links
-
-def simplify_sentence(text):
-    doc = nlp(text)
-    normalized_tokens = []
-    
-    for token in doc:
-        if token.text not in STOP_WORDS:
-            if token.pos_ == 'VERB':
-                normalized_tokens.append(token.lemma_)
-            elif token.pos_ == 'NOUN':
-                normalized_tokens.append(token.lemma_) 
-            else:
-                normalized_tokens.append(token.text) 
-    
-    return ' '.join(normalized_tokens)
-
-def clean_data(text):
-    text = re.sub("\W", " ", text)
-    pattern = re.compile("|".join(map(re.escape, UNWANTED_WORDS)))
-    text = pattern.sub("", text)
-    text = simplify_sentence(text)
-    return text
 
 def scrape_text(link):
     driver = init_webdriver()
@@ -205,12 +160,12 @@ def split_long_string(data, max_length):
     return result
 
 def get_AI_response(query, input_list):
+    print(query)
     prompt_format = """
         Give me a JSON (and only the JSON enclosed with '{}' with no explanation) of what type of visual display the user is asking 
-        (i.e. bar graph, pie chart, scatterplot, line graph, histogram, table, and 2 more displays you think it's possible)
+        (i.e. bar graph, pie chart, scatterplot, line graph, histogram, table, textual display, and 2 more displays you think it's possible)
         where each key is the type of visual display and each value is the probability that the user is asking for that display.
-        Give me an empty response if you think a visual display here would not be appropriate (when textual displays make more sense)
-        The prompt is
+        The prompt is: 
     """ + query
     format = model.generate_content(prompt_format)
     format = format.text
@@ -224,8 +179,9 @@ def get_AI_response(query, input_list):
 
     input_list = split_long_string(input_list, 10000)
     
-    query = f"""Using information provided above, tell me about {query}
-            (if applicable and appropraite, at the end of the response, give me a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
+    prompt = f"""Using information provided above, tell me about {clean_query(query)} and show in {top_format}
+            (if requested to show in any visual display except "textual display"
+            , at the end of the response, give me a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
             and don't include the code, just a string representation of the array in this section 
 
             Example Response:
@@ -234,7 +190,7 @@ def get_AI_response(query, input_list):
             **Google.Visualization.ArrayToDataTable string representation:**
             [["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
     """
-    result = model.generate_content(input_list + [query])
+    result = model.generate_content(input_list + [prompt])
     result = result.text
 
     return process_response(result, top_format)
@@ -249,6 +205,7 @@ def separate_response(result, format, lstopper, rstopper):
     if format == "table" and end_index != -1:
         textual_response = result[:result.find(lstopper)]
         data_response = result[result.find(lstopper) + 1:result.rfind(rstopper)]
+        print(data_response)
     elif end_index != -1:
         textual_response = result[:end_index]
         data_response = result[result.find(lstopper):result.rfind(rstopper) + 1]
@@ -262,16 +219,20 @@ def parse_to_table(data_response):
         rows = data_response.split("|\n|")
         table = [[element.strip() for element in row.split("|")] for row in rows]
         del table[1]
+        table = [[item for item in row if re.search(r'\w', item)] for row in table]
+        print(table)
         table = json.dumps(table)
         return table
     else:
         return None
 
 def process_response(result, top_format):
-    print(result)
     if top_format == "table":
-        textual_response, data_response = separate_response(result, top_format, "|", "|")
-        data_response = parse_to_table(data_response)
+        try:
+            textual_response, data_response = separate_response(result, top_format, "|", "|")
+            data_response = parse_to_table(data_response)
+        except:
+            textual_response, data_response = separate_response(result, top_format, "[", "]")   
     else:        
         textual_response, data_response = separate_response(result, top_format, "[", "]")
         if top_format == "textual display":
