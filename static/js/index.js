@@ -245,6 +245,10 @@
             });
             await statusCheck(res);
             let username = qs("#register form input").value;
+            let inputs = qsa("#register form input");
+            inputs.forEach(input => {
+                input.value = "";
+            });
             setCookie("username", username, {expires: setExpirationDate()});
             await displayHome();
         } catch (err) {
@@ -261,6 +265,7 @@
                 method: "POST",
                 body: params
             });
+            qsa("#login-form input")[1].value = "";
             await statusCheck(res);
             let username = qs("#login form input").value;
             setCookie("username", username, {expires: setExpirationDate()});
