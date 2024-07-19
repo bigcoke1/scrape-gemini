@@ -79,16 +79,26 @@ def scrape_text(link):
     driver.quit()
     return text
 
-def compare_date(date):
-    date = datetime.strptime(date, "%m-%d-%y").date()
-    return abs(date - datetime.now().date()) <= timedelta(days=3)
-
 def get_date():
     current_datetime = datetime.now()
     format_string = "%m-%d-%y"
     current_datetime = current_datetime.strftime(format_string)
 
     return current_datetime
+
+def get_day_tolerence(query):
+    prompt = f"""according to the following prompt, tell me how recent does the data need to be to answer the question with good accuracy,
+             and convert the time to datetime format, and today's date is {get_date()}
+            prompt: {query}.
+            reply with nothing else, but the number to indicate how many days (If the data freshness is not critical, reply with a large number like 3650)"""
+    day_tolerence = model.generate_content(prompt)
+    day_tolerence = day_tolerence.text
+    print(f"how recent does the data need to be: {day_tolerence.strip()} days")
+    return float(day_tolerence)
+
+def compare_date(date, day_tolerence):
+    date = datetime.strptime(date, "%m-%d-%y").date()
+    return abs(date - datetime.now().date()) < timedelta(days=day_tolerence)
 
 def get_local_path(id, date):
     data_folder = "data"
@@ -97,7 +107,7 @@ def get_local_path(id, date):
 
     return path
 
-def collect_result(link):
+def collect_result(link, day_tolerence):
     text = ""
     if link:
         print("now looking at " + link)
@@ -106,7 +116,7 @@ def collect_result(link):
         current_datetime = get_date()
         sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
         webpage = sql_result.fetchone()
-        if not webpage or not compare_date(webpage[1]): #if the entry was not found or the entry is too old, get new one
+        if not webpage or not compare_date(webpage[1], day_tolerence): #if the entry was not found or the entry is too old, get new one
             text = scrape_text(link)
             if webpage: #if the entry was found but is too old
                 print("old file detected and deleted")
@@ -135,10 +145,10 @@ def collect_result(link):
                 text = pickle.load(f)
     return text
 
-def iter_result(links):
+def iter_result(links, day_tolerence):
     result = []
     with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = {executor.submit(collect_result, link): link for link in links}
+        futures = {executor.submit(lambda l: collect_result(l, day_tolerence), link): link for link in links}
         for future in as_completed(futures):
             try:
                 result.append(future.result())

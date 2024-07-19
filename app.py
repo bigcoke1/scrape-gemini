@@ -79,10 +79,11 @@ def get_response():
     username = request.form.get("username")
     if query and username:
         try:
+            day_tolerence = get_day_tolerence(query)
             links = search_google(query)
             links = [link for link in links if link is not None]
             links = links[:5]
-            result = iter_result(links)
+            result = iter_result(links, day_tolerence)
             text_response, data_response, format = get_AI_response(query, result)
             current_datetime = get_date()
             json_links = json.dumps(links)
