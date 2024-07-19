@@ -16,7 +16,12 @@
         qs("#textbox input").addEventListener("change", toggleSubmit);
         id("textbox").addEventListener("submit", makeRequest);
         id("signout-btn").addEventListener("click", signOut);
-        id("clear-btn").addEventListener("click", clearHistory);
+        id("clear-btn").addEventListener("click", () => {
+            let result = confirm("Are you sure you want to clear all history?");
+            if (result) {
+                clearHistory();
+            } 
+        });
         id("account-btn").addEventListener("click", displayAccount);
         id("home-btn").addEventListener("click", displayHome);
 
