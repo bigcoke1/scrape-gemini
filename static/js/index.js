@@ -215,12 +215,13 @@
         for(let i = 0; i < res.length; i++) {
             try {
                 let entry = res[i];
+                let id = entry[0];
                 let question = entry[2];
                 let response = entry[3];
                 let data = entry[6];
                 let format = entry[7];
                 displayEntry(question, false);
-                let chartBox = displayEntry(response, true, JSON.parse(entry[5]), entry[2]);
+                let chartBox = displayEntry(response, true, JSON.parse(entry[5]), question, id);
                 if (data) {
                     generateChart(question, data, format, chartBox);
                 }
@@ -353,7 +354,7 @@
         return resTextbox;
     }
 
-    function displayEntry(res, response, links=null, query=null) {
+    function displayEntry(res, response, links=null, query=null, id=null) {
         let resTextbox = document.createElement("article");
         let text = document.createElement("p");
         text.textContent = res;
