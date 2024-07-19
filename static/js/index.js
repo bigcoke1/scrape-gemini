@@ -325,7 +325,11 @@
         loading.remove();
         let chartBox = displayEntry(textResponse, true, links, query);
         if (dataResponse) {
-            generateChart(query, dataResponse, format, chartBox);
+            try {
+                generateChart(query, dataResponse, format, chartBox);
+            } catch (err) {
+                pass
+            }
         }
         await makeChatRequest();
     }
@@ -484,7 +488,22 @@
         }
 
         chart.draw(data, options);
-        chartBox.style.height = chartHeight + "px";
+        chartBox.style.height = chartHeight + 50 + "px";
+
+        let button = document.createElement("button");
+        button.addEventListener("click", () => {
+            saveChartAsImage(chart);
+        });
+        button.textContent = "Download Chart";
+        chartBox.appendChild(button);
+    }
+
+    function saveChartAsImage(chart) {
+        let imgUrl = chart.getImageURI();
+        let link = document.createElement("a");
+        link.href = imgUrl;
+        link.download = "chart.png";
+        link.click();
     }
 
     function populateLinks(linkBox, links) {

@@ -217,6 +217,11 @@ h1 {
     font-family: "Roboto Condensed", sans-serif;
     align-self: center;
     width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
 }
 
 body > section:nth-child(1) {
