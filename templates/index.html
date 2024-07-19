@@ -10,26 +10,34 @@
         <title>Scrape-Insight</title>
     </head>
     <body>
-        <section id="login" class="shadow">
-            <h1>Scrape Insight</h1>
-            <form id="login-form">
-                Username<input type="text" name="username">
-                Password<input type="password" name="password">
-                <button class="shadow">Log In</button>
-            </form>
-            <p class="error hidden">Wrong Username or Password!</p>
-            <button>Register for a new account!</button>
-        </section>
-        <section id="register" class="hidden shadow">
-            <h1>Scrape Insight</h1>
-            <form id="register-form">
-                Username<input type="text" name="username">
-                Password<input type="password" name="password">
-                Email<input type="email" name="email">
-                <button class="shadow">Register</button>
-            </form>
-            <p class="error hidden">Please Enter All Required Fields!</p>
-            <button>Return to Log In</button>
+        <section>
+            <section id="login" class="shadow">
+                <h1>Scrape Insight</h1>
+                <form id="login-form">
+                    Username<input type="text" name="username">
+                    Password<input type="password" name="password">
+                    <button class="shadow">Log In</button>
+                </form>
+                <p class="error hidden">Wrong Username or Password!</p>
+                <button>Register for a new account!</button>
+            </section>
+            <section id="register" class="hidden shadow">
+                <h1>Scrape Insight</h1>
+                <form id="register-form">
+                    Username<input type="text" name="username">
+                    Password<input type="password" name="password">
+                    Email<input type="email" name="email">
+                    <button class="shadow">Register</button>
+                </form>
+                <p class="error hidden">Please Enter All Required Fields!</p>
+                <button>Return to Log In</button>
+            </section>
+            <section id="account" class="hidden">
+                <p>Username: </p>
+                <p>Email: </p>
+                <button id="home-btn">Home</button>
+                <button id="signout-btn">Sign out</button>
+            </section>
         </section>
         <section id="home" class="hidden">
             <section id="ui" class="shadow">
@@ -47,12 +55,6 @@
                 <input type="text" placeholder="ask a question..." name="query" class="shadow">
                 <button id="submit" disabled class="shadow">Submit</button>
             </form>
-        </section>
-        <section id="account" class="hidden">
-            <p>Username: </p>
-            <p>Email: </p>
-            <button id="home-btn">Home</button>
-            <button id="signout-btn">Sign out</button>
         </section>
     </body>
 </html>

@@ -159,6 +159,38 @@ def split_long_string(data, max_length):
             result.append(entry)
     return result
 
+def parse_to_table(data_response):
+    if data_response:
+        rows = data_response.split("|\n|")
+        table = [[element.strip() for element in row.split("|")] for row in rows]
+        del table[1]
+        table = [[item for item in row if re.search(r'\w', item)] for row in table]
+        print(table)
+        table = json.dumps(table)
+        return table
+    else:
+        return None
+
+def separate_response(result):
+    try:
+        textual_response = result[:result.index("|")]
+        data_response = result[result.index("|") + 1:result.rfind("|")]
+        data_response = parse_to_table(data_response)
+    except:
+        end_index = result.find("Google.Visualization.Array")
+        if end_index == -1:
+            end_index = result.find("[")
+        else:
+            end_index = result.rfind("\n", 0, end_index+1)
+
+        if end_index != -1:
+            textual_response = result[:end_index]
+            data_response = result[result.find("["):result.rfind("]") + 1]
+        else:
+            textual_response = result
+            data_response = None
+    return textual_response, data_response
+
 def get_AI_response(query, input_list):
     print(query)
     prompt_format = """
@@ -180,75 +212,25 @@ def get_AI_response(query, input_list):
 
     input_list = split_long_string(input_list, 10000)
     
-    prompt = f"""Using information provided above, tell me about {clean_query(query)} and show in {top_format}
-            (if requested to show in any visual display except "textual display"
-            , at the end of the response, give me a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
-            and don't include the code, just a string representation of the array in this section 
+    if top_format != "textual display":
+        if top_format != "table":
+            prompt = f"""Using information provided above, tell me about {clean_query(query)}
+                    (at the end of the response, give me a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
+                    and don't include the code, just a string representation of the array in this section 
 
-            Example Response:
-            "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-            **Google.Visualization.ArrayToDataTable string representation:**
-            [["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
-    """
+                    Example Response:
+                    "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                    blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                    **Google.Visualization.ArrayToDataTable string representation:**
+                    [["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
+            """
+        else:
+            prompt = f"Using information above, show me a table of {clean_query(query)}"
+    else:
+        prompt = f"Using information above, tell me about {clean_query(query)}"
     result = model.generate_content(input_list + [prompt])
     result = result.text
-
-    return process_response(result, top_format)
-
-def separate_response(result, format, lstopper, rstopper):
-    end_index = result.find("Google.Visualization.Array")
-    if end_index == -1:
-        end_index = result.find(lstopper)
-    else:
-        end_index = result.rfind("\n", 0, end_index+1)
-    
-    if format == "table" and end_index != -1:
-        textual_response = result[:result.find(lstopper)]
-        data_response = result[result.find(lstopper) + 1:result.rfind(rstopper)]
-        print(data_response)
-    elif end_index != -1:
-        textual_response = result[:end_index]
-        data_response = result[result.find(lstopper):result.rfind(rstopper) + 1]
-    else:
-        textual_response = result
-        data_response = None
-    return textual_response, data_response
-
-def parse_to_table(data_response):
-    if data_response:
-        rows = data_response.split("|\n|")
-        table = [[element.strip() for element in row.split("|")] for row in rows]
-        del table[1]
-        table = [[item for item in row if re.search(r'\w', item)] for row in table]
-        print(table)
-        table = json.dumps(table)
-        return table
-    else:
-        return None
-
-def process_response(result, top_format):
-    try:
-        textual_response, data_response = separate_response(result, top_format, "|", "|")
-        data_response = parse_to_table(data_response)
-        if not textual_response or not data_response:
-            raise Exception
-    except:
-        textual_response, data_response = separate_response(result, top_format, "[", "]")
-    finally:
-        top_format = top_format if textual_response and data_response else "textual display"
-        return textual_response, data_response, top_format
-    
-    """if top_format == "table":
-        try:
-            textual_response, data_response = separate_response(result, top_format, "|", "|")
-            data_response = parse_to_table(data_response)
-        except:
-            textual_response, data_response = separate_response(result, top_format, "[", "]")   
-    else:        
-        textual_response, data_response = separate_response(result, top_format, "[", "]")
-        if top_format == "textual display":
-            data_response = None"""
-
+    print(result)
+    textual_response, data_response = separate_response(result)
     top_format = top_format if textual_response and data_response else "textual display"
     return textual_response, data_response, top_format

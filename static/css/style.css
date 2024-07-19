@@ -219,16 +219,8 @@ h1 {
     width: 100%;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
+body > section:nth-child(1) {
+    display: flex;
+    align-items: center;
+    height: 100vh;
 }

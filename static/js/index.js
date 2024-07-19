@@ -22,19 +22,6 @@
 
         await checkCookie();
     }
-    
-    async function displayAccount() {
-        id("home").classList.add("hidden");
-        id("login").classList.add("hidden");
-        id("register").classList.add("hidden");
-        id("account").classList.remove("hidden");
-
-        let accountInfo = qsa("#account p");
-        accountInfo[0].textContent = "Username: " + getCookie("username");
-        let email = await makeAccountRequest(getCookie("username"));
-        accountInfo[1].textContent = "Email: " + email;
-
-    }
 
     async function makeAccountRequest(username) {
         let res = await fetch(URL + "/account/" + username);
@@ -112,11 +99,25 @@
         }
     }
 
+    async function displayAccount() {
+        id("home").classList.add("hidden");
+        id("login").classList.add("hidden");
+        id("register").classList.add("hidden");
+        id("account").classList.remove("hidden");
+        qs("body > section:nth-child(1)").style.display = "flex";
+
+        let accountInfo = qsa("#account p");
+        accountInfo[0].textContent = "Username: " + getCookie("username");
+        let email = await makeAccountRequest(getCookie("username"));
+        accountInfo[1].textContent = "Email: " + email;
+    }
+
     function displayLogin() {
         id("home").classList.add("hidden");
         id("login").classList.remove("hidden");
         id("register").classList.add("hidden");
         id("account").classList.add("hidden");
+        qs("body > section:nth-child(1)").style.display = "flex";
     }
 
     async function signOut() {
@@ -129,6 +130,7 @@
         id("login").classList.add("hidden");
         id("register").classList.remove("hidden");
         id("account").classList.add("hidden");
+        qs("body > section:nth-child(1)").style.display = "flex";
     }
 
     async function displayHome() {
@@ -137,6 +139,7 @@
         id("register").classList.add("hidden");
         id("chat").innerHTML = "";
         id("account").classList.add("hidden");
+        qs("body > section:nth-child(1)").style.display = "none";
 
         await makeChatRequest();
     }
