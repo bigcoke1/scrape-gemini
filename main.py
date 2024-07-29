@@ -11,6 +11,7 @@ import google.generativeai as genai
 from argon2 import PasswordHasher
 
 model = genai.GenerativeModel("gemini-1.5-flash")
+
 ph = PasswordHasher()
 USER_DATA = "user_data.db"
 
@@ -180,26 +181,6 @@ def parse_to_table(data_response):
     else:
         return None
 
-def separate_response(result):
-    try:
-        textual_response = result[:result.index("|")]
-        data_response = result[result.index("|") + 1:result.rfind("|")]
-        data_response = parse_to_table(data_response)
-    except:
-        end_index = result.find("Google.Visualization.Array")
-        if end_index == -1:
-            end_index = result.find("[")
-        else:
-            end_index = result.rfind("\n", 0, end_index+1)
-
-        if end_index != -1:
-            textual_response = result[:end_index]
-            data_response = result[result.find("["):result.rfind("]") + 1]
-        else:
-            textual_response = result
-            data_response = None
-    return textual_response, data_response
-
 def get_AI_response(query, input_list):
     print(query)
     prompt_format = """
@@ -222,24 +203,33 @@ def get_AI_response(query, input_list):
     input_list = split_long_string(input_list, 10000)
     
     if top_format != "textual display":
-        if top_format != "table":
-            prompt = f"""Using information provided above, tell me about {clean_query(query)}
-                    (at the end of the response, give me a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
-                    and don't include the code, just a string representation of the array in this section 
+        prompt = f"""Using information provided above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
+                Using this JSON schema:
+                    Response = {{
+                        "textual_response": "str",
+                        "data_response": "str"
+                    }}
+                (data_response is a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
+                and don't include the code, just a string representation of the array in this section 
 
-                    Example Response:
-                    "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-                    blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-                    **Google.Visualization.ArrayToDataTable string representation:**
-                    [["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
-            """
-        else:
-            prompt = f"Using information above, show me a table of {clean_query(query)}"
+                Example Response:
+                {{
+                    "textual_response": "blah blah blah blah blah blah blah blah blah",
+                    "data_response": "[["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
+                }}
+        """
     else:
-        prompt = f"Using information above, tell me about {clean_query(query)}"
+        prompt = f"""Using information above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
+                Using this JSON schema:
+                    Response = {{
+                        "textual_response": "str"
+                    }}
+        """
     result = model.generate_content(input_list + [prompt])
     result = result.text
+    result = result[result.find("{"):result.rfind("}") + 1]
     print(result)
-    textual_response, data_response = separate_response(result)
+    result = json.loads(result)
+    textual_response, data_response = result.get("textual_response"), result.get("data_response")
     top_format = top_format if textual_response and data_response else "textual display"
     return textual_response, data_response, top_format

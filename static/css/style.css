@@ -199,7 +199,11 @@ h1 {
     height: 50px;
     width: 30%;
     align-self: center;
+}
 
+.sub-textbox > section {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .sub-textbox button, form button, #account button {

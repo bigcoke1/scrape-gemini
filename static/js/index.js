@@ -215,13 +215,13 @@
         for(let i = 0; i < res.length; i++) {
             try {
                 let entry = res[i];
-                let id = entry[0];
+                let chatId = entry[0];
                 let question = entry[2];
                 let response = entry[3];
                 let data = entry[6];
                 let format = entry[7];
                 displayEntry(question, false);
-                let chartBox = displayEntry(response, true, JSON.parse(entry[5]), question, id);
+                let chartBox = displayEntry(response, true, JSON.parse(entry[5]), question, chatId);
                 if (data) {
                     generateChart(question, data, format, chartBox);
                 }
@@ -329,7 +329,7 @@
             try {
                 generateChart(query, dataResponse, format, chartBox);
             } catch (err) {
-                pass
+
             }
         }
         await makeChatRequest();
@@ -354,7 +354,7 @@
         return resTextbox;
     }
 
-    function displayEntry(res, response, links=null, query=null, id=null) {
+    function displayEntry(res, response, links=null, query=null, chatId=null) {
         let resTextbox = document.createElement("article");
         let text = document.createElement("p");
         text.textContent = res;
@@ -374,7 +374,7 @@
         resTextbox.appendChild(subTextbox);
         resTextbox.classList.add("chat-entry");
         if (response) {
-            populateResponse(resTextbox, subTextbox, chartBox, query);
+            populateResponse(resTextbox, subTextbox, chartBox, query, chatId);
         } else {
             resTextbox.classList.add("question");
             let img = document.createElement("img");
@@ -531,11 +531,12 @@
         return chartHeight;
     }
 
-    function populateResponse(resTextbox, subTextbox, chartBox, query) {
+    function populateResponse(resTextbox, subTextbox, chartBox, query, chatId) {
         resTextbox.classList.add("response");
         let img = document.createElement("img");
         img.src = "static/images/AI.png";
         resTextbox.prepend(img);
+        let buttonBox = document.createElement("section");
         let newAnswerButton = document.createElement("button");
         newAnswerButton.textContent = "Regenerate Response";
         newAnswerButton.addEventListener("click", () => {
@@ -543,8 +544,17 @@
             resTextbox.remove();
             generateResponse(query);
         });
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete Response";
+        deleteButton.addEventListener("click", async () => {
+            resTextbox.previousElementSibling.remove();
+            resTextbox.remove();
+            await deleteChat(chatId);
+        })
         chartBox.classList.add("chart");
-        subTextbox.appendChild(newAnswerButton);
+        buttonBox.appendChild(newAnswerButton);
+        buttonBox.appendChild(deleteButton);
+        subTextbox.appendChild(buttonBox);
     }
 
     async function feedQuestions(e) {
