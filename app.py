@@ -94,8 +94,9 @@ def get_response():
             cur.execute("INSERT INTO chat (username, query, response, date, links, data, format) VALUES (?, ?, ?, ?, ?, ?, ?)", 
                         [username, query, text_response, current_datetime, json_links, data_response, format])
             con.commit()
+            id = cur.lastrowid
             con.close()
-            return jsonify([text_response, data_response, format, links])
+            return jsonify([text_response, data_response, format, links, id])
         except:
             logging.error("An error occurred", exc_info=True)
             return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
@@ -166,13 +167,13 @@ def account(username):
 def upload():
     try:
         id = request.form["id"]
-        image_url = request.form["image-url"]
-        
+        image = request.form["image"]
+
         con = sqlite3.connect(USER_DATA)
         cur = con.cursor()
         response = cur.execute("SELECT username FROM chat WHERE id = ?", [id])
-        response = response.fetchone()
-        upload_file(chat_id=id, username=response[0], image_url=image_url)
+        username = response.fetchone()[0]
+        upload_file(chat_id=id, username=username, image=image)
         con.close()
         return Response("File uploaded to drive", status=200, mimetype="text/plain")
     except:

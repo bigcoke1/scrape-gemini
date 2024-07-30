@@ -201,9 +201,13 @@ h1 {
     align-self: center;
 }
 
-.sub-textbox > section {
+.sub-textbox > section, .chart section {
     display: flex;
     justify-content: space-evenly;
+}
+
+.chart section {
+    width: 100vw;
 }
 
 .sub-textbox button, form button, #account button {

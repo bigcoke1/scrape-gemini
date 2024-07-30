@@ -1,6 +1,5 @@
 import os
-import json
-import requests
+import base64
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -12,7 +11,7 @@ SCOPES = ['https://www.googleapis.com/auth/drive.file']
 
 def get_credentials(username):
     """Fetches credentials for a specific user."""
-    token_file = f'token_{username}.json'
+    token_file = f'tokens/token_{username}.json'
     if os.path.exists(token_file):
         creds = Credentials.from_authorized_user_file(token_file, SCOPES)
         if creds and creds.valid:
@@ -25,18 +24,18 @@ def get_credentials(username):
 
     # No valid credentials found, prompt user to login
     flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-    creds = flow.run_local_server(port=0)
+    creds = flow.run_local_server(port=3000)
     with open(token_file, 'w') as token:
         token.write(creds.to_json())
     return creds
 
-def upload_file(chat_id, username, image_url):
+def upload_file(chat_id, username, image):
     try:
-        response = requests.get(image_url)
-        response.raise_for_status()
+        image_data = base64.b64decode(image)
+
         save_path = f'chart/{chat_id}.png'
         with open(save_path, "wb") as file:
-            file.write(response.content)
+            file.write(image_data)
         print("Image successfully saved locally")
 
         creds = get_credentials(username)

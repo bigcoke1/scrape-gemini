@@ -223,7 +223,7 @@
                 displayEntry(question, false);
                 let chartBox = displayEntry(response, true, JSON.parse(entry[5]), question, chatId);
                 if (data) {
-                    generateChart(question, data, format, chartBox);
+                    generateChart(question, data, format, chartBox, chatId);
                 }
             } catch (err) {
                 console.log(err);
@@ -323,11 +323,12 @@
         let dataResponse = res[1];
         let format = res[2];
         let links = res[3];
+        let chatId = res[4];
         loading.remove();
         let chartBox = displayEntry(textResponse, true, links, query);
         if (dataResponse) {
             try {
-                generateChart(query, dataResponse, format, chartBox);
+                generateChart(query, dataResponse, format, chartBox, chatId);
             } catch (err) {
 
             }
@@ -396,7 +397,7 @@
         }
     }
 
-    function generateChart(query, dataResponse, format, chartBox) {
+    function generateChart(query, dataResponse, format, chartBox, chatId) {
         dataResponse = JSON.parse(dataResponse);
         checkLength(dataResponse);
 
@@ -491,26 +492,45 @@
         chart.draw(data, options);
         chartBox.style.height = chartHeight + 50 + "px";
 
+        populateChartButtons(chart, chartBox, chatId);
+    }
+
+    function populateChartButtons(chart, chartBox, chatId) {
+        let buttonBox = document.createElement("section");
         let saveButton = document.createElement("button");
         saveButton.addEventListener("click", () => {
             saveChartAsImage(chart);
         });
         saveButton.textContent = "Download Chart";
-        chartBox.appendChild(saveButton);
+        buttonBox.appendChild(saveButton);
 
         let uploadButton = document.createElement("button");
         uploadButton.addEventListener("click", async () => {
             let imgUrl = chart.getImageURI();
-            await makeUploadRequest(imgUrl);
+            await makeUploadRequest(imgUrl, chatId);
         });
         uploadButton.textContent = "Upload Chart to Google Drive";
-        chartBox.appendChild(uploadButton);
+        buttonBox.appendChild(uploadButton);
+
+        chartBox.appendChild(buttonBox);
     }
 
-    async function makeUploadRequest(imgURL) {
-        let res = await fetch(URL + "/upload");
-        await statusCheck(res);
-        
+    async function makeUploadRequest(imgUrl, chatId) {
+        try {
+            let params = new FormData();
+            params.append("id", chatId);
+            console.log(chatId);
+            let base64String = imgUrl.split(',')[1];
+            params.append("image", base64String);
+            let res = await fetch(URL + "/upload", {
+                method: "POST",
+                body: params
+            });
+            await statusCheck(res);
+        } catch (err) {
+            handleError();
+        }
+
     }
 
     function saveChartAsImage(chart) {
