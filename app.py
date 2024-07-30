@@ -14,6 +14,7 @@ from threading import Thread
 
 #my lib
 from main import *
+from drive import *
 
 SERVER_ERROR_MSG = "Internal server error"
 PARAM_ERROR_MSG = "Invalid params error"
@@ -161,6 +162,23 @@ def account(username):
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
 
+@app.route("/upload", methods=["POST"])
+def upload():
+    try:
+        id = request.form["id"]
+        image_url = request.form["image-url"]
+        
+        con = sqlite3.connect(USER_DATA)
+        cur = con.cursor()
+        response = cur.execute("SELECT username FROM chat WHERE id = ?", [id])
+        response = response.fetchone()
+        upload_file(chat_id=id, username=response[0], image_url=image_url)
+        con.close()
+        return Response("File uploaded to drive", status=200, mimetype="text/plain")
+    except:
+        logging.error("An error occured", exc_info=True)
+        return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
+    
 def run():
     app.run(host="0.0.0.0", port=5000)
 

@@ -491,12 +491,26 @@
         chart.draw(data, options);
         chartBox.style.height = chartHeight + 50 + "px";
 
-        let button = document.createElement("button");
-        button.addEventListener("click", () => {
+        let saveButton = document.createElement("button");
+        saveButton.addEventListener("click", () => {
             saveChartAsImage(chart);
         });
-        button.textContent = "Download Chart";
-        chartBox.appendChild(button);
+        saveButton.textContent = "Download Chart";
+        chartBox.appendChild(saveButton);
+
+        let uploadButton = document.createElement("button");
+        uploadButton.addEventListener("click", async () => {
+            let imgUrl = chart.getImageURI();
+            await makeUploadRequest(imgUrl);
+        });
+        uploadButton.textContent = "Upload Chart to Google Drive";
+        chartBox.appendChild(uploadButton);
+    }
+
+    async function makeUploadRequest(imgURL) {
+        let res = await fetch(URL + "/upload");
+        await statusCheck(res);
+        
     }
 
     function saveChartAsImage(chart) {
