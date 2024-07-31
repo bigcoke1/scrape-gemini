@@ -1,24 +1,39 @@
-#third-party lib
-from flask import Flask, render_template, request, Response, jsonify
-from flask_cors import CORS
-
-app = Flask(__name__)
-CORS(app)
-
-#python lib
-import uuid
-import sqlite3
-import logging
-import json
-from threading import Thread
-
 #my lib
 from main import *
 from drive import *
 
+#third-party lib
+from flask import Flask, render_template, request, Response, jsonify, session, url_for, redirect, render_template_string
+from flask_cors import CORS
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+from googleapiclient.errors import HttpError
+from google_auth_oauthlib.flow import Flow
+
+app = Flask(__name__)
+app.secret_key = os.urandom(24)
+CORS(app)
+
+@app.before_request
+def before_request():
+    if request.headers.get('X-Forwarded-Proto') == 'https':
+        request.url = request.url.replace('http://', 'https://')
+
+#python lib
+import uuid
+import logging
+from threading import Thread
+import base64
+
 SERVER_ERROR_MSG = "Internal server error"
 PARAM_ERROR_MSG = "Invalid params error"
 HTTP_ERROR_MSG = "Wrong HTTP method"
+SCOPES = ['https://www.googleapis.com/auth/drive.file']
+CLIENT_SECRETS_FILE = "credentials.json"
+URL = "https://www.scrape-insight.com"
 
 @app.route('/')
 def init():
@@ -163,6 +178,85 @@ def account(username):
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
 
+@app.route('/google')
+def google():
+    print("in here")
+    flow = Flow.from_client_secrets_file(
+        CLIENT_SECRETS_FILE, scopes=SCOPES)
+    flow.redirect_uri = f'{URL}/oauth2callback'
+
+    authorization_url, state = flow.authorization_url(
+        access_type='offline', include_granted_scopes='true')
+
+    session['state'] = state
+    return redirect(authorization_url)
+
+@app.route("/oauth2callback")
+def oauth2callback():
+    state = session['state']
+    username = session["username"]
+    flow = Flow.from_client_secrets_file(
+        CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
+    flow.redirect_uri = f'{URL}/oauth2callback'
+
+    authorization_response = request.url
+    print(f'request url: {request.url}')
+    flow.fetch_token(authorization_response=authorization_response)
+
+    credentials = flow.credentials
+    token_path = f'tokens/token_{username}.json'
+    with open(token_path, 'w') as token_file:
+        token_file.write(credentials.to_json())
+
+    return redirect(URL)
+
+def get_credentials(username):
+    try:
+        """Fetches credentials for a specific user."""
+        token_path = f'tokens/token_{username}.json'
+        if not os.path.exists(token_path):
+            print("token not found")
+            session["username"] = username
+            return redirect(f'{URL}/google')
+
+        with open(token_path, 'r') as token_file:
+            creds = Credentials.from_authorized_user_info(json.load(token_file), SCOPES)
+
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+            with open(token_path, 'w') as token_file:
+                token_file.write(creds.to_json())
+        
+        return creds
+    except:
+        logging.error("An error occured", exc_info=True)
+
+def upload_file(chat_id, username, image):
+    try:
+        image_data = base64.b64decode(image)
+
+        save_path = f'chart/{chat_id}.png'
+        with open(save_path, "wb") as file:
+            file.write(image_data)
+        print("Image successfully saved locally")
+
+        creds = get_credentials(username)
+        print(creds.get_data(as_text=True))
+        html_string = creds.get_data(as_text=True)
+        if isinstance(creds, Response):
+            return render_template_string(html_string)
+        service = build('drive', 'v3', credentials=creds)
+
+        # File to be uploaded
+        file_metadata = {'name': f'{chat_id}_chart.png'}
+        media = MediaFileUpload(save_path, mimetype='image/png')
+
+        # Upload the file
+        file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+        print(f'File ID: {file.get("id")}')
+    except HttpError as error:
+        print(f'An error occurred: {error}')
+    
 @app.route("/upload", methods=["POST"])
 def upload():
     try:
@@ -179,7 +273,7 @@ def upload():
     except:
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
-    
+
 def run():
     app.run(host="0.0.0.0", port=5000)
 

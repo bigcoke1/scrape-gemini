@@ -224,6 +224,8 @@
                 let chartBox = displayEntry(response, true, JSON.parse(entry[5]), question, chatId);
                 if (data) {
                     generateChart(question, data, format, chartBox, chatId);
+                } else {
+                    chartBox.remove();
                 }
             } catch (err) {
                 console.log(err);
@@ -332,6 +334,8 @@
             } catch (err) {
 
             }
+        } else {
+            chartBox.remove();
         }
         await makeChatRequest();
     }
@@ -387,17 +391,21 @@
         return chartBox;
     }
 
-    function checkLength(dataResponse) {
+    function checkLength(dataResponse) { // New function added
         let numColumns = dataResponse[0].length;
         for (let i = 0; i < dataResponse.length; i++) {
-            if (dataResponse[i].length != numColumns) {
-                dataResponse.splice(i, 1);
-                i--;
+            if (dataResponse[i].length > numColumns) {
+                dataResponse[i] = dataResponse[i].slice(0, numColumns);
+            } else if (dataResponse[i].length < numColumns) {
+                while (dataResponse[i].length < numColumns) {
+                    dataResponse[i].push(null);
+                }
             }
         }
     }
 
     function generateChart(query, dataResponse, format, chartBox, chatId) {
+        dataResponse = dataResponse.replace(/\\/g, "");
         dataResponse = JSON.parse(dataResponse);
         checkLength(dataResponse);
 
@@ -588,6 +596,8 @@
         chartBox.classList.add("chart");
         buttonBox.appendChild(newAnswerButton);
         buttonBox.appendChild(deleteButton);
+
+        buttonBox.classList.add("button-box");
         subTextbox.appendChild(buttonBox);
     }
 

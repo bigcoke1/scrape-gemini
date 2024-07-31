@@ -201,7 +201,7 @@ h1 {
     align-self: center;
 }
 
-.sub-textbox > section, .chart section {
+.button-box, .chart section {
     display: flex;
     justify-content: space-evenly;
 }
@@ -225,7 +225,7 @@ h1 {
     font-family: "Roboto Condensed", sans-serif;
     align-self: center;
     width: 100%;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;

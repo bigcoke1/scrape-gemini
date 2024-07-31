@@ -1,32 +1,30 @@
 import os
 import base64
+import json
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from googleapiclient.errors import HttpError
+from google_auth_oauthlib.flow import Flow
 
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
+CLIENT_SECRETS_FILE = "credentials.json"
 
 def get_credentials(username):
     """Fetches credentials for a specific user."""
-    token_file = f'tokens/token_{username}.json'
-    if os.path.exists(token_file):
-        creds = Credentials.from_authorized_user_file(token_file, SCOPES)
-        if creds and creds.valid:
-            return creds
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-            with open(token_file, 'w') as token:
-                token.write(creds.to_json())
-            return creds
+    token_path = f'tokens/token_{username}.json'
+    if not os.path.exists(token_path):
+        return redirect(url_for('login', param1=token_path))
 
-    # No valid credentials found, prompt user to login
-    flow = InstalledAppFlow.from_client_secrets_file('credentials.json', SCOPES)
-    creds = flow.run_local_server(port=3000)
-    with open(token_file, 'w') as token:
-        token.write(creds.to_json())
+    with open(token_path, 'r') as token_file:
+        creds = Credentials.from_authorized_user_info(json.load(token_file), SCOPES)
+
+    if creds and creds.expired and creds.refresh_token:
+        creds.refresh(Request())
+        with open(token_path, 'w') as token_file:
+            token_file.write(creds.to_json())
     return creds
 
 def upload_file(chat_id, username, image):
