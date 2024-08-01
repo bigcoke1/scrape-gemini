@@ -186,7 +186,7 @@ def google():
     flow.redirect_uri = f'{URL}/oauth2callback'
 
     authorization_url, state = flow.authorization_url(
-        access_type='offline', include_granted_scopes='true')
+        access_type='offline', include_granted_scopes='true', prompt='consent')
 
     session['state'] = state
     return redirect(authorization_url)
@@ -217,6 +217,7 @@ def get_credentials(username):
         if not os.path.exists(token_path):
             print("token not found")
             session["username"] = username
+            print(session)
             return redirect(f'{URL}/google')
 
         with open(token_path, 'r') as token_file:
@@ -239,12 +240,9 @@ def upload_file(chat_id, username, image):
         with open(save_path, "wb") as file:
             file.write(image_data)
         print("Image successfully saved locally")
-
         creds = get_credentials(username)
-        print(creds.get_data(as_text=True))
-        html_string = creds.get_data(as_text=True)
         if isinstance(creds, Response):
-            return render_template_string(html_string)
+            return creds
         service = build('drive', 'v3', credentials=creds)
 
         # File to be uploaded
@@ -254,6 +252,10 @@ def upload_file(chat_id, username, image):
         # Upload the file
         file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
         print(f'File ID: {file.get("id")}')
+
+        os.remove(save_path)
+
+        return file.get("id")
     except HttpError as error:
         print(f'An error occurred: {error}')
     
@@ -267,9 +269,8 @@ def upload():
         cur = con.cursor()
         response = cur.execute("SELECT username FROM chat WHERE id = ?", [id])
         username = response.fetchone()[0]
-        upload_file(chat_id=id, username=username, image=image)
         con.close()
-        return Response("File uploaded to drive", status=200, mimetype="text/plain")
+        return upload_file(chat_id=id, username=username, image=image)
     except:
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")

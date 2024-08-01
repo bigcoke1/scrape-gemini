@@ -391,19 +391,6 @@
         return chartBox;
     }
 
-    function checkLength(dataResponse) { // New function added
-        let numColumns = dataResponse[0].length;
-        for (let i = 0; i < dataResponse.length; i++) {
-            if (dataResponse[i].length > numColumns) {
-                dataResponse[i] = dataResponse[i].slice(0, numColumns);
-            } else if (dataResponse[i].length < numColumns) {
-                while (dataResponse[i].length < numColumns) {
-                    dataResponse[i].push(null);
-                }
-            }
-        }
-    }
-
     function generateChart(query, dataResponse, format, chartBox, chatId) {
         dataResponse = dataResponse.replace(/\\/g, "");
         dataResponse = JSON.parse(dataResponse);
@@ -512,12 +499,17 @@
         saveButton.textContent = "Download Chart";
         buttonBox.appendChild(saveButton);
 
+        let driveImg = document.createElement("img");
+        driveImg.src = "static/images/drive.png";
+        driveImg.alt = "google drive logo";
+
         let uploadButton = document.createElement("button");
         uploadButton.addEventListener("click", async () => {
             let imgUrl = chart.getImageURI();
             await makeUploadRequest(imgUrl, chatId);
         });
         uploadButton.textContent = "Upload Chart to Google Drive";
+        uploadButton.appendChild(driveImg);
         buttonBox.appendChild(uploadButton);
 
         chartBox.appendChild(buttonBox);
@@ -527,7 +519,6 @@
         try {
             let params = new FormData();
             params.append("id", chatId);
-            console.log(chatId);
             let base64String = imgUrl.split(',')[1];
             params.append("image", base64String);
             let res = await fetch(URL + "/upload", {
@@ -536,17 +527,9 @@
             });
             await statusCheck(res);
         } catch (err) {
-            handleError();
+            window.location.href = URL + "/google";
         }
 
-    }
-
-    function saveChartAsImage(chart) {
-        let imgUrl = chart.getImageURI();
-        let link = document.createElement("a");
-        link.href = imgUrl;
-        link.download = "chart.png";
-        link.click();
     }
 
     function populateLinks(linkBox, links) {
@@ -563,14 +546,6 @@
             // Append the anchor element
             linkBox.appendChild(urlElement);
         }
-    }
-
-    function flexHeight(numRows, options) {
-        let minHeight = 400;
-        let additionalHeight = 30 * numRows;
-        let chartHeight = Math.max(minHeight, minHeight + additionalHeight);
-        options["height"] = chartHeight;
-        return chartHeight;
     }
 
     function populateResponse(resTextbox, subTextbox, chartBox, query, chatId) {
@@ -599,6 +574,35 @@
 
         buttonBox.classList.add("button-box");
         subTextbox.appendChild(buttonBox);
+    }
+
+    function checkLength(dataResponse) { // New function added
+        let numColumns = dataResponse[0].length;
+        for (let i = 0; i < dataResponse.length; i++) {
+            if (dataResponse[i].length > numColumns) {
+                dataResponse[i] = dataResponse[i].slice(0, numColumns);
+            } else if (dataResponse[i].length < numColumns) {
+                while (dataResponse[i].length < numColumns) {
+                    dataResponse[i].push(null);
+                }
+            }
+        }
+    }
+
+    function flexHeight(numRows, options) {
+        let minHeight = 400;
+        let additionalHeight = 30 * numRows;
+        let chartHeight = Math.max(minHeight, minHeight + additionalHeight);
+        options["height"] = chartHeight;
+        return chartHeight;
+    }
+
+    function saveChartAsImage(chart) {
+        let imgUrl = chart.getImageURI();
+        let link = document.createElement("a");
+        link.href = imgUrl;
+        link.download = "chart.png";
+        link.click();
     }
 
     async function feedQuestions(e) {

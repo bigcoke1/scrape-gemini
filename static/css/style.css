@@ -237,3 +237,14 @@ body > section:nth-child(1) {
     align-items: center;
     height: 100vh;
 }
+
+section.chart > section > button:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.chart > section > button:nth-child(2) > img {
+    height: 20px;
+    width: 20px;
+}
