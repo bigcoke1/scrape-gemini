@@ -236,7 +236,6 @@ def upload_file(chat_id, username, data):
     if isinstance(creds, Response):
         return creds
     service = build('drive', 'v3', credentials=creds)
-
     try:
         image_data = base64.b64decode(data)
         # File to be uploaded
@@ -267,14 +266,14 @@ def upload_file(chat_id, username, data):
 def upload():
     try:
         id = request.form["id"]
-        image = request.form["image"]
+        data = request.form["data"]
 
         con = sqlite3.connect(USER_DATA)
         cur = con.cursor()
         response = cur.execute("SELECT username FROM chat WHERE id = ?", [id])
         username = response.fetchone()[0]
         con.close()
-        return upload_file(chat_id=id, username=username, data=image)
+        return upload_file(chat_id=id, username=username, data=data)
     except:
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")

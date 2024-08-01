@@ -510,15 +510,13 @@
 
         let uploadButton = document.createElement("button");
         uploadButton.addEventListener("click", async () => {
-            let dataUrl;
+            let data;
             if (chart.constructor.name !== "gvjs_hM") {
-                dataUrl = chart.getImageURI();
+                data = chart.getImageURI();
             } else {
-                let csv = dataResponse.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
-                let csvFile = new Blob([csv], { type: 'text/csv' });
-                dataUrl = window.URL.createObjectURL(csvFile);
+                data = dataResponse.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
             }
-            await makeUploadRequest(dataUrl, chatId);
+            await makeUploadRequest(data, chatId);
         });
         uploadButton.textContent = "Upload Chart to Google Drive";
         uploadButton.appendChild(driveImg);
@@ -527,12 +525,17 @@
         chartBox.appendChild(buttonBox);
     }
 
-    async function makeUploadRequest(imgUrl, chatId) {
+    async function makeUploadRequest(data, chatId) {
         try {
             let params = new FormData();
             params.append("id", chatId);
-            let base64String = imgUrl.split(',')[1];
-            params.append("image", base64String);
+            
+            if (data.startsWith("data:image/png;base64")) {
+                let base64String = data.split(',')[1];
+                params.append("data", base64String);
+            } else {
+                params.append("data", data)
+            }
             let res = await fetch(URL + "/upload", {
                 method: "POST",
                 body: params
