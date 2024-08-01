@@ -332,7 +332,7 @@
             try {
                 generateChart(query, dataResponse, format, chartBox, chatId);
             } catch (err) {
-
+                console.log(err);
             }
         } else {
             chartBox.remove();
@@ -394,9 +394,16 @@
     function generateChart(query, dataResponse, format, chartBox, chatId) {
         dataResponse = dataResponse.replace(/\\/g, "");
         dataResponse = JSON.parse(dataResponse);
-        checkLength(dataResponse);
+        dataResponse = checkLength(dataResponse);
+        let pairedData = pairData(dataResponse);
 
-        let data = google.visualization.arrayToDataTable(dataResponse);
+        let data;
+        if (format === "table") {
+            data = google.visualization.arrayToDataTable(dataResponse);
+        } else {
+            data = google.visualization.arrayToDataTable(pairedData);
+        }
+        
         let chartHeight = 600;
 
         let options = {
@@ -404,10 +411,11 @@
             titleTextStyle: {
                 fontSize: 20
             },
+            fontSize: 15,
             height: 600,
             chartArea: {
               width: '60%', // Adjust the width of the chart area
-              height: '70%' // Adjust the height of the chart area
+              height: '90%' // Adjust the height of the chart area
             },
             legend: {
               position: 'top' // Position the legend at the top for more space
@@ -485,6 +493,7 @@
         }
 
         chart.draw(data, options);
+
         chartBox.style.height = chartHeight + 50 + "px";
 
         populateChartButtons(chart, chartBox, chatId, dataResponse);
@@ -585,7 +594,7 @@
         subTextbox.appendChild(buttonBox);
     }
 
-    function checkLength(dataResponse) { // New function added
+    function checkLength(dataResponse) {
         let numColumns = dataResponse[0].length;
         for (let i = 0; i < dataResponse.length; i++) {
             if (dataResponse[i].length > numColumns) {
@@ -596,6 +605,30 @@
                 }
             }
         }
+        if (dataResponse.length > 50) {
+            dataResponse = dataResponse.slice(0, 50);
+        }
+
+        return dataResponse;
+    }
+
+    function pairData(data) {
+        if (data[0].length <= 2) {
+            return data;
+        }
+
+        let colToKeep;
+        for (let i = 1; i < data[1].length; i++) {
+            if (typeof data[1][i] === "number") {
+                colToKeep = i;
+                break;
+            }
+        }
+
+        data = data.map(subArray => {
+            return [subArray[0], subArray[colToKeep]];
+        });
+        return data;
     }
 
     function flexHeight(numRows, options) {
