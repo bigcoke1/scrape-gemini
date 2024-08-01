@@ -228,7 +228,6 @@ def get_AI_response(query, input_list):
     result = model.generate_content(input_list + [prompt])
     result = result.text
     result = result[result.find("{"):result.rfind("}") + 1]
-    print(result)
     result = json.loads(result)
     textual_response, data_response = result.get("textual_response"), result.get("data_response")
     top_format = top_format if textual_response and data_response else "textual display"

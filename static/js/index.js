@@ -529,13 +529,7 @@
         try {
             let params = new FormData();
             params.append("id", chatId);
-            
-            if (data.startsWith("data:image/png;base64")) {
-                let base64String = data.split(',')[1];
-                params.append("data", base64String);
-            } else {
-                params.append("data", data)
-            }
+            params.append("data", data);
             let res = await fetch(URL + "/upload", {
                 method: "POST",
                 body: params

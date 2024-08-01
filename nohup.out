@@ -1,0 +1,70 @@
+Usage: flask [OPTIONS] COMMAND [ARGS]...
+Try 'flask --help' for help.
+
+Error: No such command 'urn'.
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [01/Aug/2024 19:05:10] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 19:35:10] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:05:10] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:18:07] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:35:10] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:44:26] "GET / HTTP/1.0" 200 -
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [01/Aug/2024 20:55:02] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:55:03] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:55:03] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:55:03] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:55:03] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:55:04] "GET /account/test2 HTTP/1.0" 200 -
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [01/Aug/2024 20:56:53] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:56:53] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:56:53] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:56:53] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:57:42] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:57:42] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:57:42] "GET /static/css/style.css HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:57:42] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:57:46] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:57:46] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:57:46] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:57:46] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:57:52] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:58:55] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:58:55] "GET /static/css/style.css HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:58:55] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:58:55] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 20:59:05] "POST /login HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 20:59:05] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 21:02:32] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 21:02:32] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:02:32] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:02:32] "GET /get-all-chat/test2 HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 21:02:32] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:05:10] "HEAD / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 21:06:58] "GET / HTTP/1.0" 200 -
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [01/Aug/2024 21:48:49] "[31m[1mGET /upload HTTP/1.0[0m" 405 -
+127.0.0.1 - - [01/Aug/2024 21:48:54] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 21:48:55] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:48:55] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:48:55] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 21:48:57] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 21:48:57] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:48:58] "[36mGET /static/js/index.js HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:48:58] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [01/Aug/2024 21:49:00] "[36mGET /static/images/user.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:49:00] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [01/Aug/2024 21:49:00] "[36mGET /static/images/drive.png HTTP/1.0[0m" 304 -

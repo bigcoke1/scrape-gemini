@@ -179,7 +179,6 @@ def account(username):
 
 @app.route('/google')
 def google():
-    print("in here")
     flow = Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE, scopes=SCOPES)
     flow.redirect_uri = f'{URL}/oauth2callback'
@@ -214,9 +213,7 @@ def get_credentials(username):
         """Fetches credentials for a specific user."""
         token_path = f'tokens/token_{username}.json'
         if not os.path.exists(token_path):
-            print("token not found")
             session["username"] = username
-            print(session)
             return redirect(f'{URL}/google')
 
         with open(token_path, 'r') as token_file:
@@ -231,36 +228,62 @@ def get_credentials(username):
     except:
         logging.error("An error occured", exc_info=True)
 
+def get_or_create_folder(service, folder_name):
+    try:
+        # Query to search for the folder by name
+        query = f"mimeType='application/vnd.google-apps.folder' and name='{folder_name}'"
+        
+        # Execute the search query
+        results = service.files().list(q=query, spaces='drive', fields="files(id, name)").execute()
+        items = results.get('files', [])
+        
+        if items:
+            # Folder exists
+            print(f"Folder '{folder_name}' exists with ID: {items[0]['id']}")
+            return items[0]['id']
+        else:
+            # Folder does not exist, create it
+            file_metadata = {
+                'name': folder_name,
+                'mimeType': 'application/vnd.google-apps.folder'
+            }
+            folder = service.files().create(body=file_metadata, fields='id').execute()
+            print(f"Created folder '{folder_name}' with ID: {folder.get('id')}")
+            return folder.get('id')
+    except HttpError as error:
+        print(f'An error occurred: {error}')
+        return None
+
 def upload_file(chat_id, username, data):
     creds = get_credentials(username)
     if isinstance(creds, Response):
         return creds
     service = build('drive', 'v3', credentials=creds)
-    try:
-        image_data = base64.b64decode(data)
+    parent = get_or_create_folder(service, "scrape-insight")
+    if data.startswith("data:image/png;base64"):
+        base64_string = data.split(',')[1]
+        image_data = base64.b64decode(base64_string)
         # File to be uploaded
         save_path = f'chart/{chat_id}.png'
         with open(save_path, "wb") as file:
             file.write(image_data)
-        print("Image successfully saved locally")
 
-        file_metadata = {'name': f'{chat_id}_chart.png'}
+        file_metadata = {'name': f'{chat_id}_chart.png','parents': [parent]}
         media = MediaFileUpload(save_path, mimetype='image/png')
-    except:
+    else:
         save_path = f'chart/{chat_id}.csv'
         with open(save_path, "w") as file:
             file.write(data)
 
-        file_metadata = {'name': f'{chat_id}_table.csv'}
+        file_metadata = {'name': f'{chat_id}_table.csv','parents': [parent]}
         media = MediaFileUpload(save_path, mimetype='text/csv')
 
     # Upload the file
-    finally:
-        file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-        print(f'File ID: {file.get("id")}')
-        os.remove(save_path)
+    file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+    print(f'File ID: {file.get("id")}')
+    os.remove(save_path)
 
-        return file.get("id")
+    return file.get("id")
     
 @app.route("/upload", methods=["POST"])
 def upload():
