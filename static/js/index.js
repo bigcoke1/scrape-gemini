@@ -487,14 +487,19 @@
         chart.draw(data, options);
         chartBox.style.height = chartHeight + 50 + "px";
 
-        populateChartButtons(chart, chartBox, chatId);
+        populateChartButtons(chart, chartBox, chatId, dataResponse);
     }
 
-    function populateChartButtons(chart, chartBox, chatId) {
+    function populateChartButtons(chart, chartBox, chatId, dataResponse) {
         let buttonBox = document.createElement("section");
         let saveButton = document.createElement("button");
         saveButton.addEventListener("click", () => {
-            saveChartAsImage(chart);
+            console.log(chart.constructor.name);
+            if (chart.constructor.name === "gvjs_hM") {
+                saveTableAsCSV(dataResponse);
+            } else {
+                saveChartAsImage(chart);
+            }
         });
         saveButton.textContent = "Download Chart";
         buttonBox.appendChild(saveButton);
@@ -505,8 +510,15 @@
 
         let uploadButton = document.createElement("button");
         uploadButton.addEventListener("click", async () => {
-            let imgUrl = chart.getImageURI();
-            await makeUploadRequest(imgUrl, chatId);
+            let dataUrl;
+            if (chart.constructor.name !== "gvjs_hM") {
+                dataUrl = chart.getImageURI();
+            } else {
+                let csv = dataResponse.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+                let csvFile = new Blob([csv], { type: 'text/csv' });
+                dataUrl = window.URL.createObjectURL(csvFile);
+            }
+            await makeUploadRequest(dataUrl, chatId);
         });
         uploadButton.textContent = "Upload Chart to Google Drive";
         uploadButton.appendChild(driveImg);
@@ -603,6 +615,19 @@
         link.href = imgUrl;
         link.download = "chart.png";
         link.click();
+    }
+
+    function saveTableAsCSV(dataResponse) {
+        let csv = dataResponse.map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+        let csvFile = new Blob([csv], { type: 'text/csv' });
+        let downloadLink = document.createElement('a');
+
+        downloadLink.download = "table.csv";
+        downloadLink.href = window.URL.createObjectURL(csvFile);
+        downloadLink.style.display = 'none';
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
     }
 
     async function feedQuestions(e) {

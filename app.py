@@ -1,6 +1,5 @@
 #my lib
 from main import *
-from drive import *
 
 #third-party lib
 from flask import Flask, render_template, request, Response, jsonify, session, url_for, redirect, render_template_string
@@ -232,32 +231,37 @@ def get_credentials(username):
     except:
         logging.error("An error occured", exc_info=True)
 
-def upload_file(chat_id, username, image):
-    try:
-        image_data = base64.b64decode(image)
+def upload_file(chat_id, username, data):
+    creds = get_credentials(username)
+    if isinstance(creds, Response):
+        return creds
+    service = build('drive', 'v3', credentials=creds)
 
+    try:
+        image_data = base64.b64decode(data)
+        # File to be uploaded
         save_path = f'chart/{chat_id}.png'
         with open(save_path, "wb") as file:
             file.write(image_data)
         print("Image successfully saved locally")
-        creds = get_credentials(username)
-        if isinstance(creds, Response):
-            return creds
-        service = build('drive', 'v3', credentials=creds)
 
-        # File to be uploaded
         file_metadata = {'name': f'{chat_id}_chart.png'}
         media = MediaFileUpload(save_path, mimetype='image/png')
+    except:
+        save_path = f'chart/{chat_id}.csv'
+        with open(save_path, "w") as file:
+            file.write(data)
 
-        # Upload the file
+        file_metadata = {'name': f'{chat_id}_table.csv'}
+        media = MediaFileUpload(save_path, mimetype='text/csv')
+
+    # Upload the file
+    finally:
         file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
         print(f'File ID: {file.get("id")}')
-
         os.remove(save_path)
 
         return file.get("id")
-    except HttpError as error:
-        print(f'An error occurred: {error}')
     
 @app.route("/upload", methods=["POST"])
 def upload():
@@ -270,7 +274,7 @@ def upload():
         response = cur.execute("SELECT username FROM chat WHERE id = ?", [id])
         username = response.fetchone()[0]
         con.close()
-        return upload_file(chat_id=id, username=username, image=image)
+        return upload_file(chat_id=id, username=username, data=image)
     except:
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
