@@ -368,6 +368,7 @@
         if (links) {
             populateLinks(linkBox, links);
         }
+        linkBox.classList.add("links");
 
         let subTextbox = document.createElement("section");
         let chartBox = document.createElement("section");

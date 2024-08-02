@@ -1,100 +1,23 @@
-What is GDPR?
-What is CCPA?
-Who does GDPR apply to?
-Who does CCPA apply to?
-What are the main differences between GDPR and CCPA?
-What are the key principles of GDPR?
-What are the key principles of CCPA?
-What is personal data under GDPR?
-What is personal information under CCPA?
-What are the rights of data subjects under GDPR?
-What are the rights of consumers under CCPA?
-What is the right to be forgotten under GDPR?
-What is the right to delete under CCPA?
-What is the right to access under GDPR?
-What is the right to know under CCPA?
-What is the right to data portability under GDPR?
-How does CCPA define 'sale' of personal information?
-What are data controllers under GDPR?
-What are data processors under GDPR?
-What is a business under CCPA?
-What is a service provider under CCPA?
-What are the consent requirements under GDPR?
-What is the opt-out right under CCPA?
-How does GDPR impact marketing practices?
-How does CCPA impact marketing practices?
-What are the penalties for non-compliance with GDPR?
-What are the penalties for non-compliance with CCPA?
-What is a Data Protection Officer (DPO)?
-When is a DPO required under GDPR?
-What is the role of the DPO under GDPR?
-How does GDPR affect third-party contracts?
-How does CCPA affect third-party contracts?
-What is data minimization under GDPR?
-What is data retention under GDPR?
-How does CCPA address data retention?
-What is the right to rectification under GDPR?
-What is the right to correction under CCPA?
-How are children's data protected under GDPR?
-How are children's data protected under CCPA?
-What is a data breach under GDPR?
-What is a data breach under CCPA?
-What are the data breach notification requirements under GDPR?
-What are the data breach notification requirements under CCPA?
-How does GDPR handle data transfers outside the EU?
-How does CCPA handle data transfers?
-What are Binding Corporate Rules (BCRs)?
-What are Standard Contractual Clauses (SCCs)?
-What is the Privacy Shield Framework?
-How does GDPR enforce data protection?
-How does CCPA enforce data protection?
-What is pseudonymization under GDPR?
-What is anonymization under GDPR?
-How does GDPR impact cookies and tracking technologies?
-How does CCPA impact cookies and tracking technologies?
-What is the right to object under GDPR?
-What is the right to opt-out under CCPA?
-What is the one-stop-shop mechanism under GDPR?
-What is the right to equal services and prices under CCPA?
-What is data protection by design and by default under GDPR?
-What is the definition of a 'sale' of personal information under CCPA?
-What are the reporting requirements for data breaches under GDPR?
-What are the reporting requirements for data breaches under CCPA?
-How does GDPR impact HR data?
-How does CCPA impact HR data?
-What is the right to restrict processing under GDPR?
-How does GDPR define consent?
-How does CCPA define consent?
-What are the requirements for a privacy policy under GDPR?
-What are the requirements for a privacy policy under CCPA?
-What is the accountability principle under GDPR?
-How does GDPR impact international companies?
-How does CCPA impact international companies?
-What are the record-keeping requirements under GDPR?
-What are the record-keeping requirements under CCPA?
-How does GDPR define sensitive data?
-How does CCPA define sensitive data?
-What is the right to withdraw consent under GDPR?
-What is the right to limit use of sensitive personal information under CCPA?
-What are the exceptions to data subject rights under GDPR?
-What are the exceptions to consumer rights under CCPA?
-How does GDPR impact direct marketing?
-How does CCPA impact direct marketing?
-What is the right to lodge a complaint under GDPR?
-How does GDPR affect data processors?
-How does CCPA affect data processors?
-What are the transparency requirements under GDPR?
-What are the transparency requirements under CCPA?
-How does GDPR handle automated decision-making?
-How does CCPA handle automated decision-making?
-What are data protection impact assessments (DPIAs)?
-When is a DPIA required under GDPR?
-What is the right to opt-out of automated decision-making under GDPR?
-What is the right to non-discrimination under CCPA?
-What are the security requirements under GDPR?
-What are the security requirements under CCPA?
-How does GDPR handle data portability?
-How does CCPA handle data portability?
-How can companies prepare for GDPR compliance?
-How can companies prepare for CCPA compliance?
-What are the ongoing compliance requirements under GDPR?
+What is bandwidth?
+What is a subnet?
+What is a VLAN?
+What is a database index?
+What is normalization in databases?
+What is the difference between a static and dynamic website?
+What are web APIs and how are they used?
+What is a RESTful service?
+What is SOAP (Simple Object Access Protocol)?
+What is a microcontroller?
+What is a single-board computer?
+What are the key differences between SSD and HDD?
+What is a system on a chip (SoC)?
+What is a network switch?
+What is a network router?
+What is bandwidth throttling?
+What is network monitoring?
+What is load testing?
+What are the different types of databases?
+What is a data warehouse?
+What is data mining?
+What is business intelligence (BI)?
+What is a service-oriented architecture (SOA)?
