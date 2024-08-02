@@ -95,6 +95,7 @@ def get_day_tolerence(query):
             reply with nothing else, but the number to indicate how many days (If the data freshness is not critical, reply with a large number like 3650)"""
     day_tolerence = model.generate_content(prompt)
     day_tolerence = day_tolerence.text
+    day_tolerence = ''.join(re.findall(r'\d+', day_tolerence))
     print(f"how recent does the data need to be: {day_tolerence.strip()} days")
     return float(day_tolerence)
 
@@ -232,4 +233,3 @@ def get_AI_response(query, input_list):
     top_format = top_format if textual_response and data_response else "textual display"
     textual_response = markdown.markdown(textual_response)
     return textual_response, data_response, top_format
-
