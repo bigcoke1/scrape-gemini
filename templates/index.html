@@ -50,18 +50,20 @@
             <section id="ui" class="shadow">
                 <h1>Scrape Insight</h1>
                 <section id="ui-buttons">
-                    <button id="clear-btn">Clear history</button>
-                    <button id="account-btn">Account</button>
+                    <button id="clear-btn"><img src="../static/images/clearhistory.png" alt="clear history"></button>
+                    <button id="account-btn"><img src="../static/images/account.png" alt="account info"></button>
                 </section>
             </section>
             <section>
                 <section id="sidebar" class="shadow"></section>
-                <section id="chat" class="shadow"></section>
+                <section>
+                    <section id="chat"></section>
+                    <form id="textbox">
+                        <input type="text" placeholder="ask a question..." name="query" class="shadow">
+                        <button id="submit" disabled class="shadow">Submit</button>
+                    </form>
+                </section>
             </section>
-            <form id="textbox">
-                <input type="text" placeholder="ask a question..." name="query" class="shadow">
-                <button id="submit" disabled class="shadow">Submit</button>
-            </form>
         </section>
     </body>
 </html>

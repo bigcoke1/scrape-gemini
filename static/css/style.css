@@ -15,7 +15,6 @@ body {
     height: 25px;
     padding: 5px;
     width: 500px;
-    height: 50px;
     margin: 5px;
 }
 
@@ -29,7 +28,7 @@ body {
     width: 86.75vw;
     margin-left: 10px;
     margin-bottom: 10px;
-    background-color: #cfe9ec;
+    background-color: white;
     overflow-y: auto;
     max-width: 100%;
     overflow-x: hidden;
@@ -73,7 +72,7 @@ body {
 #login, #register, #account {
     width: 350px;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     border-radius: 8px; 
     text-align: center;
@@ -136,13 +135,13 @@ form button:hover, .sub-textbox button:hover {
 }
 
 #sidebar {
-    background-color: #bbe4e9;
+    background-color: rgb(240, 246, 248);
     width: 10.5vw;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     align-items: center;
-    height: 72vh;
+    height: 85vh;
     text-align: center;
 }
 
@@ -173,7 +172,7 @@ img {
     display: flex;
     width: 98.5%;
     margin-bottom: 10px;
-    background-color: #5dacbd;
+    background-color: #d3eaef;
     justify-content: space-between;
     align-items: center;
     padding-left: 10px;
@@ -185,7 +184,15 @@ h1 {
 }
 
 #ui button {
-    margin: 5px;
+    margin-left: 5px;
+    padding: 0px;
+    border: 0px;
+    background-color: transparent;
+}
+
+#ui img {
+    width: 30px;
+    height: 30px;
 }
 
 .sub-textbox {

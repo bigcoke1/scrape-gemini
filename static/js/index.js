@@ -210,6 +210,7 @@
             handleError();
         }
     }
+    
     function populateChat(res) {
         id("chat").innerHTML = "";
         for(let i = 0; i < res.length; i++) {
@@ -362,7 +363,7 @@
     function displayEntry(res, response, links=null, query=null, chatId=null) {
         let resTextbox = document.createElement("article");
         let text = document.createElement("p");
-        text.textContent = res;
+        text.innerHTML = res;
         let linkBox = document.createElement("p");
         if (links) {
             populateLinks(linkBox, links);
@@ -383,7 +384,7 @@
         } else {
             resTextbox.classList.add("question");
             let img = document.createElement("img");
-            img.src = "static/images/user.png";
+            img.src = "static/images/account.png";
             resTextbox.appendChild(img);
         }
         resTextbox.classList.add("shadow");
@@ -460,6 +461,7 @@
                 selectedTableRow: 'selected-table-row',
                 hoverTableRow: 'hover-table-row'
             };
+            options["width"] = chartBox.offsetWidth;
         } else if (format === "area chart") {
             chart = new google.visualization.AreaChart(chartBox);
             options['isStacked'] = true; // Stack area chart
