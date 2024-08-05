@@ -52,10 +52,6 @@ FORMAT_WORDS = [
     "word cloud", "tag cloud"
 ]
 
-STOP_WORDS_SET = set(STOP_WORDS)
-UNWANTED_WORDS_SET = set(UNWANTED_WORDS)
-FORMAT_WORDS_SET = set(FORMAT_WORDS)
-
 def simplify_sentence(text):
     doc = nlp(text)
     normalized_tokens = []
@@ -79,10 +75,12 @@ def clean_data(text):
     return text
 
 def clean_query(query):
+    pattern = re.compile("|".join(map(re.escape, FORMAT_WORDS)), re.IGNORECASE)
+    query = pattern.sub("", query)
     normalized_tokens = []
     for word in query.split():
         word = word.lower()
-        if word not in STOP_WORDS and word not in FORMAT_WORDS:
+        if word not in STOP_WORDS:
             normalized_tokens.append(word)
     return " ".join(normalized_tokens)
     

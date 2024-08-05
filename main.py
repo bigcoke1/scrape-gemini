@@ -209,7 +209,7 @@ def get_AI_response(query, input_list):
                         "textual_response": "str",
                         "data_response": "str"
                     }}
-                (data_response is a google.visualization.arrayToDataTable array in descending order representing the data, numerical data preffered,
+                (data_response is a google.visualization.arrayToDataTable array in descending order if it involves ranking or ascending order if it involves time, numerical data preffered,
                 and don't include the code, just a string representation of the array in this section 
 
                 Example Response:
