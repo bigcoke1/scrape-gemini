@@ -233,13 +233,16 @@ h1 {
 
 .chart {
     font-family: "Roboto Condensed", sans-serif;
-    align-self: center;
     width: 100%;
-    display: flex;
-    justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+#pfp-section, .chart {
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 body > section:nth-child(1) {

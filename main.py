@@ -231,5 +231,5 @@ def get_AI_response(query, input_list):
     result = json.loads(result)
     textual_response, data_response = result.get("textual_response"), result.get("data_response")
     top_format = top_format if textual_response and data_response else "textual display"
-    textual_response = markdown.markdown(textual_response)
+    textual_response = markdown.markdown(textual_response, extensions=['nl2br'])
     return textual_response, data_response, top_format

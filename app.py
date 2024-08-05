@@ -11,6 +11,7 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from googleapiclient.errors import HttpError
 from google_auth_oauthlib.flow import Flow
+from PIL import Image
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -175,6 +176,27 @@ def account(username):
         return Response(email, status=200, mimetype="text/plain")
     except:
         logging.error("An error occured", exc_info=True)
+        return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
+
+def allowed_file(filename):
+    allowed_extensions = {'png', 'jpg', 'jpeg', 'gif'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
+@app.route("/save-image", methods=["POST"])
+def save_image():
+    try:
+        username = request.form.get("username")
+        image = request.files.get("image")
+
+        if allowed_file(image.filename):
+            file_path = f"static/images/pfps/{username}.png"
+            img = Image.open(image.stream)
+            # Save the image as PNG
+            img.save(file_path, 'PNG')
+            return Response("image saved", status=200, mimetype="text/plain")
+        else:
+            return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
+    except:
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
 
 @app.route('/google')

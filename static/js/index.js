@@ -24,6 +24,7 @@
         });
         id("account-btn").addEventListener("click", displayAccount);
         id("home-btn").addEventListener("click", displayHome);
+        id("pfp-input").addEventListener("change", savePfp);
 
         await checkCookie();
     }
@@ -115,6 +116,32 @@
         accountInfo[0].textContent = "Username: " + getCookie("username");
         let email = await makeAccountRequest(getCookie("username"));
         accountInfo[1].textContent = "Email: " + email;
+
+        let img = qs("#pfp-section img");
+        img.onerror = function() {
+            img.src = "static/images/account.png";
+        };
+        img.src = "static/images/pfps/" + getCookie("username") + ".png"
+    }
+
+    async function savePfp() {
+        try {
+            let params = new FormData();
+            let image = id("pfp-input").files[0];
+            let username = getCookie("username");
+            params.append("username", username);
+            params.append("image", image)
+
+            let res = await fetch(URL + "/save-image", {
+                method: "POST",
+                body: params
+            });
+            await statusCheck(res);
+            id("pfp-input").value = "";
+            location.reload();
+        } catch (err) {
+            handleAccountError();
+        }
     }
 
     function displayLogin() {
@@ -145,6 +172,12 @@
         id("chat").innerHTML = "";
         id("account").classList.add("hidden");
         qs("body > section:nth-child(1)").style.display = "none";
+        
+        let img = qs("#account-btn img")
+        img.onerror = function() {
+            img.src = "static/images/account.png";
+        };
+        img.src = "static/images/pfps/" + getCookie("username") + ".png"
 
         await makeChatRequest();
     }
@@ -385,7 +418,10 @@
         } else {
             resTextbox.classList.add("question");
             let img = document.createElement("img");
-            img.src = "static/images/account.png";
+            img.onerror = function() {
+                img.src = "static/images/account.png";
+            };
+            img.src = "static/images/pfps/" + getCookie("username") + ".png"
             resTextbox.appendChild(img);
         }
         resTextbox.classList.add("shadow");
@@ -668,12 +704,10 @@
             e.preventDefault();
             let username = getCookie("username");
             let file = id("file-input").files[0];
-            console.log(file);
             if (file) {
                 let reader = new FileReader();
                 reader.readAsText(file);
                 reader.onload = function(e) {
-                    console.log("inside");
                     let fileContent = e.target.result;
                     let lines = fileContent.split("\n");
 
@@ -710,6 +744,12 @@
             qs("#login p").classList.add("hidden");
             qs("#register p").classList.add("hidden");
         }, 3000);
+    }
+
+    function handleAccountError() {
+        let error = document.createElement("p");
+        error.textContent = "An error occured. Try again Later."
+        id("pfp-section").appendChild(error);
     }
 
     /**
