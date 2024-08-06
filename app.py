@@ -99,6 +99,11 @@ def get_response():
             links = search_google(query)
             links = [link for link in links if link is not None]
             links = links[:5]
+            brit_links = search_brit(query)
+            brit_links = [brit_link for brit_link in brit_links if brit_link is not None]
+            brit_links = brit_links[:5]
+            links = brit_links + links
+            links = list(set(links))
             result = iter_result(links, day_tolerence)
             text_response, data_response, format = get_AI_response(query, result)
             current_datetime = get_date()

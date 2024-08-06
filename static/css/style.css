@@ -44,14 +44,12 @@ body {
 #chat {
     height: 70vh;
     width: 86.75vw;
-    margin-left: 10px;
-    margin-bottom: 10px;
     background-color: transparent;
     overflow-y: auto;
     max-width: 100%;
     overflow-x: hidden;
-    padding: 10px;
     border-radius: 10px;
+    padding: 10px;
 }
 
 .chat-entry {
@@ -178,6 +176,7 @@ form button:hover, .sub-textbox button:hover {
 
 #sidebar h3 {
     font-size: 16px;
+    opacity: 75%;
 }
 
 #sidebar h2:hover, #sidebar h3:hover {
@@ -209,6 +208,9 @@ img {
 
 h1 {
     font-size: 25px;
+    background: radial-gradient(circle at 1.8% 4.8%, rgb(17, 23, 58) 0%, rgb(58, 85, 148) 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #ui button {

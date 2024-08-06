@@ -65,6 +65,17 @@ def search_google(query):
     driver.quit()
     return links
 
+def search_brit(query):
+    driver = init_webdriver()
+    temp_query = query.replace(" ", "+")
+    driver.get("https://www.britannica.com/search?query=" + temp_query)
+
+    links = WebDriverWait(driver, 5).until(lambda dirver: driver.find_elements(By.CSS_SELECTOR, "#content > div > div.grid > div > ul > li > a"))
+    links = [link.get_attribute("href") for link in links]
+
+    driver.quit()
+    return links
+
 def scrape_text(link):
     driver = init_webdriver()
     driver.get(link)
@@ -110,7 +121,7 @@ def get_local_path(id, date):
 
     return path
 
-def collect_result(link, day_tolerence):
+def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3):
     text = ""
     if link:
         print("now looking at " + link)
@@ -128,7 +139,7 @@ def collect_result(link, day_tolerence):
                 try:
                     os.remove(path)
                 except Exception as e:
-                    print(f"An Error Occured: {e}")
+                    print(f"An Error Occurred: {e}")
 
             cur.execute("INSERT INTO webpage (url, date) VALUES (?, ?)", [link, current_datetime])
             
@@ -140,12 +151,20 @@ def collect_result(link, day_tolerence):
                 pickle.dump(text, f)
             print("new file created: " + path)
             con.commit()
-            con.close()
         else:
             path = get_local_path(webpage[0], webpage[1])
-            print("reading existing file: " + path)
-            with open(path, "rb") as f:
-                text = pickle.load(f)
+            if os.path.exists(path):
+                print("reading existing file: " + path)
+                with open(path, "rb") as f:
+                    text = pickle.load(f)
+            else:
+                cur.execute('DELETE FROM webpage WHERE url = ?', [link])
+                con.commit()
+                if recursion_depth < max_recursion_depth:
+                    text = collect_result(link, day_tolerence, recursion_depth + 1, max_recursion_depth)
+                else:
+                    print("Max recursion depth reached. Aborting.")
+    con.close()
     return text
 
 def iter_result(links, day_tolerence):
@@ -224,6 +243,7 @@ def get_AI_response(query, input_list):
                     Response = {{
                         "textual_response": "str"
                     }}
+                textual response should be at least one paragraph long.
         """
     result = model.generate_content(input_list + [prompt])
     result = result.text
