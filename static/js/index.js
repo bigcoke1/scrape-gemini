@@ -413,6 +413,7 @@
     let resTextbox = document.createElement("article");
     let text = document.createElement("p");
     text.innerHTML = res;
+
     let linkBox = document.createElement("p");
     if (links) {
       populateLinks(linkBox, links);
@@ -442,6 +443,12 @@
     }
     resTextbox.classList.add("shadow");
     id("chat").appendChild(resTextbox);
+
+    qsa('.response li > p').forEach(p => {
+      let parent = p.parentElement;
+      parent.innerHTML = p.innerHTML;
+    });
+
     return chartBox;
   }
 
@@ -609,17 +616,20 @@
   function populateLinks(linkBox, links) {
     // Create a text node for the initial text and the "References:" label
     linkBox.appendChild(document.createTextNode("\nReferences: "));
+    let list = document.createElement("ol");
     for (let i = 0; i < links.length; i++) {
       // Create a text node for the link index and description
-      linkBox.appendChild(document.createTextNode("\n" + (i + 1) + ") "));
+      let item = document.createElement("li");
 
       let urlElement = document.createElement("a");
       urlElement.href = links[i];
       urlElement.textContent = links[i];
 
+      item.appendChild(urlElement);
       // Append the anchor element
-      linkBox.appendChild(urlElement);
+      list.appendChild(item);
     }
+    linkBox.appendChild(list);
   }
 
   function populateResponse(resTextbox, subTextbox, chartBox, query, chatId) {
