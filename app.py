@@ -178,24 +178,17 @@ def account(username):
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
 
-def allowed_file(filename):
-    allowed_extensions = {'png', 'jpg', 'jpeg', 'gif'}
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
-
 @app.route("/save-image", methods=["POST"])
 def save_image():
     try:
         username = request.form.get("username")
         image = request.files.get("image")
 
-        if allowed_file(image.filename):
-            file_path = f"static/images/pfps/{username}.png"
-            img = Image.open(image.stream)
-            # Save the image as PNG
-            img.save(file_path, 'PNG')
-            return Response("image saved", status=200, mimetype="text/plain")
-        else:
-            return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
+        file_path = f"static/images/pfps/{username}.png"
+        img = Image.open(image.stream)
+        # Save the image as PNG
+        img.save(file_path, 'PNG')
+        return Response("image saved", status=200, mimetype="text/plain")
     except:
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
 
