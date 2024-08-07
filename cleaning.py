@@ -49,7 +49,7 @@ FORMAT_WORDS = [
     "network diagram", "network graph", "node-link diagram",
     "funnel chart", "sales funnel chart", "conversion funnel chart",
     "violin plot", "violin chart",
-    "word cloud", "tag cloud"
+    "word cloud", "tag cloud", "geo chart"
 ]
 
 def simplify_sentence(text):

@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import pickle
 import google.generativeai as genai
 import markdown
+import requests
 
 from argon2 import PasswordHasher
 
@@ -99,20 +100,26 @@ def get_date():
 
     return current_datetime
 
-def get_day_tolerence(query):
-    prompt = f"""according to the following prompt, tell me how recent does the data need to be to answer the question with good accuracy,
-             and convert the time to datetime format, and today's date is {get_date()}
-            prompt: {query}.
-            reply with nothing else, but the number to indicate how many days (If the data freshness is not critical, reply with a large number like 3650)"""
-    day_tolerence = model.generate_content(prompt)
-    day_tolerence = day_tolerence.text
-    day_tolerence = ''.join(re.findall(r'\d+', day_tolerence))
-    print(f"how recent does the data need to be: {day_tolerence.strip()} days")
-    return float(day_tolerence)
+def get_last_archived_date(url):
+    api_url = f'http://archive.org/wayback/available?url={url}'
+    response = requests.get(api_url)
+    data = response.json()
+    if 'archived_snapshots' in data and 'closest' in data['archived_snapshots']:
+        date_str = data['archived_snapshots']['closest']['timestamp']
+        date_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S').date()
+        # Format the datetime object to the desired format
+        return date_obj
+    return None
 
-def compare_date(date, day_tolerence):
-    date = datetime.strptime(date, "%m-%d-%y").date()
-    return abs(date - datetime.now().date()) < timedelta(days=day_tolerence)
+#returns True if date collected is newer than the webpage last updated
+def compare_date(date_collected, last_updated):
+    if not last_updated:
+        return True
+    date_collected = datetime.strptime(date_collected, "%m-%d-%y").date()
+    print(f"date collected: {date_collected}")
+    print(f"date last updated: {last_updated}")
+    
+    return date_collected >= last_updated
 
 def get_local_path(id, date):
     data_folder = "data"
@@ -121,7 +128,7 @@ def get_local_path(id, date):
 
     return path
 
-def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3):
+def collect_result(link, recursion_depth=0, max_recursion_depth=3):
     text = ""
     if link:
         print("now looking at " + link)
@@ -130,14 +137,16 @@ def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3
         current_datetime = get_date()
         sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
         webpage = sql_result.fetchone()
-        if not webpage or not compare_date(webpage[1], day_tolerence): #if the entry was not found or the entry is too old, get new one
+        last_updated = get_last_archived_date(link)
+        if not webpage or not compare_date(webpage[1], last_updated): #if the entry was not found or the entry is too old, get new one
             text = scrape_text(link)
             if webpage: #if the entry was found but is too old
-                print("old file detected and deleted")
+               
                 cur.execute("DELETE FROM webpage WHERE url = ?", [link])
                 path = get_local_path(webpage[0], webpage[1])
                 try:
                     os.remove(path)
+                    print(f"old file detected and deleted: {path}")
                 except Exception as e:
                     print(f"An Error Occurred: {e}")
 
@@ -161,16 +170,16 @@ def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3
                 cur.execute('DELETE FROM webpage WHERE url = ?', [link])
                 con.commit()
                 if recursion_depth < max_recursion_depth:
-                    text = collect_result(link, day_tolerence, recursion_depth + 1, max_recursion_depth)
+                    text = collect_result(link, recursion_depth + 1, max_recursion_depth)
                 else:
                     print("Max recursion depth reached. Aborting.")
     con.close()
     return text
 
-def iter_result(links, day_tolerence):
+def iter_result(links):
     result = []
     with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = {executor.submit(lambda l: collect_result(l, day_tolerence), link): link for link in links}
+        futures = {executor.submit(lambda l: collect_result(l), link): link for link in links}
         for future in as_completed(futures):
             try:
                 result.append(future.result())
@@ -201,55 +210,63 @@ def parse_to_table(data_response):
     else:
         return None
 
-def get_AI_response(query, input_list):
-    prompt_format = """
-        Give me a JSON (and only the JSON enclosed with '{}' with no explanation) of what type of visual display the user is asking 
-        (i.e. bar graph, pie chart, scatterplot, line graph, histogram, table, textual display, area chart, bubble chart, 
-        histogram, geo chart, donut chart, and gauge chart)
-        where each key is the type of visual display and each value is the probability that the user is asking for that display.
-        The prompt is: 
-    """ + query
-    format = model.generate_content(prompt_format)
-    format = format.text
-    format_dict = json.loads(format)
-    if format_dict:
-        top_format = max(format_dict, key=format_dict.get)     
-    else:
-        top_format = "textual display"
+def get_AI_response(query, input_list, recursion_depth=0, max_recursion_depth=3):
+    try:
+        prompt_format = """
+            Give me a JSON (and only the JSON enclosed with '{}' with no explanation) of what type of visual display the user is asking 
+            (i.e. bar graph, pie chart, scatterplot, line graph, histogram, table, textual display, area chart, bubble chart, 
+            histogram, geo chart, donut chart, and gauge chart)
+            where each key is the type of visual display and each value is the probability that the user is asking for that display.
+            The prompt is: 
+        """ + query
+        format = model.generate_content(prompt_format)
+        format = format.text
+        format_dict = json.loads(format)
+        if format_dict:
+            top_format = max(format_dict, key=format_dict.get)     
+        else:
+            top_format = "textual display"
     
-    print(top_format)
+        print(top_format)
 
-    input_list = split_long_string(input_list, 10000)
-    
-    if top_format != "textual display":
-        prompt = f"""Using information provided above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
-                Using this JSON schema:
-                    Response = {{
-                        "textual_response": "str",
-                        "data_response": "str"
-                    }}
-                (data_response is a google.visualization.arrayToDataTable array in descending order if it involves ranking or ascending order if it involves time, numerical data preffered,
-                and don't include the code, just a string representation of the array in this section 
+        input_list = split_long_string(input_list, 10000)
+        
+        if top_format != "textual display":
+            prompt = f"""Using information provided above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
+                    Using this JSON schema:
+                        Response = {{
+                            "textual_response": "str",
+                            "data_response": "str"
+                        }}
+                    (data_response is a google.visualization.arrayToDataTable array in descending order if it involves ranking or ascending order if it involves time, numerical data preffered,
+                    and don't include the code, just a string representation of the array in this section 
 
-                Example Response:
-                {{
-                    "textual_response": "blah blah blah blah blah blah blah blah blah",
-                    "data_response": "[["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
-                }}
-        """
-    else:
-        prompt = f"""Using information above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
-                Using this JSON schema:
-                    Response = {{
-                        "textual_response": "str"
+                    Example Response:
+                    {{
+                        "textual_response": "blah blah blah blah blah blah blah blah blah",
+                        "data_response": "[["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
                     }}
-                textual response should be at least one paragraph long.
-        """
-    result = model.generate_content(input_list + [prompt])
-    result = result.text
-    result = result[result.find("{"):result.rfind("}") + 1]
-    result = json.loads(result)
-    textual_response, data_response = result.get("textual_response"), result.get("data_response")
-    top_format = top_format if textual_response and data_response else "textual display"
-    textual_response = markdown.markdown(textual_response, extensions=['nl2br'])
-    return textual_response, data_response, top_format
+            """
+        else:
+            prompt = f"""Using information above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
+                    Using this JSON schema:
+                        Response = {{
+                            "textual_response": "str"
+                        }}
+                    textual response should be at least one paragraph long.
+            """
+        result = model.generate_content(input_list + [prompt])
+        result = result.text
+        result = result[result.find("{"):result.rfind("}") + 1]
+        result = json.loads(result)
+        textual_response, data_response = result.get("textual_response"), result.get("data_response")
+        if data_response:
+            json.loads(data_response)
+        top_format = top_format if textual_response and data_response else "textual display"
+        textual_response = markdown.markdown(textual_response, extensions=['nl2br'])
+        return textual_response, data_response, top_format
+    except:
+        if recursion_depth < max_recursion_depth:
+            return get_AI_response(query, input_list, recursion_depth + 1, max_recursion_depth)
+        else:
+            raise Exception
