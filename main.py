@@ -23,6 +23,7 @@ import os
 import sqlite3
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
+import logging
 
 #my lib
 from cleaning import *
@@ -210,7 +211,13 @@ def parse_to_table(data_response):
     else:
         return None
 
-def get_AI_response(query, input_list, recursion_depth=0, max_recursion_depth=3):
+def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursion_depth=3):
+    if not chat:
+        input_list = split_long_string(input_list, 10000)
+        history = [{"role": "user", "parts": string} for string in input_list]
+        chat = model.start_chat(
+            history=history
+        )
     try:
         prompt_format = """
             Give me a JSON (and only the JSON enclosed with '{}' with no explanation) of what type of visual display the user is asking 
@@ -219,7 +226,7 @@ def get_AI_response(query, input_list, recursion_depth=0, max_recursion_depth=3)
             where each key is the type of visual display and each value is the probability that the user is asking for that display.
             The prompt is: 
         """ + query
-        format = model.generate_content(prompt_format)
+        format = chat.send_message(prompt_format)
         format = format.text
         format_dict = json.loads(format)
         if format_dict:
@@ -228,8 +235,6 @@ def get_AI_response(query, input_list, recursion_depth=0, max_recursion_depth=3)
             top_format = "textual display"
     
         print(top_format)
-
-        input_list = split_long_string(input_list, 10000)
         
         if top_format != "textual display":
             prompt = f"""Using information provided above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
@@ -239,7 +244,7 @@ def get_AI_response(query, input_list, recursion_depth=0, max_recursion_depth=3)
                             "data_response": "str"
                         }}
                     (data_response is a google.visualization.arrayToDataTable array in descending order if it involves ranking or ascending order if it involves time, numerical data preffered,
-                    and don't include the code, just a string representation of the array in this section 
+                    and don't include the code, just a string representation of the array in this section) 
 
                     Example Response:
                     {{
@@ -255,18 +260,20 @@ def get_AI_response(query, input_list, recursion_depth=0, max_recursion_depth=3)
                         }}
                     textual response should be at least one paragraph long.
             """
-        result = model.generate_content(input_list + [prompt])
+        result = chat.send_message(prompt)
         result = result.text
         result = result[result.find("{"):result.rfind("}") + 1]
         result = json.loads(result)
         textual_response, data_response = result.get("textual_response"), result.get("data_response")
         if data_response:
+            data_response.replace("'", '"')
             json.loads(data_response)
         top_format = top_format if textual_response and data_response else "textual display"
         textual_response = markdown.markdown(textual_response, extensions=['nl2br'])
         return textual_response, data_response, top_format
     except:
+        logging.error("An error occured", exc_info=True)
         if recursion_depth < max_recursion_depth:
-            return get_AI_response(query, input_list, recursion_depth + 1, max_recursion_depth)
+            return get_AI_response(query, input_list, chat, recursion_depth + 1, max_recursion_depth)
         else:
             raise Exception
