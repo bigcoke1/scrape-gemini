@@ -12,7 +12,7 @@ import requests
 
 from argon2 import PasswordHasher
 
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.get_tuned_model(f'tunedModels/scrape-insight-100')
 
 ph = PasswordHasher()
 USER_DATA = "user_data.db"
@@ -199,18 +199,6 @@ def split_long_string(data, max_length):
             result.append(entry)
     return result
 
-def parse_to_table(data_response):
-    if data_response:
-        rows = data_response.split("|\n|")
-        table = [[element.strip() for element in row.split("|")] for row in rows]
-        del table[1]
-        table = [[item for item in row if re.search(r'\w', item)] for row in table]
-        print(table)
-        table = json.dumps(table)
-        return table
-    else:
-        return None
-
 def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursion_depth=3):
     if not chat:
         input_list = split_long_string(input_list, 10000)
@@ -277,3 +265,12 @@ def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursi
             return get_AI_response(query, input_list, chat, recursion_depth + 1, max_recursion_depth)
         else:
             raise Exception
+
+def get_testAI_response(query, input_list, recursion_depth=0, max_recursion_depth=3):
+
+    PREMAI_API_KEY = os.getenv("PREMAI_API_KEY")
+    turbo = dspy.PremAI(api_key=PREMAI_API_KEY, model="gpt-3.5-turbo", project_id=5609, temperature=0.5, max_tokens=1000)
+    dspy.settings.configure(lm=turbo)
+
+    summary = Summarize()
+    
