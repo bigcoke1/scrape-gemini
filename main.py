@@ -12,7 +12,14 @@ import requests
 
 from argon2 import PasswordHasher
 
-model = genai.get_tuned_model(f'tunedModels/scrape-insight-100')
+#my lib
+from load_creds import load_creds
+try:
+    genai.configure(credentials=load_creds())
+    name = "scrape-insight-101"
+    model = genai.GenerativeModel(model_name=f'tunedModels/{name}')
+except:
+    model = genai.GenerativeModel("models/gemini-1.5-flash")
 
 ph = PasswordHasher()
 USER_DATA = "user_data.db"
@@ -200,71 +207,25 @@ def split_long_string(data, max_length):
     return result
 
 def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursion_depth=3):
-    if not chat:
-        input_list = split_long_string(input_list, 10000)
-        history = [{"role": "user", "parts": string} for string in input_list]
-        chat = model.start_chat(
-            history=history
-        )
+    result = None
     try:
-        prompt_format = """
-            Give me a JSON (and only the JSON enclosed with '{}' with no explanation) of what type of visual display the user is asking 
-            (i.e. bar graph, pie chart, scatterplot, line graph, histogram, table, textual display, area chart, bubble chart, 
-            histogram, geo chart, donut chart, and gauge chart)
-            where each key is the type of visual display and each value is the probability that the user is asking for that display.
-            The prompt is: 
-        """ + query
-        format = chat.send_message(prompt_format)
-        format = format.text
-        format_dict = json.loads(format)
-        if format_dict:
-            top_format = max(format_dict, key=format_dict.get)     
-        else:
-            top_format = "textual display"
-    
-        print(top_format)
-        
-        if top_format != "textual display":
-            prompt = f"""Using information provided above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
-                    Using this JSON schema:
-                        Response = {{
-                            "textual_response": "str",
-                            "data_response": "str"
-                        }}
-                    (data_response is a google.visualization.arrayToDataTable array in descending order if it involves ranking or ascending order if it involves time, numerical data preffered,
-                    and don't include the code, just a string representation of the array in this section) 
-
-                    Example Response:
-                    {{
-                        "textual_response": "blah blah blah blah blah blah blah blah blah",
-                        "data_response": "[["Movie", "Rating"], ["Tár", 92], ["The Banshees of Inisherin", 88], ["Women Talking", 85], ["She Said", 83], ["The Fabelmans", 81]]"
-                    }}
-            """
-        else:
-            prompt = f"""Using information above, tell me about {clean_query(query)} in JSON format (and only the JSON enclosed with curly brackets with no explanation)
-                    Using this JSON schema:
-                        Response = {{
-                            "textual_response": "str"
-                        }}
-                    textual response should be at least one paragraph long.
-            """
-        result = chat.send_message(prompt)
+        context = " ".join(input_list)
+        result = model.generate_content(f"context: {context} question: {query}")
         result = result.text
-        result = result[result.find("{"):result.rfind("}") + 1]
-        result = json.loads(result)
-        textual_response, data_response = result.get("textual_response"), result.get("data_response")
+        print(result)
+        result = json.loads(result[result.find("{"):result.rfind("}") + 1])
+        textual_response, data_response = result.get("textual response"), result.get("data response")
         if data_response:
             data_response.replace("'", '"')
             json.loads(data_response)
-        top_format = top_format if textual_response and data_response else "textual display"
-        textual_response = markdown.markdown(textual_response, extensions=['nl2br'])
+        top_format = result.get("format") if textual_response and data_response else "textual display"
         return textual_response, data_response, top_format
-    except:
+    except Exception as e:
+        if isinstance(e, json.JSONDecodeError):
+            return result, None, "textual display"
         logging.error("An error occured", exc_info=True)
         if recursion_depth < max_recursion_depth:
             return get_AI_response(query, input_list, chat, recursion_depth + 1, max_recursion_depth)
-        else:
-            raise Exception
 
 def get_testAI_response(query, input_list, recursion_depth=0, max_recursion_depth=3):
 

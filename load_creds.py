@@ -4,7 +4,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 
-SCOPES = ['https://www.googleapis.com/auth/generative-language.retriever']
+SCOPES = ['https://www.googleapis.com/auth/generative-language.retriever', "https://www.googleapis.com/auth/generative-language.tuning", "https://www.googleapis.com/auth/cloud-platform"]
 
 def load_creds():
     """Converts `client_secret.json` to a credential object.
