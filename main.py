@@ -99,7 +99,9 @@ def scrape_text(link):
 
     text = " ".join(lines)
     driver.quit()
-    return text
+
+    text = model.generate_content("Summarize the following, include details and all data: " + text)
+    return text.text
 
 def get_date():
     current_datetime = datetime.now()
@@ -130,7 +132,7 @@ def compare_date(date_collected, last_updated):
     return date_collected >= last_updated
 
 def get_local_path(id, date):
-    data_folder = "data"
+    data_folder = "cache"
     path = str(id) + "-" + date + ".pickle"
     path = os.path.join(data_folder, path)
 
@@ -196,22 +198,13 @@ def iter_result(links):
     print(f"{len(result)} elements in result")
     return result
 
-def split_long_string(data, max_length):
-    result = []
-    for entry in data:
-        if len(entry) > max_length:
-            chunks = [entry[i:i+max_length] for i in range(0, len(entry), max_length)]
-            result.extend(chunks)
-        else:
-            result.append(entry)
-    return result
-
 def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursion_depth=3):
     result = None
     try:
         context = " ".join(input_list)
         result = model.generate_content(f"context: {context} question: {query}")
         result = result.text
+        result = markdown.markdown(result, extensions=['nl2br'])
         print(result)
         result = json.loads(result[result.find("{"):result.rfind("}") + 1])
         textual_response, data_response = result.get("textual response"), result.get("data response")
@@ -226,12 +219,3 @@ def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursi
         logging.error("An error occured", exc_info=True)
         if recursion_depth < max_recursion_depth:
             return get_AI_response(query, input_list, chat, recursion_depth + 1, max_recursion_depth)
-
-def get_testAI_response(query, input_list, recursion_depth=0, max_recursion_depth=3):
-
-    PREMAI_API_KEY = os.getenv("PREMAI_API_KEY")
-    turbo = dspy.PremAI(api_key=PREMAI_API_KEY, model="gpt-3.5-turbo", project_id=5609, temperature=0.5, max_tokens=1000)
-    dspy.settings.configure(lm=turbo)
-
-    summary = Summarize()
-    
