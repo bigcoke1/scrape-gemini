@@ -36,13 +36,12 @@ for item in training_data:
         "output": output
     })
 
-name = f"scrape-insight-101"
+name = f"scrape-insight-102"
 operation = genai.create_tuned_model(
     source_model=base_model,
     training_data=formatted_data,
-
-    id = name,
-    epoch_count = 5,
+    id=name,
+    epoch_count=5,
     batch_size=4,
     learning_rate=0.001,
 )

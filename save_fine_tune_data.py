@@ -4,7 +4,6 @@ from main import get_local_path
 import google.generativeai as genai
 import pickle
 import os
-import time
 
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 model = genai.GenerativeModel("gemini-1.5-flash")

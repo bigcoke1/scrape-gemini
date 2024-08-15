@@ -209,13 +209,14 @@ def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursi
         result = json.loads(result[result.find("{"):result.rfind("}") + 1])
         textual_response, data_response = result.get("textual response"), result.get("data response")
         if data_response:
+            data_response.replace("\\", "")
             data_response.replace("'", '"')
             json.loads(data_response)
         top_format = result.get("format") if textual_response and data_response else "textual display"
         return textual_response, data_response, top_format
     except Exception as e:
         if isinstance(e, json.JSONDecodeError):
-            return result, None, "textual display"
+            return str(result), None, "textual display"
         logging.error("An error occured", exc_info=True)
         if recursion_depth < max_recursion_depth:
             return get_AI_response(query, input_list, chat, recursion_depth + 1, max_recursion_depth)
