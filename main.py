@@ -18,6 +18,7 @@ try:
     genai.configure(credentials=load_creds())
     name = "scrape-insight-101"
     model = genai.GenerativeModel(model_name=f'tunedModels/{name}')
+    time_model = genai.GenerativeModel(model_name=f'tunedModels/scrape-insight-time-model')
 except:
     model = genai.GenerativeModel("models/gemini-1.5-flash")
 
@@ -110,26 +111,17 @@ def get_date():
 
     return current_datetime
 
-def get_last_archived_date(url):
-    api_url = f'http://archive.org/wayback/available?url={url}'
-    response = requests.get(api_url)
-    data = response.json()
-    if 'archived_snapshots' in data and 'closest' in data['archived_snapshots']:
-        date_str = data['archived_snapshots']['closest']['timestamp']
-        date_obj = datetime.strptime(date_str, '%Y%m%d%H%M%S').date()
-        # Format the datetime object to the desired format
-        return date_obj
-    return None
+def get_day_tolerence(query):
+    prompt = f"Instruction: Determine how fresh the data needs to be for the following question. Question: {query}"
+    day_tolerence = time_model.generate_content(prompt)
+    day_tolerence = day_tolerence.text
+    day_tolerence = ''.join(re.findall(r'\d+', day_tolerence))
+    print(f"day tolerence: {day_tolerence.strip()} days")
+    return float(day_tolerence)
 
-#returns True if date collected is newer than the webpage last updated
-def compare_date(date_collected, last_updated):
-    if not last_updated:
-        return True
-    date_collected = datetime.strptime(date_collected, "%m-%d-%y").date()
-    print(f"date collected: {date_collected}")
-    print(f"date last updated: {last_updated}")
-    
-    return date_collected >= last_updated
+def compare_date(date, day_tolerence):
+    date = datetime.strptime(date, "%m-%d-%y").date()
+    return abs(date - datetime.now().date()) < timedelta(days=day_tolerence)
 
 def get_local_path(id, date):
     data_folder = "cache"
@@ -138,7 +130,7 @@ def get_local_path(id, date):
 
     return path
 
-def collect_result(link, recursion_depth=0, max_recursion_depth=3):
+def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3):
     text = ""
     if link:
         print("now looking at " + link)
@@ -147,11 +139,9 @@ def collect_result(link, recursion_depth=0, max_recursion_depth=3):
         current_datetime = get_date()
         sql_result = cur.execute("SELECT id, date FROM webpage WHERE url = ?", [link])
         webpage = sql_result.fetchone()
-        last_updated = get_last_archived_date(link)
-        if not webpage or not compare_date(webpage[1], last_updated): #if the entry was not found or the entry is too old, get new one
+        if not webpage or not compare_date(webpage[1], day_tolerence): #if the entry was not found or the entry is too old, get new one
             text = scrape_text(link)
             if webpage: #if the entry was found but is too old
-               
                 cur.execute("DELETE FROM webpage WHERE url = ?", [link])
                 path = get_local_path(webpage[0], webpage[1])
                 try:
@@ -180,16 +170,17 @@ def collect_result(link, recursion_depth=0, max_recursion_depth=3):
                 cur.execute('DELETE FROM webpage WHERE url = ?', [link])
                 con.commit()
                 if recursion_depth < max_recursion_depth:
-                    text = collect_result(link, recursion_depth + 1, max_recursion_depth)
+                    text = collect_result(link, day_tolerence, recursion_depth + 1, max_recursion_depth)
                 else:
                     print("Max recursion depth reached. Aborting.")
     con.close()
     return text
 
-def iter_result(links):
+def iter_result(query, links):
+    day_tolerence = get_day_tolerence(query)
     result = []
     with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = {executor.submit(lambda l: collect_result(l), link): link for link in links}
+        futures = {executor.submit(lambda l: collect_result(l, day_tolerence), link): link for link in links}
         for future in as_completed(futures):
             try:
                 result.append(future.result())

@@ -99,7 +99,7 @@ def get_response():
             links = [link for link in links if link is not None]
             links = list(set(links))
             links = links[:5]
-            result = iter_result(links)
+            result = iter_result(query, links)
             text_response, data_response, format = get_AI_response(query, result)
             current_datetime = get_date()
             json_links = json.dumps(links)

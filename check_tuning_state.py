@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 genai.configure(credentials=load_creds())
 
-name = "scrape-insight-101"
+name = "scrape-insight-time-model"
 model = genai.get_tuned_model(f'tunedModels/{name}')
 
 print(model)
@@ -16,8 +16,8 @@ print(model)
 operations = genai.list_operations()
 operation = list(operations)[1]
 
-"""for status in operation.wait_bar():
-  time.sleep(30)"""
+for status in operation.wait_bar():
+  time.sleep(30)
 
 plt.figure(figsize=(10, 6))
 model = operation.result()
