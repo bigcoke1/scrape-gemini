@@ -19,6 +19,7 @@ try:
     name = "scrape-insight-101"
     model = genai.GenerativeModel(model_name=f'tunedModels/{name}')
     time_model = genai.GenerativeModel(model_name=f'tunedModels/scrape-insight-time-model')
+    summary_model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
 except:
     model = genai.GenerativeModel("models/gemini-1.5-flash")
 
@@ -38,7 +39,6 @@ from cleaning import *
 
 def init_webdriver():
     chrome_options = Options()
-    #chrome_options.add_extension("Adblock Plus - free ad blocker 4.2.0.0.crx")
     chrome_options.add_argument("--headless=new")
     prefs = {
         "download.default_directory": "/dev/null",
@@ -47,14 +47,6 @@ def init_webdriver():
         "safebrowsing.enabled": True
     }
     chrome_options.add_experimental_option("prefs", prefs)
-    """    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--disable-infobars")
-    chrome_options.add_argument("--start-maximized")
-    chrome_options.add_argument("--disable-software-rasterizer")
-    chrome_options.add_argument("--remote-debugging-port=9222")
-    chrome_options.add_argument("--disable-background-timer-throttling")"""
     chrome_options.binary_location = "/home/easonmeng/chrome-linux64/chrome"
     
     driver = webdriver.Chrome(options=chrome_options)
@@ -101,8 +93,7 @@ def scrape_text(link):
     text = " ".join(lines)
     driver.quit()
 
-    text = model.generate_content("Summarize the following, include details and all data: " + text)
-    return text.text
+    return text
 
 def get_date():
     current_datetime = datetime.now()
@@ -141,6 +132,8 @@ def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3
         webpage = sql_result.fetchone()
         if not webpage or not compare_date(webpage[1], day_tolerence): #if the entry was not found or the entry is too old, get new one
             text = scrape_text(link)
+            text = summary_model.generate_content("Summarize the following, include details and all data: " + text)
+            text = text.text
             if webpage: #if the entry was found but is too old
                 cur.execute("DELETE FROM webpage WHERE url = ?", [link])
                 path = get_local_path(webpage[0], webpage[1])
@@ -193,21 +186,36 @@ def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursi
     result = None
     try:
         context = " ".join(input_list)
-        result = model.generate_content(f"context: {context} question: {query}")
+        prompt = f"""
+        Given the fields 'context', 'question', produce the fields 'textual response', 'data response', 'format'
+        ---
+        Follow the following format:
+        {{
+            textual response: str (paragraphs)
+            data response: str (array of array in string format)
+            format: str (the most appropriate display format (i.e. bar chart, textual display, table, line chart, geo chart))
+        }}
+        ---
+        context: {context} 
+        question: {query}    
+        """
+        result = model.generate_content(prompt)
         result = result.text
         result = markdown.markdown(result, extensions=['nl2br'])
         print(result)
         result = json.loads(result[result.find("{"):result.rfind("}") + 1])
         textual_response, data_response = result.get("textual response"), result.get("data response")
-        if data_response:
+        if data_response and textual_response:
             data_response.replace("\\", "")
             data_response.replace("'", '"')
             json.loads(data_response)
-        top_format = result.get("format") if textual_response and data_response else "textual display"
+        else:
+            raise Exception
+        top_format = result.get("format") if textual_response and data_response and result.get("format") != "null" else "textual display"
         return textual_response, data_response, top_format
     except Exception as e:
-        if isinstance(e, json.JSONDecodeError):
-            return str(result), None, "textual display"
         logging.error("An error occured", exc_info=True)
         if recursion_depth < max_recursion_depth:
             return get_AI_response(query, input_list, chat, recursion_depth + 1, max_recursion_depth)
+        else:
+            return str(result), None, "textual display"

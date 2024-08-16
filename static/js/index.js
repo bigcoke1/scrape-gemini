@@ -460,13 +460,22 @@
 
     let data;
     if (format === "table") {
+      dataResponse = dataResponse.map(innerArray => 
+        innerArray.map(item => item.toString())
+      );
       data = google.visualization.arrayToDataTable(dataResponse);
     } else {
+      if (!pairedData.slice(1).every(innerArray => {
+        // Check if the second column (index 1) is a number or can be converted to a number
+        return !isNaN(parseFloat(innerArray[1])) && isFinite(innerArray[1]);
+      })) {
+        format = "table";
+      }
+      console.log(pairedData)
       data = google.visualization.arrayToDataTable(pairedData);
     }
 
     let chartHeight = 600;
-
     let options = {
       title: query,
       titleTextStyle: {
@@ -679,6 +688,12 @@
   }
 
   function pairData(data) {
+    data = data.map(innerArray => 
+      innerArray.map(item => {
+          let floatValue = parseFloat(item);
+          return isNaN(floatValue) ? item : floatValue;
+      })
+    );
     if (data[0].length <= 2) {
       return data;
     }
