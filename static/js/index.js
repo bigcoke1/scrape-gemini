@@ -27,7 +27,14 @@
     id("account-btn").addEventListener("click", displayAccount);
     id("home-btn").addEventListener("click", displayHome);
     id("pfp-input").addEventListener("change", savePfp);
+    let exampleQuestions = qsa("#example-questions button");
 
+    exampleQuestions.forEach(button => {
+      button.addEventListener("click", async (e) => {
+        qs("#textbox input").value = e.target.textContent;
+        await makeRequest(e);
+      });
+    });
     await checkCookie();
   }
 

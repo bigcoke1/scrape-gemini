@@ -70,5 +70,19 @@ def tune_time_model():
     tuned_models = [m for m in tuned_models]
     print(tuned_models)
 
+def tune_summary_model():
+    with open("summary_data.json", 'r') as f:
+        training_data = json.load(f)
+    
+    training_data = [{"text_input": item["input_text"], "output": str(item["output"])} for item in training_data]
+    name = f"scrape-insight-summary-model"
+    operation = genai.create_tuned_model(
+        source_model=base_model,
+        training_data=training_data,
+        id=name,
+        epoch_count=5,
+        batch_size=4,
+        learning_rate=0.001
+    )
 if __name__ == "__main__":
-    tune_time_model()
+    tune_summary_model()

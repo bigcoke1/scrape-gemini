@@ -7,9 +7,11 @@ import os
 from main import scrape_text
 from main import get_local_path
 
+
+genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+model = genai.GenerativeModel("gemini-1.5-flash")
+
 def tune_generation_model():
-    genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-    model = genai.GenerativeModel("gemini-1.5-flash")
     available_models = genai.list_models()
 
     con = sqlite3.connect("user_data.db")
@@ -76,8 +78,8 @@ def tune_summary_model():
         path = get_local_path(id, date)
         text = scrape_text(link)
         
-        with open(path, "rb") as f:
-            summary = pickle.load(f)
+        summary = model.generate_content(f"Summarize the following passage, include details and all data: {text}")
+        summary = summary.text
         
         result_json.append(
             {

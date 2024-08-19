@@ -14,14 +14,10 @@ from argon2 import PasswordHasher
 
 #my lib
 from load_creds import load_creds
-try:
-    genai.configure(credentials=load_creds())
-    name = "scrape-insight-101"
-    model = genai.GenerativeModel(model_name=f'tunedModels/{name}')
-    time_model = genai.GenerativeModel(model_name=f'tunedModels/scrape-insight-time-model')
-    summary_model = genai.GenerativeModel(model_name="models/gemini-1.5-flash")
-except:
-    model = genai.GenerativeModel("models/gemini-1.5-flash")
+genai.configure(credentials=load_creds())
+name = "scrape-insight-101"
+time_model = genai.GenerativeModel(model_name=f'tunedModels/scrape-insight-time-model')
+model = genai.GenerativeModel(model_name="models/gemini-1.5-flash", generation_config={"temperature": 0.2})
 
 ph = PasswordHasher()
 USER_DATA = "user_data.db"
@@ -33,6 +29,7 @@ import sqlite3
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
 import logging
+import time
 
 #my lib
 from cleaning import *
@@ -79,21 +76,16 @@ def search_brit(query):
     return links
 
 def scrape_text(link):
-    driver = init_webdriver()
-    driver.get(link)
-
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    html = driver.page_source
-    soup = BeautifulSoup(html, "html.parser")
-    text = soup.get_text()
-    lines = [line for line in text.splitlines() if line.strip()]
-
-    lines = list(map(clean_data, lines))
-
-    text = " ".join(lines)
-    driver.quit()
-
-    return text
+    response = requests.get(link, timeout=5)
+    if response.status_code == 200:
+        soup = BeautifulSoup(response.content, "html.parser")
+        text = soup.get_text()
+        lines = [line for line in text.splitlines() if line.strip()]
+        lines = list(map(clean_data, lines))
+        text = " ".join(lines)
+        return text
+    else:
+        return None
 
 def get_date():
     current_datetime = datetime.now()
@@ -121,7 +113,7 @@ def get_local_path(id, date):
 
     return path
 
-def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3):
+def collect_result(link, day_tolerence, current_chat, recursion_depth=0, max_recursion_depth=3):
     text = ""
     if link:
         print("now looking at " + link)
@@ -132,7 +124,7 @@ def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3
         webpage = sql_result.fetchone()
         if not webpage or not compare_date(webpage[1], day_tolerence): #if the entry was not found or the entry is too old, get new one
             text = scrape_text(link)
-            text = summary_model.generate_content("Summarize the following, include details and all data: " + text)
+            text = current_chat.send_message("Summarize the following, include details and all data: " + text)
             text = text.text
             if webpage: #if the entry was found but is too old
                 cur.execute("DELETE FROM webpage WHERE url = ?", [link])
@@ -159,63 +151,63 @@ def collect_result(link, day_tolerence, recursion_depth=0, max_recursion_depth=3
                 print("reading existing file: " + path)
                 with open(path, "rb") as f:
                     text = pickle.load(f)
+                current_chat.send_message(text)
             else:
                 cur.execute('DELETE FROM webpage WHERE url = ?', [link])
                 con.commit()
                 if recursion_depth < max_recursion_depth:
+                    print(f"Error occured. Recursion depth: {recursion_depth}")
                     text = collect_result(link, day_tolerence, recursion_depth + 1, max_recursion_depth)
                 else:
                     print("Max recursion depth reached. Aborting.")
     con.close()
     return text
 
-def iter_result(query, links):
+def iter_result(query, links, current_chat):
     day_tolerence = get_day_tolerence(query)
     result = []
     with ThreadPoolExecutor(max_workers=5) as executor:
-        futures = {executor.submit(lambda l: collect_result(l, day_tolerence), link): link for link in links}
+        futures = {executor.submit(lambda l: collect_result(l, day_tolerence, current_chat), link): link for link in links}
         for future in as_completed(futures):
             try:
                 result.append(future.result())
             except Exception as exc:
                 print(f"An error occurred: {exc}")
     print(f"{len(result)} elements in result")
-    return result
+    return current_chat
 
-def get_AI_response(query, input_list, chat=None, recursion_depth=0, max_recursion_depth=3):
-    result = None
+def get_AI_response(query, chat, recursion_depth=0, max_recursion_depth=3):
+    textual_response = None
     try:
-        context = " ".join(input_list)
-        prompt = f"""
-        Given the fields 'context', 'question', produce the fields 'textual response', 'data response', 'format'
-        ---
-        Follow the following format:
-        {{
-            textual response: str (paragraphs)
-            data response: str (array of array in string format)
-            format: str (the most appropriate display format (i.e. bar chart, textual display, table, line chart, geo chart))
-        }}
-        ---
-        context: {context} 
-        question: {query}    
-        """
-        result = model.generate_content(prompt)
-        result = result.text
-        result = markdown.markdown(result, extensions=['nl2br'])
-        print(result)
-        result = json.loads(result[result.find("{"):result.rfind("}") + 1])
-        textual_response, data_response = result.get("textual response"), result.get("data response")
-        if data_response and textual_response:
-            data_response.replace("\\", "")
-            data_response.replace("'", '"')
-            json.loads(data_response)
-        else:
-            raise Exception
-        top_format = result.get("format") if textual_response and data_response and result.get("format") != "null" else "textual display"
-        return textual_response, data_response, top_format
+        textual_response = chat.send_message("Using all previous context, answer this question in plain text:" + query)
+        textual_response = textual_response.text
+        textual_response = markdown.markdown(textual_response, extensions=['nl2br'])
+        print(textual_response)
+        
+        data_response = chat.send_message("""Based on all previous context, make a google.visualization.arrayToDataTable array of array in json format to represent the data, numerical data preferred,
+                                          descending order unless the independent variable is time
+                                          (Example: 
+                                          [["blah", "blah"], ["blah", 10], ["blah", 10], ["blah", 10], ["blah", 10]]
+                                          )
+                                          if a data response if not applicable, return "null"
+                                          DO NOT RETURN ANYTHING ELSE EXCEPT THE ARRAY, NO EXPLANATION
+                                          """)
+        data_response = data_response.text
+        data_response = data_response[data_response.find("["):data_response.rfind("]") + 1]
+        print(data_response)
+
+        format = chat.send_message("""Based on the previous context, in these formats, which one is the most appropriate to represent the data you just provided?
+                                   formats: textual display, bar graph, table, line graph, geo chart
+                                   if no data is provided earlier, return "textual display"
+                                   DO NOT RETURN ANYTHING ELSE EXCEPT THE NAME OF THE DISPLAY (NO EXPLANATION)
+                                   """)
+        format = format.text
+        format = format.strip()
+        print(format)
+        return textual_response, data_response, format
     except Exception as e:
         logging.error("An error occured", exc_info=True)
         if recursion_depth < max_recursion_depth:
-            return get_AI_response(query, input_list, chat, recursion_depth + 1, max_recursion_depth)
+            return get_AI_response(query, chat, recursion_depth + 1, max_recursion_depth)
         else:
-            return str(result), None, "textual display"
+            return textual_response, None, "textual display"

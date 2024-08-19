@@ -95,12 +95,17 @@ def get_response():
     username = request.form.get("username")
     if query and username:
         try:
+            start_time = time.time()
+            current_chat = model.start_chat()
             links = search_google(query)
+            print(f"Retrieved links in {time.time() - start_time} seconds")
             links = [link for link in links if link is not None]
             links = list(set(links))
             links = links[:5]
-            result = iter_result(query, links)
-            text_response, data_response, format = get_AI_response(query, result)
+            current_chat = iter_result(query, links, current_chat)
+            print(f"Cached in {time.time() - start_time} seconds")
+            text_response, data_response, format = get_AI_response(query, current_chat)
+            print(f"Got AI response in {time.time() - start_time} seconds")
             current_datetime = get_date()
             json_links = json.dumps(links)
             

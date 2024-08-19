@@ -296,3 +296,23 @@ section.chart > section > button:nth-child(2) > img {
 .links {
     margin-top: 0px;
 }
+
+#example-questions {
+    overflow-x: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#example-questions button {
+    font-family: "Roboto Condensed", sans-serif;
+    margin: 10px;
+    background-color: transparent;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 3px 3px 3px gray;
+}
+
+#example-questons button:hover {
+    background-color: lightblue;
+}
