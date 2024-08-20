@@ -101,7 +101,6 @@ def get_response():
             print(f"Retrieved links in {time.time() - start_time} seconds")
             links = [link for link in links if link is not None]
             links = list(set(links))
-            links = links[:5]
             current_chat = iter_result(query, links, current_chat)
             print(f"Cached in {time.time() - start_time} seconds")
             text_response, data_response, format = get_AI_response(query, current_chat)

@@ -73,7 +73,7 @@ body {
     margin: 5px;
 }
 
-.response ul {
+.response ul, .response ol {
     margin: 0px;
 }
 

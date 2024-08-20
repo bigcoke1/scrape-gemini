@@ -15,7 +15,6 @@ from argon2 import PasswordHasher
 #my lib
 from load_creds import load_creds
 genai.configure(credentials=load_creds())
-name = "scrape-insight-101"
 time_model = genai.GenerativeModel(model_name=f'tunedModels/scrape-insight-time-model')
 model = genai.GenerativeModel(model_name="models/gemini-1.5-flash", generation_config={"temperature": 0.2})
 
@@ -76,16 +75,19 @@ def search_brit(query):
     return links
 
 def scrape_text(link):
-    response = requests.get(link, timeout=5)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.content, "html.parser")
-        text = soup.get_text()
-        lines = [line for line in text.splitlines() if line.strip()]
-        lines = list(map(clean_data, lines))
-        text = " ".join(lines)
-        return text
-    else:
-        return None
+    try:
+        response = requests.get(link, timeout=5)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.content, "html.parser")
+            text = soup.get_text()
+            lines = [line for line in text.splitlines() if line.strip()]
+            lines = list(map(clean_data, lines))
+            text = " ".join(lines)
+            return text
+        else:
+            raise Exception
+    except:
+        print(f"An error occurred: {response.status_code} error")
 
 def get_date():
     current_datetime = datetime.now()
@@ -171,15 +173,16 @@ def iter_result(query, links, current_chat):
         for future in as_completed(futures):
             try:
                 result.append(future.result())
+                if len(result) >= 5:
+                    print(f"{len(result)} elements in result")
+                    return current_chat
             except Exception as exc:
                 print(f"An error occurred: {exc}")
-    print(f"{len(result)} elements in result")
-    return current_chat
 
 def get_AI_response(query, chat, recursion_depth=0, max_recursion_depth=3):
     textual_response = None
     try:
-        textual_response = chat.send_message("Using all previous context, answer this question in plain text:" + query)
+        textual_response = chat.send_message("Using all previous context, answer this question in plain text:" + clean_query(query))
         textual_response = textual_response.text
         textual_response = markdown.markdown(textual_response, extensions=['nl2br'])
         print(textual_response)
@@ -196,7 +199,8 @@ def get_AI_response(query, chat, recursion_depth=0, max_recursion_depth=3):
         data_response = data_response[data_response.find("["):data_response.rfind("]") + 1]
         print(data_response)
 
-        format = chat.send_message("""Based on the previous context, in these formats, which one is the most appropriate to represent the data you just provided?
+        format = chat.send_message(f"""Based on the previous context, in these formats, which one is the most appropriate to represent the data you just provided?
+                                   query: {query}
                                    formats: textual display, bar graph, table, line graph, geo chart
                                    if no data is provided earlier, return "textual display"
                                    DO NOT RETURN ANYTHING ELSE EXCEPT THE NAME OF THE DISPLAY (NO EXPLANATION)
