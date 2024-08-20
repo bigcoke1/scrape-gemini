@@ -63,17 +63,6 @@ def search_google(query):
     driver.quit()
     return links
 
-def search_brit(query):
-    driver = init_webdriver()
-    temp_query = query.replace(" ", "+")
-    driver.get("https://www.britannica.com/search?query=" + temp_query)
-
-    links = WebDriverWait(driver, 5).until(lambda dirver: driver.find_elements(By.CSS_SELECTOR, "#content > div > div.grid > div > ul > li > a"))
-    links = [link.get_attribute("href") for link in links]
-
-    driver.quit()
-    return links
-
 def scrape_text(link):
     try:
         response = requests.get(link, timeout=5)
