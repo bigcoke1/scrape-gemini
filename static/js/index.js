@@ -460,28 +460,9 @@
   }
 
   function generateChart(query, dataResponse, format, chartBox, chatId) {
-    dataResponse = dataResponse.replace(/\\/g, "");
-    dataResponse = JSON.parse(dataResponse);
-    dataResponse = checkLength(dataResponse);
-    let pairedData = pairData(dataResponse);
-
-    let data;
-    if (format === "table") {
-      dataResponse = dataResponse.map(innerArray => 
-        innerArray.map(item => item.toString())
-      );
-      data = google.visualization.arrayToDataTable(dataResponse);
-    } else {
-      if (!pairedData.slice(1).every(innerArray => {
-        // Check if the second column (index 1) is a number or can be converted to a number
-        return !isNaN(parseFloat(innerArray[1])) && isFinite(innerArray[1]);
-      })) {
-        format = "table";
-      }
-      console.log(pairedData)
-      data = google.visualization.arrayToDataTable(pairedData);
-    }
-
+    let [data, modifiedFormat] = processDataResponse(dataResponse, format);
+    const numRows = data.length;
+    data = google.visualization.arrayToDataTable(data);
     let chartHeight = 600;
     let options = {
       title: query,
@@ -506,28 +487,22 @@
     };
 
     let chart;
-    if (format === "bar graph") {
-      chartHeight = flexHeight(dataResponse.length - 1, options);
+    if (modifiedFormat === "bar graph") {
+      chartHeight = flexHeight(numRows, options);
       chart = new google.visualization.BarChart(chartBox);
       options["bars"] = "horizontal";
       options["bar"] = {
         groupWidth: "80%",
       };
-    } else if (format === "line graph") {
+      console.log(chartHeight)
+      console.log(dataResponse.length-1)
+    } else if (modifiedFormat === "line graph") {
       chart = new google.visualization.LineChart(chartBox);
       options["curveType"] = "function"; // Set curve type for line chart
       options["lineWidth"] = 2; // Set line width
-    } else if (format === "pie chart") {
-      chart = new google.visualization.PieChart(chartBox);
-      options["pieSliceText"] = "label"; // Show label on pie slices
-      options["pieHole"] = 0.4; // Set pie hole (donut chart)
-    } else if (format === "scatterplot") {
-      chart = new google.visualization.ScatterChart(chartBox);
-      options["pointSize"] = 5; // Set size of points
-      options["legend"] = { position: "none" }; // Hide legend
-    } else if (format === "table") {
+    }  else if (modifiedFormat === "table") {
       chart = new google.visualization.Table(chartBox);
-      chartHeight = flexHeight(dataResponse.length - 1, options);
+      chartHeight = flexHeight(numRows, options);
       options["allowHtml"] = true; // Allows HTML in table cells
       options["showRowNumber"] = true; // Show row numbers
       options["cssClassNames"] = {
@@ -538,31 +513,9 @@
         hoverTableRow: "hover-table-row",
       };
       options["width"] = chartBox.offsetWidth;
-    } else if (format === "area chart") {
-      chart = new google.visualization.AreaChart(chartBox);
-      options["isStacked"] = true; // Stack area chart
-    } else if (format === "bubble chart") {
-      chart = new google.visualization.BubbleChart(chartBox);
-      options["bubble"] = { opacity: 0.3 }; // Set bubble opacity
-    } else if (format === "histogram") {
-      chart = new google.visualization.Histogram(chartBox);
-      options["histogram"] = { bucketSize: 1 }; // Set bucket size
-    } else if (format === "geo chart") {
+    } else if (modifiedFormat === "geo chart") {
       chart = new google.visualization.GeoChart(chartBox);
       options["colorAxis"] = { colors: ["#e5f5f9", "#2ca25f"] }; // Set color axis range
-    } else if (format === "donut chart") {
-      chart = new google.visualization.PieChart(chartBox);
-      options["pieHole"] = 0.4; // Set hole size for donut chart
-    } else if (format === "gauge chart") {
-      chart = new google.visualization.Gauge(chartBox);
-      options["min"] = 0;
-      options["max"] = 100;
-      options["greenFrom"] = 80;
-      options["greenTo"] = 100;
-      options["yellowFrom"] = 60;
-      options["yellowTo"] = 80;
-      options["redFrom"] = 0;
-      options["redTo"] = 60;
     } else {
       let error = document.createElement("p");
       error.textContent = "Graphic Type Not Supported Yet";
@@ -676,47 +629,86 @@
     subTextbox.appendChild(buttonBox);
   }
 
-  function checkLength(dataResponse) {
-    let numColumns = dataResponse[0].length;
-    for (let i = 0; i < dataResponse.length; i++) {
-      if (dataResponse[i].length > numColumns) {
-        dataResponse[i] = dataResponse[i].slice(0, numColumns);
-      } else if (dataResponse[i].length < numColumns) {
-        while (dataResponse[i].length < numColumns) {
-          dataResponse[i].push(null);
-        }
+  function processDataResponse(rawDataResponse, format) {
+    // Clean and parse the data response
+    let dataResponse = JSON.parse(rawDataResponse.replace(/\\/g, ""));
+    dataResponse = checkLength(dataResponse);
+    const pairedData = pairData(dataResponse);
+  
+    // Convert format to lowercase for consistent comparison
+    format = format.toLowerCase();
+  
+    // Determine the data format and prepare the data for visualization
+    let data;
+    if (format === "table") {
+      data = convertToStringArray(dataResponse);
+    } else {
+      if (!isSecondColumnNumeric(pairedData)) {
+        format = "table";
+        data = convertToStringArray(dataResponse);
+      } else {
+        data = pairedData
       }
     }
-    if (dataResponse.length > 50) {
-      dataResponse = dataResponse.slice(0, 50);
-    }
-
-    return dataResponse;
+    return [data, format];
   }
-
+  
+  function checkLength(dataResponse) {
+    const numColumns = dataResponse[0].length;
+  
+    // Normalize the length of each row
+    dataResponse = dataResponse.map(row => {
+      if (row.length > numColumns) {
+        return row.slice(0, numColumns);
+      } else {
+        while (row.length < numColumns) {
+          row.push(null);
+        }
+        return row;
+      }
+    });
+  
+    // Limit the number of rows to 50
+    return dataResponse.length > 50 ? dataResponse.slice(0, 50) : dataResponse;
+  }
+  
   function pairData(data) {
-    data = data.map(innerArray => 
-      innerArray.map(item => {
-          let floatValue = parseFloat(item);
-          return isNaN(floatValue) ? item : floatValue;
-      })
-    );
-    if (data[0].length <= 2) {
-      return data;
-    }
-
-    let colToKeep;
+    // Convert strings to floats where possible
+    data = data.map(innerArray => innerArray.map(item => tryParseFloat(item)));
+  
+    if (data[0].length <= 2) return data;
+  
+    // Identify the column to keep (first numeric column)
+    const colToKeep = findFirstNumericColumn(data);
+  
+    // Pair data to keep only the first column and the numeric column
+    return data.map(row => [row[0], row[colToKeep]]);
+  }
+  
+  function tryParseFloat(item) {
+    const floatValue = parseFloat(item);
+    return isNaN(floatValue) ? item : floatValue;
+  }
+  
+  function findFirstNumericColumn(data) {
     for (let i = 1; i < data[1].length; i++) {
       if (typeof data[1][i] === "number") {
-        colToKeep = i;
-        break;
+        return i;
       }
     }
-
-    data = data.map((subArray) => {
-      return [subArray[0], subArray[colToKeep]];
-    });
-    return data;
+    return 1; // Fallback if no numeric column found
+  }
+  
+  function isSecondColumnNumeric(data) {
+    return data.slice(1).every(row => isNumeric(row[1]));
+  }
+  
+  function isNumeric(value) {
+    return !isNaN(parseFloat(value)) && isFinite(value);
+  }
+  
+  function convertToStringArray(dataResponse) {
+    return dataResponse.map(innerArray => innerArray.map(item => item.toString()))
   }
 
   function flexHeight(numRows, options) {

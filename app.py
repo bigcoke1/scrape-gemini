@@ -1,5 +1,6 @@
 #my lib
 from main import *
+from rag import *
 
 #third-party lib
 from flask import Flask, render_template, request, Response, jsonify, session, url_for, redirect, render_template_string
@@ -96,7 +97,11 @@ def get_response():
     if query and username:
         try:
             start_time = time.time()
-            current_chat = model.start_chat()
+            text_response, data_response, format = get_dspy_answer(query)
+            current_datetime = get_date()
+            json_links = None
+            links = None
+            """current_chat = model.start_chat()
             links = search_google(query)
             print(f"Retrieved links in {time.time() - start_time} seconds")
             links = [link for link in links if link is not None]
@@ -106,7 +111,7 @@ def get_response():
             text_response, data_response, format = get_AI_response(query, current_chat)
             print(f"Got AI response in {time.time() - start_time} seconds")
             current_datetime = get_date()
-            json_links = json.dumps(links)
+            json_links = json.dumps(links)"""
             
             con = sqlite3.connect(USER_DATA)
             cur = con.cursor()
