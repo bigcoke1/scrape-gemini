@@ -77,11 +77,5 @@ def clean_data(text):
 def clean_query(query):
     pattern = re.compile("|".join(map(re.escape, FORMAT_WORDS)), re.IGNORECASE)
     query = pattern.sub("", query)
-    normalized_tokens = []
-    for word in query.split():
-        word = word.lower()
-        if word not in STOP_WORDS:
-            normalized_tokens.append(word)
-    return " ".join(normalized_tokens)
-    
+    return query    
     

@@ -1,7 +1,3 @@
-#my lib
-from main import *
-from rag import *
-
 #third-party lib
 from flask import Flask, render_template, request, Response, jsonify, session, url_for, redirect, render_template_string
 from flask_cors import CORS
@@ -14,6 +10,13 @@ from googleapiclient.errors import HttpError
 from google_auth_oauthlib.flow import Flow
 from PIL import Image
 
+#python lib
+import uuid
+import logging
+from threading import Thread
+import base64
+import os
+
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 CORS(app)
@@ -23,11 +26,9 @@ def before_request():
     if request.headers.get('X-Forwarded-Proto') == 'https':
         request.url = request.url.replace('http://', 'https://')
 
-#python lib
-import uuid
-import logging
-from threading import Thread
-import base64
+#my lib
+from main import *
+from rag import *
 
 SERVER_ERROR_MSG = "Internal server error"
 PARAM_ERROR_MSG = "Invalid params error"
@@ -98,21 +99,27 @@ def get_response():
         try:
             start_time = time.time()
             text_response, data_response, format = get_dspy_answer(query)
+            text_response = markdown.markdown(text_response, extensions=['nl2br'])
+            print(f"Got AI response in {time.time() - start_time} seconds")
             current_datetime = get_date()
-            json_links = None
-            links = None
-            """current_chat = model.start_chat()
             links = search_google(query)
-            print(f"Retrieved links in {time.time() - start_time} seconds")
             links = [link for link in links if link is not None]
             links = list(set(links))
+            json_links = json.dumps(links)
+            """
+            current_chat = model.start_chat()
+            links = search_google(query)
+            print(f"Retrieved links in {time.time() - start_time} seconds")
+            links = [link for link in links if link is not None and not "youtube.com" in link]
+            links = list(set(links))
+            links = links[:5]
             current_chat = iter_result(query, links, current_chat)
             print(f"Cached in {time.time() - start_time} seconds")
             text_response, data_response, format = get_AI_response(query, current_chat)
             print(f"Got AI response in {time.time() - start_time} seconds")
             current_datetime = get_date()
-            json_links = json.dumps(links)"""
-            
+            json_links = json.dumps(links)
+            """
             con = sqlite3.connect(USER_DATA)
             cur = con.cursor()
             cur.execute("INSERT INTO chat (username, query, response, date, links, data, format) VALUES (?, ?, ?, ?, ?, ?, ?)", 

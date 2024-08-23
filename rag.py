@@ -2,37 +2,39 @@ import dspy
 from dspy.teleprompt import BootstrapFewShot
 import os
 import json
+from dspy.retrieve.weaviate_rm import WeaviateRM
+import weaviate
 
+"""weaviate_client = weaviate.WeaviateClient("https://scrape-insight.com")
+retriever_model = WeaviateRM(
+    collection_name="your_collection_name",
+    weaviate_client=weaviate_client,
+    k=5
+)"""
 PREMAI_API_KEY = os.getenv("PREMAI_API_KEY")
-turbo = dspy.PremAI(model="gpt-3.5-turbo", project_id=5609, api_key=PREMAI_API_KEY, temperature=0.7, max_tokens=4000)
+turbo = dspy.PremAI(model="gpt-3.5-turbo", project_id=5609, api_key=PREMAI_API_KEY, temperature=0.2, max_tokens=4000)
 colbertv2_wiki17_abstracts = dspy.ColBERTv2(url='http://20.102.90.50:2017/wiki17_abstracts')
 dspy.configure(lm=turbo, rm=colbertv2_wiki17_abstracts)
-
-class GenerateQuery(dspy.Signature):
-    question = dspy.InputField()
-    query = dspy.OutputField(desc="a query to be used to retrieve context using a retrieval model")
 
 class GenerateAnswer(dspy.Signature):
     context = dspy.InputField()
     question = dspy.InputField()
-    textual_response = dspy.OutputField(desc="one or more paragraphs")
+    textual_response = dspy.OutputField(desc="at least two paragraphs using your own knowledge and the context, include details")
     data_response = dspy.OutputField(desc="a google.visualization.arrayToDataTable array of arrays in json format if applicable")
     format = dspy.OutputField(
         desc="""the most appropriate format to represent the data (formats: textual display, bar graph, table, line graph, geo chart)
-            output textual display if data_response is None"""
+            output textual display if data response is []"""
     )
 
 class RAG(dspy.Module):
     def __init__(self, num_passages):
         super().__init__()
-        self.generate_query = dspy.ChainOfThought(GenerateQuery)
         self.retrieve = dspy.Retrieve(k=num_passages)
         self.generate_answer = dspy.ChainOfThought(GenerateAnswer)
 
     def forward(self, question, context=None):
-        query = self.generate_query(question=question).query
         if not context:
-            context = self.retrieve(query).passages
+            context = self.retrieve(question).passages
         pred = self.generate_answer(context=context, question=question)
         return dspy.Prediction(context=context, question=question, textual_response=pred.textual_response, data_response=pred.data_response, format=pred.format)
 
@@ -137,8 +139,8 @@ def load_rag(num_passages):
         rag.save("compiled_rag.json")
     return rag
 
+rag = load_rag(num_passages=5)
 def get_dspy_answer(question):
-    rag = load_rag(num_passages=5)
     pred = rag(question)
     print(f"Question: {question}")
     print(f"Predicted Textual Response: {pred.textual_response}")

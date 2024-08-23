@@ -460,74 +460,80 @@
   }
 
   function generateChart(query, dataResponse, format, chartBox, chatId) {
-    let [data, modifiedFormat] = processDataResponse(dataResponse, format);
-    const numRows = data.length;
-    data = google.visualization.arrayToDataTable(data);
-    let chartHeight = 600;
-    let options = {
-      title: query,
-      titleTextStyle: {
-        fontSize: 20,
-      },
-      fontSize: 15,
-      height: 600,
-      chartArea: {
-        width: "60%", // Adjust the width of the chart area
-        height: "90%", // Adjust the height of the chart area
-      },
-      legend: {
-        position: "top", // Position the legend at the top for more space
-      },
-      colors: ["#3366CC", "#DC3912", "#FF9900", "#109618", "#990099"], // Customize bar colors
-      animation: {
-        startup: true,
-        duration: 1000,
-        easing: "out",
-      },
-    };
-
-    let chart;
-    if (modifiedFormat === "bar graph") {
-      chartHeight = flexHeight(numRows, options);
-      chart = new google.visualization.BarChart(chartBox);
-      options["bars"] = "horizontal";
-      options["bar"] = {
-        groupWidth: "80%",
+    try {
+      function removeSpecialCharacters(str) {
+        return str.replace(/[^a-zA-Z0-9\s]|[\r\n]/g, '');
+      }
+      format = removeSpecialCharacters(format)
+      let [data, modifiedFormat] = processDataResponse(dataResponse, format);
+      const numRows = data.length;
+      data = google.visualization.arrayToDataTable(data);
+      let chartHeight = 600;
+      let options = {
+        title: query,
+        titleTextStyle: {
+          fontSize: 20,
+        },
+        fontSize: 15,
+        height: 600,
+        chartArea: {
+          width: "60%", // Adjust the width of the chart area
+          height: "90%", // Adjust the height of the chart area
+        },
+        legend: {
+          position: "top", // Position the legend at the top for more space
+        },
+        colors: ["#3366CC", "#DC3912", "#FF9900", "#109618", "#990099"], // Customize bar colors
+        animation: {
+          startup: true,
+          duration: 1000,
+          easing: "out",
+        },
       };
-      console.log(chartHeight)
-      console.log(dataResponse.length-1)
-    } else if (modifiedFormat === "line graph") {
-      chart = new google.visualization.LineChart(chartBox);
-      options["curveType"] = "function"; // Set curve type for line chart
-      options["lineWidth"] = 2; // Set line width
-    }  else if (modifiedFormat === "table") {
-      chart = new google.visualization.Table(chartBox);
-      chartHeight = flexHeight(numRows, options);
-      options["allowHtml"] = true; // Allows HTML in table cells
-      options["showRowNumber"] = true; // Show row numbers
-      options["cssClassNames"] = {
-        headerRow: "header-row",
-        tableRow: "table-row",
-        oddTableRow: "odd-table-row",
-        selectedTableRow: "selected-table-row",
-        hoverTableRow: "hover-table-row",
-      };
-      options["width"] = chartBox.offsetWidth;
-    } else if (modifiedFormat === "geo chart") {
-      chart = new google.visualization.GeoChart(chartBox);
-      options["colorAxis"] = { colors: ["#e5f5f9", "#2ca25f"] }; // Set color axis range
-    } else {
-      let error = document.createElement("p");
-      error.textContent = "Graphic Type Not Supported Yet";
-      error.classList.add("error");
-      chartBox.appendChild(error);
+  
+      let chart;
+      if (modifiedFormat === "bar graph") {
+        chartHeight = flexHeight(numRows, options);
+        chart = new google.visualization.BarChart(chartBox);
+        options["bars"] = "horizontal";
+        options["bar"] = {
+          groupWidth: "80%",
+        };
+      } else if (modifiedFormat === "line graph") {
+        chart = new google.visualization.LineChart(chartBox);
+        options["curveType"] = "function"; // Set curve type for line chart
+        options["lineWidth"] = 2; // Set line width
+      }  else if (modifiedFormat === "table") {
+        chart = new google.visualization.Table(chartBox);
+        chartHeight = flexHeight(numRows, options);
+        options["allowHtml"] = true; // Allows HTML in table cells
+        options["showRowNumber"] = true; // Show row numbers
+        options["cssClassNames"] = {
+          headerRow: "header-row",
+          tableRow: "table-row",
+          oddTableRow: "odd-table-row",
+          selectedTableRow: "selected-table-row",
+          hoverTableRow: "hover-table-row",
+        };
+        options["width"] = chartBox.offsetWidth;
+      } else if (modifiedFormat === "geo chart") {
+        chart = new google.visualization.GeoChart(chartBox);
+        options["colorAxis"] = { colors: ["#e5f5f9", "#2ca25f"] }; // Set color axis range
+      } else {
+        let error = document.createElement("p");
+        error.textContent = "Graphic Type Not Supported Yet";
+        error.classList.add("error");
+        chartBox.appendChild(error);
+      }
+      chart.draw(data, options);
+  
+      chartBox.style.height = chartHeight + 50 + "px";
+  
+      populateChartButtons(chart, chartBox, chatId, dataResponse);
+    } catch (err) {
+      console.log(err)
+      chartBox.remove()
     }
-
-    chart.draw(data, options);
-
-    chartBox.style.height = chartHeight + 50 + "px";
-
-    populateChartButtons(chart, chartBox, chatId, dataResponse);
   }
 
   function populateChartButtons(chart, chartBox, chatId, dataResponse) {
@@ -577,6 +583,7 @@
         body: params,
       });
       await statusCheck(res);
+      alert("Successfully Uploaded!")
     } catch (err) {
       window.location.href = URL + "/google";
     }
@@ -584,7 +591,7 @@
 
   function populateLinks(linkBox, links) {
     // Create a text node for the initial text and the "References:" label
-    linkBox.appendChild(document.createTextNode("\nReferences: "));
+    linkBox.appendChild(document.createTextNode("\nFor More Inforamtion: "));
     let list = document.createElement("ol");
     for (let i = 0; i < links.length; i++) {
       // Create a text node for the link index and description

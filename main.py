@@ -167,11 +167,13 @@ def iter_result(query, links, current_chat):
                     return current_chat
             except Exception as exc:
                 print(f"An error occurred: {exc}")
+    return current_chat
 
 def get_AI_response(query, chat, recursion_depth=0, max_recursion_depth=3):
     textual_response = None
     try:
-        textual_response = chat.send_message("Using all previous context, answer this question in plain text:" + clean_query(query))
+        print(clean_query(query))
+        textual_response = chat.send_message("Using all previous context and your own knowledge, tell me about this in plain text:" + query)
         textual_response = textual_response.text
         textual_response = markdown.markdown(textual_response, extensions=['nl2br'])
         print(textual_response)
