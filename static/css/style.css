@@ -228,6 +228,10 @@ h1 {
     margin-bottom: 0px;
 }
 
+#ui img:hover {
+    box-shadow: 3px 3px 3px gray;
+}
+
 .sub-textbox {
     display: flex;
     flex-direction: column;
@@ -313,6 +317,6 @@ section.chart > section > button:nth-child(2) > img {
     box-shadow: 3px 3px 3px gray;
 }
 
-#example-questons button:hover {
-    background-color: lightblue;
+#example-questions button:hover {
+    background-color: rgb(198, 229, 239);
 }
