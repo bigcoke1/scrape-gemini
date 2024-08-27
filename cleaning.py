@@ -1,28 +1,5 @@
-import spacy
 import re
 
-nlp = spacy.load('en_core_web_sm')
-
-STOP_WORDS = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you", "your", "yours", "yourself", 
-              "yourselves", "he", "him", "his", "himself", "she", "her", "hers", "herself", "it", "its", "itself", 
-              "they", "them", "their", "theirs", "themselves", "what", "which", "who", "whom", "this", "that", 
-              "these", "those", "am", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
-                "having", "do", "does", "did", "doing", "a", "an", "the", "and", "but", "if", "or", "because", 
-                "as", "until", "while", "of", "at", "by", "for", "with", "about", "against", "between", "into", "through",
-                "during", "before", "after", "above", "below", "to", "from", "up", "down", "in", "out", "on", "off", "over", 
-                "under", "again", "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", 
-                "both", "each", "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", 
-                "so", "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"]
-UNWANTED_WORDS = [
-    "Advertisement", "advertisement", "ads", "Ad", "ad", "Buy our product", "Buy now", "Shop now", 
-    "Click here", "Subscribe", "Sign up", "Join now", "Limited offer", "Sale", "Discount", "Promo", 
-    "Deal", "Coupon", "Exclusive offer", "Special offer", "Free trial", "Get your free", "Order now", 
-    "Hurry up", "Offer ends soon", "Best price", "Save money", "Use code", "Powered by", "Sponsored by",
-    "We use cookies", "cookie policy", "cookies to improve", "cookies for better experience", 
-    "cookie settings", "cookie consent", "accept cookies", "This site uses cookies", "privacy policy", 
-    "terms of service", "terms and conditions", "Read more", "Learn more", "More info", 
-    "advertising purposes", "Third-party cookies", "ad choices"
-]
 FORMAT_WORDS = [
     "bar graph", "bar chart", "horizontal bar chart", "vertical bar chart", "stacked bar chart", 
     "grouped bar chart", "clustered bar chart",
@@ -51,28 +28,6 @@ FORMAT_WORDS = [
     "violin plot", "violin chart",
     "word cloud", "tag cloud", "geo chart"
 ]
-
-def simplify_sentence(text):
-    doc = nlp(text)
-    normalized_tokens = []
-    
-    for token in doc:
-        if token.text not in STOP_WORDS:
-            if token.pos_ == 'VERB':
-                normalized_tokens.append(token.lemma_)
-            elif token.pos_ == 'NOUN':
-                normalized_tokens.append(token.lemma_) 
-            else:
-                normalized_tokens.append(token.text) 
-    
-    return ' '.join(normalized_tokens)
-
-def clean_data(text):
-    text = re.sub("\W", " ", text)
-    pattern = re.compile("|".join(map(re.escape, UNWANTED_WORDS)), re.IGNORECASE)
-    text = pattern.sub("", text)
-    text = simplify_sentence(text)
-    return text
 
 def clean_query(query):
     pattern = re.compile("|".join(map(re.escape, FORMAT_WORDS)), re.IGNORECASE)

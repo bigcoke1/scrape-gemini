@@ -47,5 +47,13 @@ if __name__ == "__main__":
         questions = client.collections.get("Privacy_Data")
         questions.data.insert_many(question_objs)
 
+        questions = client.collections.get("Privacy_Data")
+
+        response = questions.query.near_text(
+            query="example",
+            limit=2
+        )
+
+        print(response.objects[0].properties) 
     finally:
         client.close()

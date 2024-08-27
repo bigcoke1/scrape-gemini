@@ -8,8 +8,8 @@ import json
 PREMAI_API_KEY = os.getenv("PREMAI_API_KEY")
 turbo = dspy.PremAI(model="gpt-3.5-turbo", project_id=5609, api_key=PREMAI_API_KEY, temperature=0.2, max_tokens=4000)
 colbertv2_wiki17_abstracts = dspy.ColBERTv2(url='http://20.102.90.50:2017/wiki17_abstracts')
-weaviate_client = re_instantiate_weaviate()
-weaviate_rm = WeaviateRM(weaviate_collection_name="Privacy_Data", weaviate_client=weaviate_client)
+with re_instantiate_weaviate() as weaviate_client:
+    weaviate_rm = WeaviateRM(weaviate_collection_name="Privacy_Data", weaviate_client=weaviate_client)
 dspy.configure(lm=turbo, rm=colbertv2_wiki17_abstracts)
 
 class GenerateAnswer(dspy.Signature):

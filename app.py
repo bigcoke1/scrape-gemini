@@ -1,9 +1,8 @@
 #third-party lib
-from flask import Flask, render_template, request, Response, jsonify, session, url_for, redirect, render_template_string
+from flask import Flask, render_template, request, Response, jsonify, session, redirect
 from flask_cors import CORS
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 from googleapiclient.errors import HttpError
@@ -25,6 +24,7 @@ import datetime
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 CORS(app)
+USER_DATA = "user_data.db"
 
 @app.before_request
 def before_request():
@@ -99,7 +99,7 @@ def login():
         return Response(HTTP_ERROR_MSG, status=400, mimetype="text/plain")
 
 def get_date():
-    current_datetime = datetime.now()
+    current_datetime = datetime.datetime.now()
     format_string = "%m-%d-%y"
     return current_datetime.strftime(format_string)
 

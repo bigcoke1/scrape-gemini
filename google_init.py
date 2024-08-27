@@ -3,18 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
-import google.generativeai as genai
 
 #my lib
-from load_creds import load_creds
-genai.configure(credentials=load_creds())
-time_model = genai.GenerativeModel(model_name=f'tunedModels/scrape-insight-time-model')
-model = genai.GenerativeModel(model_name="models/gemini-1.5-flash", generation_config={"temperature": 0.2})
-
-USER_DATA = "user_data.db"
-
-#my lib
-from cleaning import *
+from cleaning import clean_query
 
 def init_webdriver():
     chrome_options = Options()
