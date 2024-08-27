@@ -1,0 +1,26 @@
+---
+services:
+  weaviate:
+    command:
+    - --host
+    - 0.0.0.0
+    - --port
+    - '8080'
+    - --scheme
+    - http
+    image: cr.weaviate.io/semitechnologies/weaviate:1.26.1
+    ports:
+    - 8080:8080
+    - 50051:50051
+    - 443:443
+    restart: on-failure:0
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      CLUSTER_HOSTNAME: 'node1'
+      ENABLE_MODULES: text2vec-palm, text2vec-openai
+      AZURE_APIKEY: '09fe0d7ab4664090837dcb07bed91334'
+      GOOGLE_APIKEY: 'ya29.a0AcM612xY_qLe060otwhZk8Pe_thgBuIULz-DlVVDQ68z4IDupyawGskut3FV3xBKmKj7TtFpOMRsxAVfFpIl2ykZG6ikjgMesX61XQHq2T37tiKRwIsiDPH14XpBt9qoAeSsZcQRSpsig-loOiwGZyu5QAkz65HEYLPImPswKn5TiK0aCgYKARcSARISFQHGX2MiBxfbVAzrzoRqraM0fK3_MQ0182'
+      DEFAULT_VECTORIZER_MODULE: text2vec-openai
+...

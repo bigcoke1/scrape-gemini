@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from main import *
+from google_init import *
 import google.generativeai as genai
 import pickle
 import os

@@ -9,6 +9,8 @@ from googleapiclient.http import MediaFileUpload
 from googleapiclient.errors import HttpError
 from google_auth_oauthlib.flow import Flow
 from PIL import Image
+from argon2 import PasswordHasher
+import markdown
 
 #python lib
 import uuid
@@ -16,6 +18,9 @@ import logging
 from threading import Thread
 import base64
 import os
+import sqlite3
+import time
+import datetime
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -27,7 +32,7 @@ def before_request():
         request.url = request.url.replace('http://', 'https://')
 
 #my lib
-from main import *
+from google_init import *
 from rag import *
 
 SERVER_ERROR_MSG = "Internal server error"
@@ -36,6 +41,8 @@ HTTP_ERROR_MSG = "Wrong HTTP method"
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
 CLIENT_SECRETS_FILE = "credentials.json"
 URL = "https://www.scrape-insight.com"
+
+ph = PasswordHasher()
 
 @app.route('/')
 def init():
@@ -91,6 +98,11 @@ def login():
     else:
         return Response(HTTP_ERROR_MSG, status=400, mimetype="text/plain")
 
+def get_date():
+    current_datetime = datetime.now()
+    format_string = "%m-%d-%y"
+    return current_datetime.strftime(format_string)
+
 @app.route("/getresponse", methods=["POST"])
 def get_response():
     query = request.form.get("query")
@@ -106,20 +118,6 @@ def get_response():
             links = [link for link in links if link is not None]
             links = list(set(links))
             json_links = json.dumps(links)
-            """
-            current_chat = model.start_chat()
-            links = search_google(query)
-            print(f"Retrieved links in {time.time() - start_time} seconds")
-            links = [link for link in links if link is not None and not "youtube.com" in link]
-            links = list(set(links))
-            links = links[:5]
-            current_chat = iter_result(query, links, current_chat)
-            print(f"Cached in {time.time() - start_time} seconds")
-            text_response, data_response, format = get_AI_response(query, current_chat)
-            print(f"Got AI response in {time.time() - start_time} seconds")
-            current_datetime = get_date()
-            json_links = json.dumps(links)
-            """
             con = sqlite3.connect(USER_DATA)
             cur = con.cursor()
             cur.execute("INSERT INTO chat (username, query, response, date, links, data, format) VALUES (?, ?, ?, ?, ?, ?, ?)", 

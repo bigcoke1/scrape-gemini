@@ -1,23 +1,19 @@
 import dspy
 from dspy.teleprompt import BootstrapFewShot
+from dspy.retrieve.weaviate_rm import WeaviateRM
+from weaviate_init import re_instantiate_weaviate
 import os
 import json
-from dspy.retrieve.weaviate_rm import WeaviateRM
-import weaviate
 
-"""weaviate_client = weaviate.WeaviateClient("https://scrape-insight.com")
-retriever_model = WeaviateRM(
-    collection_name="your_collection_name",
-    weaviate_client=weaviate_client,
-    k=5
-)"""
 PREMAI_API_KEY = os.getenv("PREMAI_API_KEY")
 turbo = dspy.PremAI(model="gpt-3.5-turbo", project_id=5609, api_key=PREMAI_API_KEY, temperature=0.2, max_tokens=4000)
 colbertv2_wiki17_abstracts = dspy.ColBERTv2(url='http://20.102.90.50:2017/wiki17_abstracts')
+weaviate_client = re_instantiate_weaviate()
+weaviate_rm = WeaviateRM(weaviate_collection_name="Privacy_Data", weaviate_client=weaviate_client)
 dspy.configure(lm=turbo, rm=colbertv2_wiki17_abstracts)
 
 class GenerateAnswer(dspy.Signature):
-    context = dspy.InputField()
+    context = dspy.InputField(desc="May contain useful information")
     question = dspy.InputField()
     textual_response = dspy.OutputField(desc="at least two paragraphs using your own knowledge and the context, include details")
     data_response = dspy.OutputField(desc="a google.visualization.arrayToDataTable array of arrays in json format if applicable")
