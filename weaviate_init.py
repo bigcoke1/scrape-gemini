@@ -8,7 +8,7 @@ import json
 URL = os.getenv("WCS_TEST_URL")
 APIKEY = os.getenv("WCS_ADMIN_KEY")
 
-def re_instantiate_weaviate() -> weaviate.Client:
+def instantiate_weaviate() -> weaviate.Client:
     # Connect to a WCS instance
     client = weaviate.connect_to_weaviate_cloud(
         cluster_url=URL,  # Replace with your Weaviate Cloud URL
@@ -21,7 +21,7 @@ def re_instantiate_weaviate() -> weaviate.Client:
 
 if __name__ == "__main__":
     try: 
-        client = re_instantiate_weaviate()
+        client = instantiate_weaviate()
         print(client.is_ready())
         client.collections.delete("Privacy_Data")
         questions = client.collections.create(

@@ -1,0 +1,625 @@
+[
+    {
+        "context": "Some context...",
+        "question": "biden's approval rate in a line chart",
+        "textual_response": "<p>Joe Biden's approval rating is currently hovering around 35% approval and 62% disapproval according to Pew Research Center as of April 24, 2024. This is largely unchanged from last year. While Biden's approval rating has slightly improved among Democrats, his approval rating among Republicans remains low, and a majority of Americans disapprove of how he is handling his job. Biden's approval rating is also affected by various demographic groups, with the majority of Americans disapproving of his performance across race, ethnicity, education, and age.  </p>",
+        "data_response": "[[\"Date\", \"Biden Approval Rating\"],[\"Jan 2023\", 43],[\"Feb 2023\", 41],[\"Mar 2023\", 41],[\"Apr 2023\", 41],[\"May 2023\", 40],[\"Jun 2023\", 40],[\"Jul 2023\", 38],[\"Aug 2023\", 39],[\"Sept 2023\", 38],[\"Oct 2023\", 39],[\"Nov 2023\", 37],[\"Dec 2023\", 35],[\"Jan 2024\", 36],[\"Feb 2024\", 37],[\"Mar 2024\", 37],[\"Apr 2024\", 35]]",
+        "format": "line graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "top 5 martial art styles",
+        "textual_response": "<p>Based on popularity and growth, here are the top 5 martial art styles:</p>",
+        "data_response": "[[\"Martial Art\", \"Popularity Ranking\"], [\"Muay Thai\", 1], [\"Karate\", 2], [\"Taekwondo\", 3], [\"Judo\", 4], [\"Kung Fu\", 5]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "how does photosynthesis work",
+        "textual_response": "<p>Photosynthesis is the process by which green plants and certain other organisms transform light energy into chemical energy. During photosynthesis, green plants use light energy to convert water and carbon dioxide into oxygen and energy-rich organic compounds.  This process is critical for the existence of the vast majority of life on Earth. Photosynthetic organisms form the base of Earth's food webs, and almost all of the oxygen in the atmosphere is due to this process. </p>\n<p>Photosynthesis is carried out in specialized organelles called chloroplasts, which contain the green pigment chlorophyll. Chlorophyll absorbs light energy, which is then used to split water molecules, releasing oxygen as a byproduct. The hydrogen atoms from water are then used to reduce carbon dioxide to form carbohydrates, such as glucose. </p>\n<p>The overall reaction of photosynthesis can be summarized as follows: </p>\n<p>6CO2 + 6H2O \u2192 C6H12O6 + 6O2 </p>\n<p>This equation indicates that six molecules of carbon dioxide and six molecules of water are converted into one molecule of glucose and six molecules of oxygen using light energy. </p>\n<p>The process of photosynthesis is divided into two stages: </p>\n<ul>\n<li>\n<p><strong>Light-dependent reactions:</strong> These reactions occur in the thylakoid membranes of chloroplasts and involve the absorption of light energy by chlorophyll. This energy is used to split water molecules and produce ATP and NADPH. </p>\n</li>\n<li>\n<p><strong>Light-independent reactions (Calvin cycle):</strong> These reactions occur in the stroma of chloroplasts and use the energy stored in ATP and NADPH to convert carbon dioxide into carbohydrates.  </p>\n</li>\n</ul>\n<p>The rate of photosynthesis can be influenced by a number of factors, including: </p>\n<ul>\n<li>\n<p><strong>Light intensity:</strong> The rate of photosynthesis increases with increasing light intensity until a point of saturation is reached. </p>\n</li>\n<li>\n<p><strong>Temperature:</strong> Photosynthesis has an optimal temperature range, and the rate of the process decreases at temperatures outside this range. </p>\n</li>\n<li>\n<p><strong>Carbon dioxide concentration:</strong> The rate of photosynthesis increases with increasing carbon dioxide concentration. </p>\n</li>\n<li>\n<p><strong>Water availability:</strong> Water is essential for photosynthesis, and the rate of the process decreases when water is scarce. </p>\n</li>\n</ul>\n<p>Photosynthesis is an essential process for life on Earth, providing the food and oxygen that we need to survive. </p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what function does water have on the human body",
+        "textual_response": "<p>Water is essential for nearly every part of the human body to function efficiently. It comprises about two-thirds of our body weight.  Proper hydration is crucial for maintaining healthy cells, regulating body temperature, lubricating joints, aiding digestion, and much more.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what function does water have on the human body",
+        "textual_response": "<p>Water is crucial for nearly every function in the human body, making up roughly two-thirds of our body weight. It supports metabolic reactions, helps form urine, composes the majority of sweat, and is a major component of blood plasma. Proper hydration is essential for many bodily functions, including brain function, muscle performance, joint health, gastrointestinal function, kidney function, heart function, blood volume regulation, gallbladder function, urinary tract health, skin health, and weight control. Adequate water intake also plays a vital role in situations requiring special consideration, such as air travel, cold weather, and extreme heat.  The best way to ensure proper hydration is to keep an eye on the color of your urine, with pale yellow indicating adequate hydration.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "elaborate on how water is essential for muscle performance",
+        "textual_response": "<p>Water plays a crucial role in muscle performance, acting as a fundamental component for both metabolic and mechanical functions. Approximately 76% of muscle mass is composed of water, highlighting its significance in maintaining muscle hydration. Proper hydration is essential for muscle function, as it helps to energize muscles by providing the necessary electrolytes for optimal performance. Dehydration can lead to muscle weakness, fatigue, and even increased risk of injury. Water also lubricates joints, allowing for ease of movement and reducing stress on joints during weightlifting or strenuous activity. Moreover, adequate hydration can enhance pain tolerance and speed up recovery time after exercise, crucial for consistent strength building and reducing muscle soreness.  Hydration contributes to removing metabolic waste from the body, helping muscles function properly. In essence, water is a vital nutrient for muscle health and performance, enhancing energy, protecting joints, increasing pain tolerance, speeding up recovery, and optimizing overall function.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is amazon web service",
+        "textual_response": "<p>Amazon Web Services (AWS) is a comprehensive cloud computing platform offering over 200 fully featured services from data centers globally. It caters to millions of customers, including fast-growing startups, large enterprises, and leading government agencies. AWS enables organizations to lower costs, become more agile, and innovate faster. It provides a wide range of services, including compute, storage, databases, networking, analytics, machine learning, and artificial intelligence, making it easier and more cost-effective to move existing applications to the cloud and build nearly anything imaginable. AWS is also known for its deep functionality within services, offering the widest variety of databases purpose-built for different types of applications. This allows you to choose the right tool for the job and achieve the best cost and performance. </p>\n<p>AWS boasts the largest and most dynamic community in the cloud computing space, with millions of active customers and tens of thousands of partners globally. Customers span virtually every industry and size, including startups, enterprises, and public sector organizations. The AWS Partner Network (APN) encompasses thousands of system integrators specializing in AWS services and tens of thousands of independent software vendors (ISVs) whose technology works seamlessly with AWS.  </p>\n<p>AWS is architected to be the most flexible and secure cloud computing environment available today. The core infrastructure is built to meet the stringent security requirements of the military, global banks, and highly sensitive organizations. This is backed by a deep set of cloud security tools, over 300 security, compliance, and governance service features, as well as support for 143 security standards and compliance certifications.  </p>\n<p>AWS has been a pioneer in innovation, constantly accelerating the pace of innovation and inventing entirely new technologies that transform businesses. For example, in 2014, AWS pioneered serverless computing with the launch of AWS Lambda, allowing developers to run code without provisioning or managing servers. Similarly, AWS built Amazon SageMaker, a fully managed machine learning service that empowers developers and scientists to use machine learning without prior experience.  </p>\n<p>AWS has unmatched experience, maturity, reliability, security, and performance for mission-critical applications. For 17 years, AWS has delivered cloud services to millions of customers around the world, running a wide variety of use cases. AWS's operational experience is at a greater scale than any other cloud provider. AWS offers a pay-as-you-go approach to pricing its services. Pricing for each service is unique, and the cost for AWS products and services varies based on factors like usage, resources, and performance requirements.</p>\n<p>AWS's global network of regions and availability zones provides a reliable and scalable platform for deploying applications. With 105 Availability Zones within 33 geographic Regions, AWS offers a robust and secure infrastructure with high availability for mission-critical applications. </p>",
+        "data_response": "[[\"Region\",\"Availability Zones\"],[\"Asia Pacific\",\"38\"],[\"Europe\",\"36\"],[\"Middle East\",\"36\"],[\"North America\",\"25\"],[\"South America\",\"3\"]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is amazon web service",
+        "textual_response": "<p>Amazon Web Services (AWS) is a subsidiary of Amazon that provides on-demand cloud computing platforms and APIs to individuals, companies, and governments on a pay-as-you-go basis. It's one of the leading cloud computing platforms, offering a wide range of services, including computing, storage, networking, database, analytics, application services, deployment, management, machine learning, mobile, developer tools, and more. AWS is used by a broad range of customers, from startups to large enterprises and government agencies. The company's goal is to provide a secure, reliable, and scalable platform for its customers to build and run their applications. AWS operates across numerous geographical regions around the world, with data centers in North America, South America, Europe, the Middle East, and Asia Pacific.</p>",
+        "data_response": "[[\"Service\", \"Market Share (Q1 2023)\"], [\"Amazon Web Services (AWS)\", 31], [\"Microsoft Azure\", 25], [\"Google Cloud\", 11]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "gdp 2024 ranking in geo chart",
+        "textual_response": "<p>The 2024 GDP ranking Geo Chart shows the world's largest economies by nominal GDP. The chart is arranged in descending order, with the largest economy at the top and the smallest at the bottom. The United States is the world's largest economy, followed by China and Japan.  It highlights the global distribution of economic power and provides insight into the world's economic landscape.</p>",
+        "data_response": "[[\"Country\", \"GDP (Trillion USD)\"],[\"United States\", 28.78],[\"China\", 18.53],[\"Japan\", 4.11],[\"India\", 3.94],[\"United Kingdom\", 3.50],[\"Germany\", 4.59],[\"France\", 3.13],[\"Brazil\", 2.33],[\"Italy\", 2.33],[\"Cana\", 2.24]]",
+        "format": "geo chart"
+    },
+    {
+        "context": "Some context...",
+        "question": "gdp ranking in geo chart",
+        "textual_response": "<p>The GDP ranking is based on the nominal GDP estimate for 2024 from the International Monetary Fund. The top 25 economies in the world by nominal GDP are:</p>\n<ol>\n<li>United States</li>\n<li>China</li>\n<li>Germany</li>\n<li>Japan</li>\n<li>India</li>\n<li>United Kingdom</li>\n<li>France</li>\n<li>Brazil</li>\n<li>Italy</li>\n<li>Canada</li>\n<li>Russia</li>\n<li>Mexico</li>\n<li>Australia</li>\n<li>South Korea</li>\n<li>Spain</li>\n<li>Indonesia</li>\n<li>Netherlands</li>\n<li>Turkey</li>\n<li>Saudi Arabia</li>\n<li>Switzerland</li>\n<li>Poland</li>\n<li>Taiwan</li>\n<li>Belgium</li>\n<li>Sweden</li>\n<li>Argentina</li>\n</ol>\n<p>This ranking can fluctuate from year to year due to factors such as currency exchange rates and economic growth.  However, it provides a general overview of the size and strength of national economies.</p>",
+        "data_response": "[[\"Country\", \"Nominal GDP (Trillion USD)\"],[\"United States\", 28.78],[\"China\", 18.53],[\"Germany\", 4.59],[\"Japan\", 4.11],[\"India\", 3.94],[\"United Kingdom\", 3.5],[\"France\", 3.13],[\"Brazil\", 2.33],[\"Italy\", 2.33],[\"Canada\", 2.24],[\"Russia\", 2.06],[\"Mexico\", 2.02],[\"Australia\", 1.79],[\"South Korea\", 1.76],[\"Spain\", 1.65],[\"Indonesia\", 1.48],[\"Netherlands\", 1.14],[\"Turkey\", 1.11],[\"Saudi Arabia\", 1.11],[\"Switzerland\", 0.938],[\"Poland\", 0.845],[\"Taiwan\", 0.803],[\"Belgium\", 0.655],[\"Sweden\", 0.623],[\"Argentina\", 0.604]]",
+        "format": "geo chart"
+    },
+    {
+        "context": "Some context...",
+        "question": "olympics 2024 medal ranking",
+        "textual_response": "<p>The 2024 Summer Olympics in Paris have seen many nations compete for the prestigious gold medals. The current medal rankings show the USA in the lead with a total of 89 medals, including 25 gold. China is in second place with 61 medals, including 23 gold, and France holds third place with 48 medals, including 13 gold.</p>",
+        "data_response": "[[\"Country\", \"Gold\", \"Silver\", \"Bronze\", \"Total Medals\"],[\"United States\", 25, 32, 32, 89],[\"China\", 23, 22, 16, 61],[\"France\", 13, 16, 19, 48],[\"Great Britain\", 12, 16, 20, 48],[\"Australia\", 17, 12, 10, 39],[\"Japan\", 11, 6, 12, 29],[\"Italy\", 9, 10, 8, 27],[\"South Korea\", 11, 8, 7, 26],[\"Netherlands\", 9, 5, 6, 20],[\"Canada\", 6, 4, 8, 18],[\"Germany\", 8, 5, 4, 17],[\"Brazil\", 2, 5, 7, 14],[\"New Zealand\", 3, 6, 1, 10],[\"Spain\", 2, 3, 5, 10]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "olympics 2024 medal ranking",
+        "textual_response": "<p>The United States currently leads the medal count at the 2024 Paris Olympics, with 86 medals, including 24 gold. China is in second place with 59 medals, including 22 gold, followed by France with 48 medals, including 13 gold.</p>",
+        "data_response": "[[\"Country\", \"Total Medals\", \"Gold\", \"Silver\", \"Bronze\"], [\"United States\", 89, 25, 32, 32], [\"China\", 61, 23, 22, 16], [\"France\", 48, 13, 16, 19], [\"Great Britain\", 48, 12, 16, 20], [\"Australia\", 39, 17, 12, 10]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "olympics 2024 medal ranking",
+        "textual_response": "<p>Here is the current medal count for the 2024 Paris Olympics as of August 11, 2024. The United States is in the lead with 24 gold medals, followed by China with 22 gold medals and Australia with 17 gold medals.</p>",
+        "data_response": "[[\"Country\", \"Gold\", \"Silver\", \"Bronze\", \"Total\"], [\"United States\", 24, 32, 32, 88], [\"China\", 22, 22, 16, 61], [\"Australia\", 17, 12, 10, 39], [\"France\", 13, 16, 19, 48], [\"Great Britain\", 12, 16, 20, 48], [\"South Korea\", 11, 8, 7, 26], [\"Japan\", 11, 6, 12, 29], [\"Italy\", 9, 10, 8, 27], [\"Netherlands\", 9, 5, 6, 20], [\"Germany\", 8, 5, 4, 17], [\"Canada\", 6, 4, 8, 18], [\"Ireland\", 4, 0, 3, 7], [\"New Zealand\", 3, 5, 10, 19], [\"Hungary\", 3, 3, 2, 8], [\"Sweden\", 3, 3, 2, 8], [\"Romania\", 3, 3, 1, 7], [\"Brazil\", 2, 5, 7, 14], [\"Spain\", 2, 3, 5, 10], [\"Ukraine\", 2, 2, 3, 7], [\"Croatia\", 2, 1, 2, 5], [\"Belgium\", 2, 0, 3, 5], [\"Hong Kong\", 2, 0, 2, 4], [\"Philippines\", 2, 0, 1, 3], [\"Azerbaijan\", 2, 0, 0, 2], [\"Serbia\", 2, 0, 0, 2], [\"Israel\", 1, 4, 1, 6], [\"Switzerland\", 1, 2, 4, 7], [\"Georgia\", 1, 2, 1, 4], [\"Denmark\", 1, 2, 0, 3], [\"Greece\", 1, 1, 5, 7], [\"Poland\", 1, 1, 4, 6], [\"Kazakhstan\", 1, 1, 3, 5], [\"Kenya\", 1, 1, 2, 4], [\"South Africa\", 1, 1, 2, 4], [\"Chile\", 1, 1, 0, 2], [\"Ecuador\", 1, 1, 0, 2], [\"Saint Lucia\", 1, 1, 0, 2], [\"Uganda\", 1, 1, 0, 2], [\"Chinese Taipei\", 1, 0, 4, 5], [\"Uzbekistan\", 1, 0, 2, 3], [\"Cuba\", 1, 0, 1, 2], [\"Czechia\", 1, 0, 1, 2], [\"Guatemala\", 1, 0, 1, 2], [\"Norway\", 1, 0, 1, 2], [\"Algeria\", 1, 0, 0, 1], [\"Argentina\", 1, 0, 0, 1], [\"Bahrain\", 1, 0, 0, 1], [\"Dominica\", 1, 0, 0, 1], [\"Slovenia\", 1, 0, 0, 1], [\"Jamaica\", 0, 3, 1, 4], [\"North Korea\", 0, 2, 3, 5], [\"Mexico\", 0, 2, 1, 3], [\"Thailand\", 0, 2, 1, 3], [\"Ethiopia\", 0, 2, 0, 2], [\"Turkey\", 0, 1, 2, 3], [\"Kyrgyzstan\", 0, 1, 1, 2], [\"Kosovo\", 0, 1, 1, 2], [\"Armenia\", 0, 1, 0, 1], [\"Colombia\", 0, 1, 0, 1], [\"Cyprus\", 0, 1, 0, 1], [\"Fiji\", 0, 1, 0, 1], [\"Mongolia\", 0, 1, 0, 1], [\"Tunisia\", 0, 1, 0, 1], [\"India\", 0, 0, 3, 3], [\"Tajikistan\", 0, 0, 3, 3], [\"Dominican Republic\", 0, 0, 2, 2], [\"Lithuania\", 0, 0, 2, 2], [\"Malaysia\", 0, 0, 2, 2], [\"Moldova\", 0, 0, 2, 2], [\"Austria\", 0, 0, 1, 1], [\"Cape Verde\", 0, 0, 1, 1], [\"Egypt\", 0, 0, 1, 1], [\"Grena\", 0, 0, 1, 1], [\"Indonesia\", 0, 0, 1, 1], [\"Iran\", 0, 0, 1, 1], [\"Peru\", 0, 0, 1, 1], [\"Portugal\", 0, 0, 1, 1], [\"Slovakia\", 0, 0, 1, 1]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "best selling movie in 2023",
+        "textual_response": "<p>The highest grossing movie of 2023 is <em>Barbie</em>, bringing in a total of $1,445,638,421 worldwide.</p>",
+        "data_response": "[[\"Movie\", \"Worldwide Gross\"], [\"Barbie\", 1445638421], [\"The Super Mario Bros. Movie\", 1361992475], [\"Oppenheimer\", 976075361], [\"Guardians of the Galaxy Vol. 3\", 845555777], [\"Fast X\", 714582375]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "best selling movie in 2023",
+        "textual_response": "<p>The highest-grossing movie worldwide in 2023 is Barbie, earning over $1.36 billion.</p>",
+        "data_response": "[[\"Movie\", \"Worldwide Box Office\"],[\"Barbie\", 1361553421],[\"The Super Mario Bros. Movie\", 1361553421],[\"Oppenheimer\", 976968205],[\"Guardians of the Galaxy Vol. 3\", 845468744],[\"Fast X\", 714567285],[\"Spider-Man: Across the Spider-Verse\", 681222435],[\"Full River Red\", 634631282],[\"Wonka\", 629037798],[\"The Little Mermaid\", 569626289]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "best selling movie in 2023",
+        "textual_response": "<p>The best selling movie of 2023 worldwide is Barbie, raking in over $1.4 billion at the box office.</p>",
+        "data_response": "[[\"Movie\", \"Worldwide Gross (Millions)\"], [\"Barbie\", 1445.6], [\"The Super Mario Bros. Movie\", 1361.9], [\"Oppenheimer\", 976.9], [\"Guardians of the Galaxy Vol. 3\", 845.4], [\"Fast X\", 714.5]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "best selling movie in 2023",
+        "textual_response": "<p>The highest-grossing movie of 2023 worldwide is Barbie, with a global box office of $1.36 billion. It surpasses The Super Mario Bros. Movie, which held the previous record with $1.35 billion. Barbie's success is attributed to its strong performance both in North America ($600 million) and internationally ($760 million). It remains the #1 movie for four consecutive weekends and holds the distinction of being the highest-grossing movie directed solely by a woman.  It is currently the 14th highest-grossing domestic release and the 15th highest-grossing global release in history. </p>",
+        "data_response": "[[\"Movie\", \"Worldwide Gross (Millions)\"], [\"Barbie\", 1360], [\"The Super Mario Bros. Movie\", 1350], [\"Oppenheimer\", 977], [\"Guardians of the Galaxy Vol. 3\", 845], [\"Fast X\", 715], [\"Spider-Man: Across the Spider-Verse\", 681], [\"Wonka\", 629], [\"The Little Mermaid\", 570], [\"Mission: Impossible - Dead Reckoning Part One\", 567]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "best selling movie in 2022",
+        "textual_response": "<p>The best-selling movie of 2022 was Avatar: The Way of Water, grossing over $2.32 billion worldwide.</p>",
+        "data_response": "[[\"Movie\", \"Worldwide Gross (Billions)\"], [\"Avatar: The Way of Water\", 2.32], [\"Top Gun: Maverick\", 1.49], [\"Jurassic World Dominion\", 1.00], [\"Doctor Strange in the Multiverse of Madness\", 0.95], [\"Minions: The Rise of Gru\", 0.94]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is amazon web service",
+        "textual_response": "<p>Amazon Web Services (AWS) is a subsidiary of Amazon that provides on-demand cloud computing platforms and APIs to individuals, companies, and governments on a pay-as-you-go basis.  It offers a wide range of services related to compute, storage, networking, database, analytics, machine learning, deployment, management, and more. AWS is the largest provider of cloud infrastructure services, with a market share of 31% as of Q1 2023.  The company's goal is to make it easier for customers to build, deploy, and scale applications quickly, reliably, and cost-effectively. Some of AWS's most popular services include Amazon Elastic Compute Cloud (EC2), Amazon Simple Storage Service (S3), Amazon Relational Database Service (RDS), Amazon DynamoDB, AWS Lambda, Amazon CloudFront, and Amazon Kinesis.</p>",
+        "data_response": "[[\"Service\", \"Market Share (Q1 2023)\"], [\"AWS\", 31], [\"Microsoft Azure\", 25], [\"Google Cloud\", 21]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "what function does water have on the human body",
+        "textual_response": "<p>Water is absolutely essential for life, and its functions in the human body are numerous and vital.  It makes up about 60% of our body weight and is involved in countless processes. Water acts as a crucial building material for every cell, regulating internal body temperature through sweating and respiration. It helps to transport nutrients and oxygen throughout the bloodstream, and it assists in flushing out waste products through urination.  Water acts as a shock absorber, protecting the brain, spinal cord, and fetus during pregnancy.  It also forms saliva, lubricates joints, and helps to prevent constipation.  Without sufficient water intake, the body cannot function optimally, leading to dehydration and a variety of health issues.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "how does photosynthesis work",
+        "textual_response": "<p>Photosynthesis is the process by which plants, algae, and some bacteria convert light energy into chemical energy that can be used for growth and other life processes. This process takes place in organelles called chloroplasts, which contain the green pigment chlorophyll.  Chlorophyll absorbs light energy, primarily in the blue and red wavelengths, and uses it to split water molecules. This releases oxygen as a byproduct and provides electrons to power the conversion of carbon dioxide into sugars. These sugars are then used as fuel for the plant's metabolism or stored for later use. In essence, photosynthesis is the foundation of most food webs on Earth, as it provides the energy that sustains life.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "explain CCPA vs GDPR",
+        "textual_response": "<p>The California Consumer Privacy Act (CCPA) and the General Data Protection Regulation (GDPR) are two prominent laws designed to protect consumer data privacy. Both laws aim to give individuals more control over their personal information, but they differ in their scope, applicability, and enforcement mechanisms.</p>\n<p><strong>CCPA</strong></p>\n<ul>\n<li><strong>Focus:</strong> Primarily focuses on the privacy rights of California residents. It aims to increase transparency and give consumers more control over their personal information collected and used by businesses.</li>\n<li><strong>Applicability:</strong> Applies to businesses that meet specific criteria, such as having annual revenue exceeding $25 million, collecting data from 50,000 or more California residents, or deriving 50% of revenue from selling personal information.</li>\n<li><strong>Key Rights:</strong>  Provides consumers with the right to know, access, delete, and opt-out of the sale of their personal information.</li>\n<li><strong>Enforcement:</strong> Enforced by the California Attorney General and the California Privacy Protection Agency (CPPA), with penalties ranging from $2,500 to $7,500 per violation.</li>\n</ul>\n<p><strong>GDPR</strong></p>\n<ul>\n<li><strong>Focus:</strong>  Applies to all organizations that process the personal data of individuals residing in the European Union (EU). Its goal is to protect the fundamental rights of EU citizens regarding their personal information.</li>\n<li><strong>Applicability:</strong> Broadly applies to any organization that processes the personal data of EU residents, regardless of their location. </li>\n<li><strong>Key Rights:</strong>  Grants individuals with extensive rights, including the right to access, rectify, erase, restrict processing, data portability, and object to processing.</li>\n<li><strong>Enforcement:</strong>  Enforced by data protection authorities in EU member states, with potential penalties up to \u20ac20 million or 4% of annual global turnover, whichever is higher.</li>\n</ul>\n<p><strong>Key Differences:</strong></p>\n<ul>\n<li><strong>Scope:</strong> GDPR has a broader scope, applying to organizations worldwide that process the personal data of EU residents. The CCPA is specific to California residents.</li>\n<li><strong>Applicability:</strong>  The CCPA has specific thresholds for businesses to meet before it applies. The GDPR applies to all organizations that process personal data of EU residents.</li>\n<li><strong>Data Rights:</strong>  GDPR provides more extensive data rights to individuals, including the right to object to automated decision-making. The CCPA emphasizes the right to know, delete, and opt-out of the sale of personal information.</li>\n<li><strong>Enforcement:</strong>  The GDPR has stricter penalties for non-compliance compared to the CCPA.</li>\n</ul>\n<p><strong>Similarities:</strong></p>\n<ul>\n<li><strong>Transparency:</strong> Both laws require organizations to be transparent about how they collect, use, and share personal information.</li>\n<li><strong>User Control:</strong> Both laws empower individuals with rights to control their personal data.</li>\n<li><strong>Global Impact:</strong> Both laws have had a significant impact on data privacy regulations worldwide, serving as models for other jurisdictions.</li>\n</ul>\n<p>By understanding the key differences and similarities between the CCPA and GDPR, organizations can better navigate the evolving data privacy landscape and ensure they are compliant with both laws.</p>",
+        "data_response": "[[\"Regulation\", \"Scope\", \"Applicability\", \"Key Rights\", \"Enforcement\"], [\"CCPA\", \"California Residents\", \"Businesses meeting specific criteria\", \"Right to know, access, delete, opt-out of sale\", \"California Attorney General, CPPA; penalties up to $7,500 per violation\"], [\"GDPR\", \"EU Residents\", \"All organizations processing personal data of EU residents\", \"Right to access, rectify, erase, restrict processing, data portability, object to processing\", \"Data protection authorities in EU member states; penalties up to \u20ac20 million or 4% of annual global turnover\"]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "how does photosynthesis work",
+        "textual_response": "<p>Photosynthesis is the process by which plants, algae, and some bacteria convert light energy into chemical energy. This chemical energy is stored in the form of glucose, a type of sugar that the organism can use for fuel. Photosynthesis occurs in two main stages: the light-dependent reactions and the light-independent reactions. In the light-dependent reactions, chlorophyll absorbs energy from sunlight and uses it to split water molecules into oxygen, hydrogen ions, and electrons. These electrons are then used to create ATP and NADPH, which are energy-carrying molecules. In the light-independent reactions, the ATP and NADPH from the light-dependent reactions are used to convert carbon dioxide into glucose. This process is also known as the Calvin cycle. Photosynthesis is essential for life on Earth as it provides the oxygen we breathe and the food we eat.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "explain PbD in privacy",
+        "textual_response": "<p>Privacy by Design (PbD) is a proactive approach to data privacy that emphasizes embedding privacy considerations into the design and development of systems, technologies, and processes from the very beginning. It was introduced by Dr. Ann Cavoukian, the former Information Privacy Commissioner of Ontario, Canada. The core principle of PbD is to prioritize privacy as a fundamental requirement, rather than an afterthought. This involves integrating privacy protection features directly into the layout, structure, and functionality of products and services. PbD encourages organizations to proactively address potential privacy risks and concerns throughout the design and development process, reducing the need for expensive adjustments later. Key elements of PbD include data protection, transparency, and user control. It aims to build trust by respecting individuals' right to privacy and empowering them with control over their personal data.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is a pipeline in devlopment",
+        "textual_response": "<p>In software development, a pipeline refers to a series of automated steps that build, test, and deploy code. It's a fundamental concept in DevOps, where development and operations teams work together to streamline the software development process. The pipeline automates repetitive tasks, allowing developers to focus on innovation and reducing the risk of errors.  Think of it like a factory assembly line for code, where each stage represents a specific task, such as building, testing, and deploying. These stages are interconnected, with the output of one stage feeding into the next. This automation ensures that code is consistently tested and deployed, leading to faster release cycles, improved quality, and greater efficiency.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is a pipeline in devlopment",
+        "textual_response": "<p>In software development, a pipeline refers to a series of automated steps that build, test, and deploy code. It's a core concept in DevOps, emphasizing continuous integration and continuous deployment. The goal is to streamline the development process, allowing for faster releases and reducing manual errors. Think of it like a factory assembly line for code, where each stage represents a specific task such as building, testing, and deploying. The pipeline automates these tasks, enabling developers to focus on innovation rather than repetitive work.  It's essentially a series of interconnected stages where code flows through for building, testing, and deployment. This helps to automate the process, improve efficiency, and increase the frequency of releases. Key benefits include faster feedback, reduced risk, and increased collaboration. It's a crucial element for modern software development, allowing teams to deliver high-quality software more efficiently.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "why is US leading the Olympics 2024",
+        "textual_response": "<p>The US topped the medal table at the 2024 Summer Olympics in Paris, securing 126 medals overall, including 40 gold. This performance was fueled by strong showings in numerous sports, including swimming, athletics, basketball, gymnastics, and water polo. The US achieved its most successful Olympics outside of the country since the 1984 Los Angeles Games. Key factors contributing to this success include:</p>\n<ul>\n<li><strong>Deep Talent Pool:</strong> The US boasts a deep talent pool across various sports, thanks to strong youth development programs and a robust collegiate athletic system.</li>\n<li><strong>Strong Support System:</strong> The US Olympic and Paralympic Committee (USOPC) provides comprehensive support to athletes, including training facilities, funding, and expert coaching.</li>\n<li><strong>Historical Success:</strong> The US has a strong tradition of success in the Olympics, which helps to inspire future generations of athletes.</li>\n<li><strong>Strong Performance in Key Sports:</strong> The US excelled in sports like swimming, athletics, basketball, gymnastics, and water polo, contributing significantly to their overall medal count.</li>\n</ul>\n<p>These factors combined to help the US dominate the 2024 Summer Olympics in Paris. The nation's strong performance showcased the depth and talent of American athletes on the world stage.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is a pipeline in devlopment",
+        "textual_response": "<h2>What is a Pipeline in Development</h2>\n\nIn software development, a pipeline refers to a series of automated steps that build, test, and deploy code. It's a crucial part of the development process, especially when using continuous integration and continuous delivery (CI/CD). Think of it as a conveyor belt for code, where each stage represents a specific task.\n\n<h3>Key Stages of a Development Pipeline</h3>\n\n1. <strong>Version Control:</strong> Code is stored and managed in a version control system like Git, allowing developers to work on different branches and merge their changes.\n2. <strong>Build:</strong> Code is compiled, built, and packaged into deployable units.\n3. <strong>Test:</strong> Automated tests are run to ensure the code meets quality standards and functionality requirements.\n4. <strong>Deploy:</strong> Code is deployed to various environments, such as testing, staging, and production.\n\n<h3>Benefits of Using a Pipeline</h3>\n\n* <strong>Faster Deployment:</strong> Automating the process reduces the time it takes to get code into production.\n* <strong>Increased Quality:</strong> Continuous testing helps catch defects early, reducing the risk of bugs in production.\n* <strong>Improved Collaboration:</strong> Clear stages and visibility enhance communication and collaboration between development and operations teams.\n* <strong>Scalability:</strong> Pipelines can be easily adapted to handle growing codebases and deployments.\n\n<h3>Examples of Deployment Pipelines</h3>\n\n* <strong>Simple Pipeline:</strong> A basic pipeline for small projects, focusing on building and deploying code.\n* <strong>CI/CD Pipeline:</strong> A more robust pipeline incorporating continuous integration and continuous delivery, with features like automated testing and deployment to multiple environments.\n* <strong>Feature Branch Pipeline:</strong> A pipeline designed for feature-driven development, where each feature has its own branch and undergoes testing before being merged into the main branch.\n\n<h3>Popular Tools for Building Pipelines</h3>\n\n* <strong>Jenkins:</strong> A widely used open-source automation server.\n* <strong>Azure DevOps:</strong> A cloud-based platform for development and deployment.\n* <strong>GitHub Actions:</strong> Built-in automation for GitHub repositories.\n* <strong>GoCD:</strong> A robust tool for complex pipelines.\n\nBy using pipelines, development teams can streamline their workflow, improve code quality, and deploy faster. It's a fundamental concept for modern software development.",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "explain PbD in privacy",
+        "textual_response": "<p>Privacy by Design (PbD) is a proactive approach to data protection that emphasizes embedding privacy considerations into the design and development of products, services, and systems. It was introduced by Dr. Ann Cavoukian, the former Information Privacy Commissioner of Ontario, Canada. The key principle of PbD is to prioritize privacy from the outset, rather than treating it as an afterthought. This means that privacy is built into every aspect of the product or service, from the initial concept to the final implementation. PbD is based on seven core principles: Proactive/Reactive; Preventative/Remedial, Privacy Default Setting, Privacy Embed Design, Full Functionality; Positive Sum/Zero Sum, End-to-End Security; Full Lifecycle Protection, Visibility/Transparency; Keep Open, Respect User Privacy; Keep User Centric. These principles encourage organizations to proactively protect user data, give users control over their information, and be transparent about their data handling practices. PbD has become increasingly important due to the rise of data protection regulations such as the General Data Protection Regulation (GDPR) in Europe. By adopting PbD, organizations can protect their users' privacy, build trust, and avoid legal issues.</p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "ccpa vs gdpr in a table",
+        "textual_response": "<p>The CCPA and GDPR are both laws designed to protect consumer data privacy, but they have different focuses and approaches. The CCPA is a California state law that aims to give consumers more control over their personal data, while the GDPR is a European regulation that emphasizes data protection as a fundamental right. The CCPA focuses on providing transparency and giving consumers the right to access, delete, and opt-out of the sale of their personal data. The GDPR requires organizations to obtain consent before processing personal data and provides individuals with more extensive rights, including the right to data portability. Both laws have been influential in shaping data privacy regulations around the world, and many countries have introduced their own laws based on their principles.</p>",
+        "data_response": "[[\"Law\", \"Focus\", \"Key Provisions\", \"Applicability\"],[\"CCPA\", \"Transparency and control over personal data for California residents\", \"Right to know, delete, and opt-out of the sale of personal data\", \"Businesses that operate in California and meet specific criteria regarding data volume or revenue\"],[\"GDPR\", \"Protection of personal data for all individuals in the EU\", \"Numerous rights for individuals, including the right to access, rectify, and erase personal data\", \"Any organization that processes the personal data of individuals residing in the EU\"]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "ccpa vs gdpr in a table",
+        "textual_response": "<p>The CCPA and GDPR are both data privacy laws that aim to protect consumer data, but they differ in their scope, applicability, and key provisions. The CCPA is a state law in California, while the GDPR is a regulation that applies to all businesses operating within the European Union. This means that the GDPR has a broader reach and can have a significant impact on businesses operating globally. Both laws aim to empower consumers and give them more control over their personal data. They require businesses to be transparent about their data practices and to respect the rights of consumers. By understanding the key differences between the CCPA and the GDPR, businesses can ensure that they are compliant with both laws and protecting the privacy of their customers.</p>",
+        "data_response": "[[\"Law\", \"Scope\", \"Applicability\", \"Key Provisions\"],[\"CCPA\", \"California\", \"Applies to businesses that collect the personal data of California residents and meet certain criteria\", \"Right to know, delete, and opt-out of the sale of personal data\"],[\"GDPR\", \"European Union\", \"Applies to all businesses that process the personal data of individuals in the EU\", \"Right to access, rectify, erase, restrict processing, data portability, and object to processing\"]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "highest grossing movie in 2020",
+        "textual_response": "<p>The highest grossing movie of 2020 in North America was <em>B Boys Life</em>, earning $206,310,000. This was due to its release before the pandemic had a major impact on theaters.</p>",
+        "data_response": "[[\"Movie\",\"North American Gross\"],[\"B Boys Life\",206310000],[\"Sonic the Hedgehog\",146070000],[\"Birds of Prey\",84160000],[\"Dolittle\",77050000],[\"The Invisible Man\",64910000],[\"The Call of the Wild\",62340000],[\"Onward\",61560000],[\"Tenet\",57910000],[\"The Gentlemen\",36470000],[\"The Croods: A New Age\",32330000]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "olympics 2024 medal table",
+        "textual_response": "<p>The 2024 Summer Olympics medal table is based on the number of gold medals won. The United States topped the table with 40 gold medals, followed by China with 40 gold medals, and Japan with 20 gold medals.</p>",
+        "data_response": "[[\"Country\", \"Gold\", \"Silver\", \"Bronze\", \"Total\"],[\"United States\", 40, 44, 42, 126],[\"China\", 40, 27, 24, 91],[\"Japan\", 20, 12, 13, 45],[\"Australia\", 18, 19, 16, 53],[\"France\", 16, 26, 22, 64],[\"Netherlands\", 15, 7, 12, 34],[\"Great Britain\", 14, 22, 29, 65],[\"South Korea\", 13, 9, 10, 32],[\"Italy\", 12, 13, 15, 40],[\"Germany\", 12, 13, 8, 33],[\"New Zealand\", 10, 7, 3, 20],[\"Canada\", 9, 7, 11, 27],[\"Uzbekistan\", 8, 2, 3, 14],[\"Hungary\", 6, 7, 6, 19],[\"Spain\", 5, 4, 9, 18],[\"Sweden\", 4, 4, 3, 11],[\"Kenya\", 4, 2, 5, 11],[\"Norway\", 4, 1, 3, 8],[\"Ireland\", 4, 0, 3, 7],[\"Brazil\", 3, 7, 10, 20],[\"Iran\", 3, 6, 3, 22],[\"Ukraine\", 3, 5, 4, 12],[\"Romania\", 3, 4, 2, 9],[\"Georgia\", 3, 1, 7, 11]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "tell me about UW informatics school",
+        "textual_response": "<p>The University of Washington Information School is a world-leading institution for education, research, and innovation in the field of information. The school's commitment to diversity, inclusion, and career success makes it a top choice for students seeking to pursue a career in information.</p>",
+        "data_response": "[[\"Area\", \"Key Data\"], [\"Enrollment\", \"700+ students across undergraduate and graduate programs\"], [\"Faculty\", \"50+ faculty members\"], [\"Research Funding\", \"Millions of dollars annually\"]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "tell me about UW informatics school",
+        "textual_response": "<p>The Informatics program at the University of Washington's Information School is a popular choice for students looking to enter the growing field of data science. The program offers both undergraduate and graduate degrees, and is known for its strong curriculum and emphasis on practical skills. The program is highly selective, with a 40% acceptance rate for the 2023-2024 academic year.  The average GPA of admitted students was 3.67, with a range of 2.22 to 4.0. The average GRE score for admitted students was in the 2023-2024 application cycle was not shared. The program requires applicants to have completed four prerequisite courses, including introductory computer programming and data structures. Students can increase their chances of admission by completing these prerequisites, achieving a strong GPA, and writing compelling essays. The program also offers a variety of opportunities for students to get involved in research, internships, and study abroad. </p> \n <p>The Informatics major at the University of Washington Information School is a vibrant and engaging program that offers a deep dive into the intersection of technology and human value. Students gain a strong understanding of the information society and learn to creatively envision equitable information technology systems.  The program emphasizes interdisciplinary learning, with coursework drawing upon areas like computer science, information science, sociology, psychology, design, information management, and more. This well-rounded approach prepares graduates for successful careers in a variety of fields, including software development, data science, UX design, research, product management, cybersecurity, biomedical informatics, and information architecture. The program boasts a strong focus on diversity, equity, inclusion, accessibility, and sovereignty, emphasizing critical thinking about the impact of information technology on society.  Students can choose to focus on areas like data science, health well-being, human computer interaction, information architecture, cybersecurity, information management, information society, and software development. The program offers strong career support, with graduates finding success in both profit and non-profit organizations. </p>",
+        "data_response": "[[\"Field\", \"Value\"], [\"Number of Students\", 120], [\"Number of Faculty\", 30], [\"Average Starting Salary\", \"$85,000\"], [\"Placement Rate\", \"95%\"], [\"Focus Areas\", \"Data Science, Software Development, UX Design, Research, Information Architecture, Cybersecurity, Biomedical Informatics\"], [\"Admission Requirements\", \"Strong academic record, strong interest in the field, strong essay responses\"]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "University of Washington tuition of 2024",
+        "textual_response": "<p>The tuition for the University of Washington for the 2024-2025 academic year is as follows: Full-time tuition for the Seattle campus is $15,730, the Bothell campus is $12,121, and the Tacoma campus is $11,349. These figures represent an increase from the previous year's rates.</p>",
+        "data_response": "[[\"Campus\", \"Tuition\"],[\"Seattle\", 15730],[\"Bothell\", 12121],[\"Tacoma\", 11349]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "University of Washington tuition for out-of-state students in 2024",
+        "textual_response": "<p>The University of Washington's tuition and fees for out-of-state undergraduate students in 2024 range from $43,404 to $69,006.  This includes both tuition and mandatory fees.  The cost of attendance also includes expenses for housing, food, personal expenses, and transportation. The exact cost will vary depending on the student's chosen program and living arrangements.</p>",
+        "data_response": "[[\"Category\", \"Cost\"],[\"Tuition and Fees\", 43404],[\"Housing\", 16371],[\"Food\", 2508],[\"Personal\", 1074],[\"Total\", 69006]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "who is faouzia ouihya",
+        "textual_response": "<p>Faouzia Ouihya is a 24-year-old Moroccan-Canadian singer, songwriter, and musician. Born on July 5, 2000, in Casablanca, Morocco, she rose to fame after winning the Audience Award and Grand Prix in the 2015 La Chicane \u00e9lectrique competition. Her musical style is a unique blend of pop, R&amp;B, and Moroccan influences, known for her powerful vocals and captivating performances. She has released numerous songs and collaborated with renowned artists such as David Guetta, John Legend, and Galantis. Faouzia's music has garnered critical acclaim and a dedicated fanbase worldwide, making her one of the most successful Moroccan-Canadian musicians of her generation. Her career continues to flourish as she releases new music and performs at concerts and festivals around the globe.</p>",
+        "data_response": "[[\"Category\", \"Data\"], [\"Nationality\", \"Moroccan-Canadian\"], [\"Born\", \"July 5, 2000\"], [\"Birthplace\", \"Casablanca, Morocco\"], [\"Musical Genre\", \"Pop, R&amp;B, Moroccan influences\"], [\"Notable Collaborations\", \"David Guetta, John Legend, Galantis\"], [\"Awards\", \"Audience Award and Grand Prix at La Chicane \u00e9lectrique (2015)\"], [\"Active Years\", \"2015-present\"], [\"Famous For\", \"Powerful vocals, unique musical style, global recognition\"]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is china's gdp right now",
+        "textual_response": "<p>China's nominal GDP in 2022 was $25.5 trillion USD, according to Statista.</p>",
+        "data_response": "[[\"Year\", \"Nominal GDP (Trillion USD)\"], [2013, 10.14], [2014, 11.45], [2015, 11.99], [2016, 12.96], [2017, 14.12], [2018, 15.31], [2019, 16.77], [2020, 17.42], [2021, 22.69], [2022, 25.49]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "recent election news",
+        "textual_response": "<p>The 2024 US presidential election is heating up, with both parties gearing up for a hard-fought race.  Kamala Harris is the presumptive Democratic nominee, having secured the majority of delegates during the primaries. She chose Minnesota Governor Tim Walz as her running mate.  Donald Trump is the presumptive Republican nominee, having won the majority of primaries. He chose JD Vance as his running mate.  The race is expected to be close, with both candidates focusing on key battleground states.  The economy, healthcare, and abortion rights are expected to be key issues in the election.  The election is scheduled for November 5, 2024.</p>",
+        "data_response": "[[\"Candidate\", \"Estimated Popular Vote\"],[\"Kamala Harris\", 275],[\"Donald Trump\", 255],[\"Other\", 10]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "recent election news",
+        "textual_response": "<p>The 2024 US presidential election is rapidly approaching, with both parties gearing up for a hard-fought race.  The current frontrunner for the Democratic nomination is Vice President Kamala Harris, while former President Donald Trump is the presumptive Republican nominee.  The race is expected to be close, with both candidates focusing on key battleground states.  The economy, healthcare, and social issues are expected to be central to the campaign.  The first primaries will take place in early 2024, and the general election will be held on November 5, 2024.</p>",
+        "data_response": "[[\"Candidate\", \"Party\", \"Projected Electoral Votes\"], [\"Kamala Harris\", \"Democrat\", 270], [\"Donald Trump\", \"Republican\", 263], [\"Robert F. Kennedy Jr.\", \"Independent\", 0], [\"Cornel West\", \"Independent\", 0]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "how many days does each month have",
+        "textual_response": "<p>The number of days in each month varies. Most months have either 30 or 11 days, but February has 28 days (29 in leap years). Here's a breakdown:</p>",
+        "data_response": "[[\"Month\", \"Days\"], [\"January\", 31], [\"February\", 28], [\"March\", 31], [\"April\", 30], [\"May\", 31], [\"June\", 30], [\"July\", 31], [\"August\", 31], [\"September\", 30], [\"October\", 31], [\"November\", 30], [\"December\", 31]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "how many days does each month have",
+        "textual_response": "&lt;p&gt;The number of days in each month varies. Most months have either 30 or 31 days, but February is an exception. It has 28 days in a common year and 29 days in a leap year. Here's a breakdown:&lt;/p&gt;",
+        "data_response": "[[\"Month\", \"Days\"], [\"January\", 31], [\"February\", 28], [\"March\", 31], [\"April\", 30], [\"May\", 31], [\"June\", 30], [\"July\", 31], [\"August\", 31], [\"September\", 30], [\"October\", 31], [\"November\", 30], [\"December\", 31]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "how many days does each month have",
+        "textual_response": "<p>The number of days in each month varies.  To help you remember, here's a popular rhyme:  \"Thirty days hath September, April, June, and November.  All the rest have thirty-one, except February alone, which has twenty-eight days clear, and twenty-nine in each leap year.\"</p>",
+        "data_response": "[[\"Month\", \"Days\"],[\"January\", 31],[\"February\", 28],[\"March\", 31],[\"April\", 30],[\"May\", 31],[\"June\", 30],[\"July\", 31],[\"August\", 31],[\"September\", 30],[\"October\", 31],[\"November\", 30],[\"December\", 31]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "how many days does each month have",
+        "textual_response": "<p>The number of days in each month varies, with most months having either 30 or 31 days. However, February is the exception, typically having 28 days and 29 days during leap years.</p>\n<p>Here is a breakdown of the number of days in each month:</p>\n<ul>\n<li>January: 31 days</li>\n<li>February: 28 days (29 in leap years)</li>\n<li>March: 31 days</li>\n<li>April: 30 days</li>\n<li>May: 31 days</li>\n<li>June: 30 days</li>\n<li>July: 31 days</li>\n<li>August: 31 days</li>\n<li>September: 30 days</li>\n<li>October: 31 days</li>\n<li>November: 30 days</li>\n<li>December: 31 days</li>\n</ul>",
+        "data_response": "[[\"Month\", \"Days\"],[\"January\", 31],[\"February\", 28],[\"March\", 31],[\"April\", 30],[\"May\", 31],[\"June\", 30],[\"July\", 31],[\"August\", 31],[\"September\", 30],[\"October\", 31],[\"November\", 30],[\"December\", 31]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "How does photosynthesis work? \ud83c\udf31",
+        "textual_response": "<p>Photosynthesis is like a two-step recipe that plants use to turn light energy into food.  Imagine a plant's leaves as tiny solar panels. They have a special green pigment called chlorophyll that captures light energy from the sun. This energy excites tiny particles called electrons, making them jump to a higher energy level.  These energized electrons then travel through a chain, releasing energy along the way. This energy is used to make a special energy-carrying molecule called ATP, like a rechargeable battery for the plant.  This step also splits water molecules, releasing oxygen as a byproduct, which is why we breathe it. </p>\n<p>Next, the plant takes carbon dioxide from the air and combines it with a molecule called RuBP.  This new molecule then gets a boost of energy from the ATP and another energy-carrying molecule called NADPH. The result is a simple sugar, like glucose, which the plant uses as food to grow and live. </p>\n<p>So, plants use sunlight, water, and carbon dioxide to create food (sugar) and release oxygen as a bonus.  This process is the basis for life on Earth! </p>",
+        "data_response": [],
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "How does photosynthesis work? \ud83c\udf31",
+        "textual_response": "<p>Photosynthesis is the process by which plants, algae, and some bacteria use sunlight, water, and carbon dioxide to create their own food in the form of sugar (glucose). It's like a plant's way of cooking! Here's how it works:</p>\n<ol>\n<li>\n<p><strong>Light-Dependent Reactions:</strong> Sunlight is captured by chlorophyll, a green pigment found in plant cells, and used to split water molecules. This releases oxygen as a byproduct and produces energy molecules called ATP and NADPH. It's like taking sunlight and turning it into a battery for the plant. </p>\n</li>\n<li>\n<p><strong>Calvin Cycle (Light-Independent Reactions):</strong> The energy molecules (ATP and NADPH) from the first step are used to grab carbon dioxide from the air and convert it into glucose. It's like using the battery to power a machine that builds sugar.</p>\n</li>\n</ol>\n<p>This sugar (glucose) is the plant's food and provides energy for growth and other functions. It's also the basis of the food chain for almost all life on Earth! </p>\n<p>But photosynthesis isn't always perfect. Sometimes, the plant's machinery makes a mistake, grabbing oxygen instead of carbon dioxide, leading to a wasteful process called photorespiration. Scientists are working to improve photosynthesis by finding ways to bypass this mistake and make plants more efficient at using sunlight. </p>",
+        "data_response": "[\n  [\"RIPE Funding Source\", \"Funding Amount (Millions)\"],\n  [\"Bill & Melinda Gates Foundation\", 25],\n  [\"Foundation for Food & Agricultural Research\", 20]\n]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "How does photosynthesis work? \ud83c\udf31",
+        "textual_response": "<p>Photosynthesis is how plants and some other organisms use sunlight to make their own food. It's like a two-step recipe:</p>\n<p><strong>Step 1: Light-Dependent Reactions (Like Cooking with Sunlight)</strong></p>\n<ol>\n<li><strong>Sunlight is absorbed:</strong>  Chlorophyll, a green pigment in plants, captures sunlight energy.</li>\n<li><strong>Energy is passed around:</strong> This energy excites electrons, which are passed along a chain, like a relay race.</li>\n<li><strong>Energy is stored:</strong>  This energy is used to make ATP, the plant's energy currency, and NADPH, a special energy carrier.</li>\n<li><strong>Water is split:</strong>  Water molecules are broken apart, releasing oxygen as a byproduct.</li>\n</ol>\n<p><strong>Step 2: Light-Independent Reactions (Like Baking with the Stored Energy)</strong></p>\n<ol>\n<li><strong>Carbon dioxide is captured:</strong>  Plants take in carbon dioxide from the air.</li>\n<li><strong>Carbon is built into sugar:</strong>  The energy from ATP and NADPH is used to combine carbon dioxide with other molecules, creating glucose (sugar).</li>\n<li><strong>Sugar is stored:</strong>  The plant uses this glucose for growth, energy, and to make other important molecules.</li>\n</ol>\n<p><strong>In short, photosynthesis is like a plant's way of turning sunlight, water, and carbon dioxide into food (sugar) and releasing oxygen as a bonus!</strong> </p>",
+        "data_response": "[\n  [\"Factor\", \"Photosynthesis Rate\"],\n  [\"High Light Intensity\", 100],\n  [\"Medium Light Intensity\", 75],\n  [\"Low Light Intensity\", 25],\n  [\"Optimal Temperature\", 100],\n  [\"Slightly Higher Temperature\", 80],\n  [\"Slightly Lower Temperature\", 80],\n  [\"Much Higher Temperature\", 20],\n  [\"Much Lower Temperature\", 20],\n  [\"High CO2 Concentration\", 100],\n  [\"Medium CO2 Concentration\", 75],\n  [\"Low CO2 Concentration\", 25],\n  [\"Abundant Water\", 100],\n  [\"Moderate Water\", 75],\n  [\"Limited Water\", 25]\n]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "How far is the sun to each planet in the solar system? \ud83c\udf1e",
+        "textual_response": "<p>Here are the distances from the Sun to each planet in our solar system, as provided in the article:</p>\n<ul>\n<li><strong>Mercury:</strong> Roughly 35 million miles (58 million kilometers) or 0.4 AU.</li>\n<li><strong>Venus:</strong> Roughly 67 million miles (108 million kilometers) or 0.7 AU.</li>\n<li><strong>Earth:</strong> Roughly 93 million miles (150 million kilometers) or 1 AU.</li>\n<li><strong>Mars:</strong> Roughly 142 million miles (228 million kilometers) or 1.5 AU.</li>\n<li><strong>Jupiter:</strong> Roughly 484 million miles (778 million kilometers) or 5.2 AU.</li>\n<li><strong>Saturn:</strong> Roughly 887 million miles (1.4 billion kilometers) or 9.5 AU.</li>\n<li><strong>Uranus:</strong> Roughly 1.8 billion miles (2.9 billion kilometers) or 19 AU.</li>\n<li><strong>Neptune:</strong> Roughly 2.8 billion miles (4.5 billion kilometers) or 30 AU.</li>\n<li><strong>Pluto:</strong> Roughly 3.7 billion miles (5.9 billion kilometers) or 39.5 AU. </li>\n</ul>",
+        "data_response": "[\n  [\"Planet\", \"Distance from Sun (AU)\"],\n  [\"Pluto\", 39.5],\n  [\"Neptune\", 30],\n  [\"Uranus\", 19],\n  [\"Saturn\", 9.5],\n  [\"Jupiter\", 5.2],\n  [\"Mars\", 1.5],\n  [\"Earth\", 1],\n  [\"Venus\", 0.7],\n  [\"Mercury\", 0.4]\n]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "How far is the sun to each planet in the solar system? \ud83c\udf1e",
+        "textual_response": "<p>Here are the distances from the Sun to each planet in our solar system, as provided in the previous context:</p>\n<ul>\n<li><strong>Mercury:</strong> 57.9 million kilometers</li>\n<li><strong>Venus:</strong> 108.2 million kilometers</li>\n<li><strong>Earth:</strong> 149.6 million kilometers</li>\n<li><strong>Mars:</strong> 227.9 million kilometers</li>\n<li><strong>Jupiter:</strong> 778.5 million kilometers</li>\n<li><strong>Saturn:</strong> 1.43 billion kilometers</li>\n<li><strong>Uranus:</strong> 2.87 billion kilometers</li>\n<li><strong>Neptune:</strong> 4.5 billion kilometers</li>\n<li><strong>Pluto:</strong> 5.9 billion kilometers </li>\n</ul>",
+        "data_response": "[[\"Planet\", \"Distance from Sun (km)\"], [\"Neptune\", 4500000000], [\"Uranus\", 2870000000], [\"Saturn\", 1430000000], [\"Jupiter\", 778500000], [\"Mars\", 227900000], [\"Earth\", 149600000], [\"Venus\", 108200000], [\"Mercury\", 57900000]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "What is Privacy by Design? \ud83d\udd0e",
+        "textual_response": "<p>Privacy by Design (PbD) is a way of thinking about building systems and software that prioritizes protecting people's privacy from the very beginning. It's like baking privacy into the core of everything you create, instead of adding it as an afterthought. </p>\n<p>Imagine you're building a house. PbD is like making sure the windows are designed to let in light but also have blinds for privacy, or building a fence around the yard to keep things secure. You're thinking about privacy from the start, not just adding a lock to the door later. </p>\n<p>PbD is based on seven key principles:</p>\n<ol>\n<li><strong>Be proactive, not reactive:</strong>  Think about privacy risks before they happen, and build systems to prevent them.</li>\n<li><strong>Privacy by default:</strong>  Make sure systems protect privacy automatically, unless someone chooses to share their information.</li>\n<li><strong>Build privacy into the design:</strong>  Don't just add privacy features later, make them part of the core design.</li>\n<li><strong>Privacy and functionality should work together:</strong>  Don't make privacy a trade-off for useful features.</li>\n<li><strong>Protect data from start to finish:</strong>  Keep data secure throughout its entire life, from when it's collected to when it's deleted.</li>\n<li><strong>Be transparent about how data is used:</strong>  Make sure everyone knows how data is being used and can verify it.</li>\n<li><strong>Put the user's privacy first:</strong>  Design systems that respect people's privacy and give them control over their data.</li>\n</ol>\n<p>PbD is a powerful idea that can help us build a more privacy-friendly digital world. </p>",
+        "data_response": "[\n  [\"Principle\", \"Number of Articles Cited\"],\n  [\"Respect User Privacy\", 20],\n  [\"Visibility and Transparency\", 20],\n  [\"End-to-End Security\", 20],\n  [\"Full Functionality, Positive Sum\", 20],\n  [\"Privacy Embedded in Design\", 20],\n  [\"Privacy by Default\", 20],\n  [\"Proactive/Preventive\", 20]\n]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "Soccer players with the most number of goals \u26bd",
+        "textual_response": "<p>The soccer players with the most number of goals are:</p>\n<ol>\n<li><strong>Cristiano Ronaldo</strong> with 897 goals</li>\n<li><strong>Lionel Messi</strong> with 838 goals</li>\n<li><strong>Josef Bican</strong> with 805 goals (though this record is disputed)</li>\n<li><strong>Pel\u00e9</strong> with 762 goals (though this record is disputed due to the inclusion of friendly matches)</li>\n</ol>\n<p>These players are all considered legends of the sport and their goal-scoring records are impressive. </p>",
+        "data_response": "[\n  [\"Player\", \"Total Goals\", \"League Goals\", \"Cup Goals\", \"Continental Goals\", \"Career Span (Years)\"],\n  [\"Cristiano Ronaldo\", 897, 547, 56, 164, 22],\n  [\"Lionel Messi\", 838, 509, 71, 149, 20],\n  [\"Josef Bican\", 805, 515, 134, 41, 25],\n  [\"Pel\u00e9\", 762, 604, 49, 26, 21],\n  [\"Rom\u00e1rio\", 755, 544, 93, 54, 23],\n  [\"Ferenc Pusk\u00e1s\", 724, 515, 69, 56, 24],\n  [\"Jimmy Jones\", 648, 332, 290, 14, 18],\n  [\"Gerd M\u00fcller\", 634, 405, 92, 69, 18],\n  [\"Robert Lewandowski\", 632, 388, 57, 104, 16],\n  [\"Joe Bambrick\", 629, 348, 260, 0, 18],\n  [\"Abe Lenstra\", 624, 573, 18, 0, 28],\n  [\"Eus\u00e9bio\", 619, 422, 97, 59, 22],\n  [\"Luis Su\u00e1rez\", 574, 400, 48, 57, 19],\n  [\"Glenn Ferguson\", 563, 313, 241, 9, 25],\n  [\"Zlatan Ibrahimovi\u0107\", 561, 394, 48, 57, 25],\n  [\"Fernando Peyroteo\", 553, 464, 72, 3, 13],\n  [\"Uwe Seeler\", 552, 447, 41, 21, 19],\n  [\"Jimmy McGrory\", 552, 409, 131, 0, 16],\n  [\"Alfredo Di St\u00e9fano\", 530, 376, 55, 70, 22],\n  [\"Gy\u00f6rgy S\u00e1rosi\", 517, 351, 22, 102, 19],\n  [\"Roberto Dinamite\", 511, 476, 8, 5, 22],\n  [\"Hugo S\u00e1nchez\", 507, 390, 49, 38, 22],\n  [\"Imre Schlosser\", 504, 417, 18, 10, 24],\n  [\"Franz Binder\", 503, 297, 93, 87, 19]\n]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "How far is the sun to each planet in the solar system? \ud83c\udf1e",
+        "textual_response": "The distance of each planet in the solar system from the Sun is summarized below in astronomical units (AU).",
+        "data_response": "[[\"Planet\", \"Distance from Sun (AU)\"],[\"Mercury\", 0.39],[\"Venus\", 0.72],[\"Earth\", 1],[\"Mars\", 1.52],[\"Jupiter\", 5.20],[\"Saturn\", 9.58],[\"Uranus\", 19.22],[\"Neptune\", 30.05],[\"Pluto\", 39.48]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "What is Privacy by Design? \ud83d\udd0e",
+        "textual_response": "Privacy by Design is an approach to systems engineering that incorporates privacy considerations throughout the entire engineering process. It emphasizes the importance of considering privacy as a core value and integrating it into the design of systems from the outset.",
+        "data_response": "[[\"Key Concept\", \"Description\"],[\"Origin\", \"Derived from a joint report on Privacy-enhancing technologies in 1995 by the Information and Privacy Commissioner of Ontario, Canada, the Dutch Data Protection Authority, and the Netherlands Organisation for Applied Scientific Research.\"],[\"Focus\", \"To take into account human values throughout the engineering process and ensure privacy is considered at all stages.\"],[\"Goal\", \"To proactively embed privacy into the design and operation of systems, rather than addressing it as an afterthought.\"],[\"Implementation\", \"Privacy by Design integrates privacy features into technology, business practices, physical design, and networked infrastructure.\"]]",
+        "format": "table\n\n---"
+    },
+    {
+        "context": "Some context...",
+        "question": "ccpa vs gdpr",
+        "textual_response": "The CCPA is a privacy law that gives California residents more control over their personal information held by businesses. It grants them rights related to accessing, deleting, and opting out of the sale of their data. On the other hand, the GDPR is a regulation in the EU aimed at strengthening data protection and unifying regulations. It focuses on giving control back to EU citizens and simplifying the regulatory environment for businesses. While the CCPA applies to businesses that collect personal data of California residents, the GDPR has a broader reach, applying to all individuals in the EU and regulating data export outside the EU.",
+        "data_response": "[[\"Regulation\", \"Scope\", \"Enforcement\"], [\"CCPA\", \"California residents\", \"California-based businesses\", \"California Attorney General enforcement\"], [\"GDPR\", \"EU individuals\", \"International businesses\", \"Supervisory authorities in each EU member state enforcement\"]]",
+        "format": "bar graph\n\n---"
+    },
+    {
+        "context": "Some context...",
+        "question": "how far is each planet in the solar system to the Earth",
+        "textual_response": "<p>The distances of different planets in the solar system to Earth vary based on their orbits and positions. These distances are commonly measured in astronomical units (AU), where 1 AU is roughly the distance from Earth to the Sun. Earth's average distance from the Sun is about 1 AU, serving as a reference point for comparing distances to other planets.</p>",
+        "data_response": "[[\"Planet\", \"Distance to Earth (AU)\"], [\"Mercury\", 1.52], [\"Venus\", 0.72], [\"Mars\", 1.52], [\"Jupiter\", 4.20], [\"Saturn\", 8.52], [\"Uranus\", 18.25], [\"Neptune\", 29.77], [\"Pluto\", 33.95]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "how far is each planet in the solar system to the Earth in a bar chart",
+        "textual_response": "The distances of each planet in the solar system to Earth vary significantly due to the vastness of space. Understanding these relative distances can provide insights into the scale of our solar system and the challenges of representing them accurately.",
+        "data_response": "[[\"Planet\", \"Distance to Earth (Million Kilometers)\"], [\"Mercury\", 77.3], [\"Venus\", 261], [\"Mars\", 102], [\"Jupiter\", 870], [\"Saturn\", 1532], [\"Uranus\", 2900], [\"Neptune\", 4350], [\"Pluto\", 5880]]",
+        "format": "bar graph\n\n---"
+    },
+    {
+        "context": "Some context...",
+        "question": "How does photosynthesis work? \ud83c\udf31",
+        "textual_response": "<p>Photosynthesis is a process used by plants and other organisms to convert light energy into chemical energy stored in carbohydrate molecules like sugars. This process involves two main stages: light-dependent reactions and light-independent reactions. In the light-dependent reactions, chlorophyll absorbs light energy to split water molecules into oxygen, hydrogen ions, and electrons. These energized electrons create ATP and NADPH. In the light-independent reactions, ATP and NADPH are used to convert carbon dioxide into glucose through the Calvin cycle. Factors influencing photosynthesis rate include light intensity, temperature, CO\u2082 concentration, water availability, and essential minerals.</p>",
+        "data_response": "[[\"Factors\", \"Influence Level\"], [\"Light Intensity\", 4], [\"Temperature\", 3], [\"CO\u2082 Concentration\", 5], [\"Water Availability\", 2], [\"Minerals\", 2]]",
+        "format": "bar graph\n\n---"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is black myth wukong",
+        "textual_response": "\"Black Myth: Wukong\" is an upcoming video game based on the character Sun Wukong, also known as the Monkey King from Chinese mythology and the novel \"Journey to the West.\" The game is developed by the Chinese indie studio Game Science and aims to offer a fresh take on the classic character and his adventures. \"Black Myth: Wukong\" gained attention for its stunning visuals, gameplay mechanics, and the promise of an engaging narrative set in a mystical world inspired by Chinese folklore.",
+        "data_response": "[[\"Game Element\", \"Rating\"], [\"Graphics\", 9.5], [\"Gameplay\", 8.7], [\"Narrative\", 8.9], [\"Sound Design\", 9.2]]",
+        "format": "bar graph\n\n---"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is black myth wukong",
+        "textual_response": "Black Myth: Wukong is an upcoming action-adventure game developed by Game Science Studio, inspired by the legendary figure Sun Wukong, also known as the Monkey King. The game is based on Chinese mythology and folklore, featuring Wukong's supernatural abilities and adventures. Black Myth: Wukong gained significant attention following its announcement for its stunning visuals, immersive gameplay, and intriguing storyline. The game is expected to offer a unique gaming experience blending traditional Chinese culture with modern gaming elements.",
+        "data_response": "[[\"Popularity/Impact\", \"Rating\"], [\"Game Science Studio\", 9.5], [\"Visuals\", 9.3], [\"Gameplay\", 9.4], [\"Storyline\", 9.2], [\"Unique Experience\", 9.6]]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "Soccer players with the most number of goals \u26bd",
+        "textual_response": "<p>Imagine a list of the greatest goal-scorers in soccer history, a lineup of legends with incredible numbers of goals.  This list is focused on players who've managed to score 500 or more goals in their entire professional careers!</p>\n<p>At the top, you've got Cristiano Ronaldo, currently the king with a whopping 897 goals. Right behind him is Lionel Messi with 838 goals, still actively adding to his count. </p>\n<p>These two modern giants are chasing the record often attributed to Pel\u00e9, the Brazilian legend who's said to have scored over 1,000 goals. However, there's debate about those numbers because they include friendly matches and non-official games.</p>\n<p>But let's not forget about Josef Bican, a player from the early 20th century who is credited with 805 goals by FIFA.  His record is also disputed because some of his goals came from lower-tier leagues and wartime competitions.</p>\n<p>The list is full of names like Gerd M\u00fcller, Eus\u00e9bio, Rom\u00e1rio, and Robert Lewandowski, all legends in their own right who've consistently put the ball in the back of the net. It's amazing to see how many different countries are represented, showcasing the global talent of the beautiful game.</p>\n<p>One thing to keep in mind is that this list is constantly changing as active players continue to score. For example, Robert Lewandowski, Zlatan Ibrahimovi\u0107, and Luis Su\u00e1rez are all still making their mark on the world of soccer, so their goal counts are likely to increase!</p>\n<p>So, when you see a player celebrate a goal, think about the incredible history of goal-scoring, and the countless players who've left their mark on the game! </p>",
+        "data_response": "[\n  [\"Rank\", \"Player\", \"Club\", \"Country\", \"Total\", \"League\", \"Cup\", \"Continental\", \"Career Span\"],\n  [1, \"Cristiano Ronaldo\", \"Sporting CP, Manchester United, Real Madrid, Juventus, Al Nassr\", \"Portugal\", 897, 547, 56, 164, 2002],\n  [2, \"Lionel Messi\", \"Barcelona, Paris Saint-Germain, Inter Miami\", \"Argentina\", 838, 509, 71, 149, 2004],\n  [3, \"Pel\u00e9\", \"Santos, New York Cosmos\", \"Brazil\", 762, 604, 49, 26, 1957],\n  [4, \"Rom\u00e1rio\", \"Vasco da Gama, PSV Eindhoven, Barcelona, Flamengo, Valencia, Fluminense, Al Sadd, Miami Fusion, Adelaide United, America\", \"Brazil\", 755, 544, 93, 54, 1985],\n  [5, \"Ferenc Pusk\u00e1s\", \"Budapest Honved, Real Madrid\", \"Hungary\", 724, 515, 69, 56, 1943],\n  [6, \"Josef Bican\", \"Rapid Vienna, Vienna, Slavia Prague, FC V\u00edtkovice, FC Hradec Kr\u00e1lov\u00e9, Dynamo Prague, Slovan Liberec, Spartak Brno ZJ\u0160\", \"Austria/Czech Republic\", 722, 515, 134, 41, 1931],\n  [7, \"Jimmy Jones\", \"Belfast Celtic, Glenavon, Portadown, Bangor\", \"Northern Ireland\", 648, 332, 290, 14, 1947],\n  [8, \"Gerd M\u00fcller\", \"Bayern Munich, Fort Lauderdale Strikers\", \"Germany\", 634, 405, 92, 69, 1964],\n  [9, \"Robert Lewandowski\", \"Znicz Pruszk\u00f3w, Lech Pozna\u0144, Borussia Dortmund, Bayern Munich, Barcelona\", \"Poland\", 632, 388, 57, 104, 2008],\n  [10, \"Joe Bambrick\", \"Glentoran, Linfield, Chelsea, Walsall\", \"Northern Ireland\", 629, 348, 260, 0, 1926],\n  [11, \"Abe Lenstra\", \"Heerenveen, SC Enschede, Enschedese Boys\", \"Netherlands\", 624, 573, 18, 0, 1937],\n  [12, \"Eus\u00e9bio\", \"Sporting Louren\u00e7o Marques, Benfica, Boston Minutemen, Monterrey, Toronto Metros Croatia, Beira Mar, Las Vegas Quicksilvers, Uni\u00e3o de Tomar, New Jersey Americans\", \"Portugal\", 619, 422, 97, 59, 1957],\n  [13, \"Luis Su\u00e1rez\", \"Nacional, Groningen, Ajax, Liverpool, Barcelona, Atl\u00e9tico Madrid, Gr\u00eamio, Inter Miami\", \"Uruguay\", 574, 400, 48, 57, 2005],\n  [14, \"Glenn Ferguson\", \"Ards, Glenavon, Linfield, Lisburn Distillery\", \"Northern Ireland\", 563, 313, 241, 9, 1987],\n  [15, \"Zlatan Ibrahimovi\u0107\", \"Malm\u00f6 FF, Ajax, Juventus, Inter Milan, Barcelona, AC Milan, Paris Saint-Germain, Manchester United, LA Galaxy\", \"Sweden\", 561, 394, 48, 57, 1999],\n  [16, \"Fernando Peyroteo\", \"Sporting CP\", \"Portugal\", 553, 464, 72, 3, 1937],\n  [17, \"Uwe Seeler\", \"Hamburger SV, Cork Celtic\", \"Germany\", 552, 447, 41, 21, 1954],\n  [18, \"Jimmy McGrory\", \"Celtic, Clydebank\", \"Scotland\", 552, 409, 131, 0, 1922],\n  [19, \"Alfredo Di St\u00e9fano\", \"River Plate, Hurac\u00e1n, Millonarios, Real Madrid, Espanyol\", \"Argentina\", 530, 376, 55, 70, 1945],\n  [20, \"Gy\u00f6rgy S\u00e1rosi\", \"Ferencv\u00e1rosi\", \"Hungary\", 517, 351, 22, 102, 1930],\n  [21, \"Roberto Dinamite\", \"Vasco da Gama\", \"Brazil\", 511, 476, 8, 5, 1971],\n  [22, \"Hugo S\u00e1nchez\", \"UNAM, San Diego Sockers, Atl\u00e9tico Madrid, Real Madrid, Am\u00e9rica, Rayo Vallecano, Atlante, Linz, Dallas Burn, Atl\u00e9tico Celaya\", \"Mexico\", 507, 390, 49, 38, 1976],\n  [23, \"Imre Schlosser\", \"Ferencv\u00e1rosi, MTK Hung\u00e1ria, Wiener AC, Budai 33\", \"Hungary\", 504, 417, 18, 10, 1905],\n  [24, \"Franz Binder\", \"Rapid Vienna\", \"Austria\", 503, 297, 93, 87, 1930]\n]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "Soccer players with the most number of goals \u26bd",
+        "textual_response": "<p>Okay, you're asking about the soccer players who have scored the most goals! This is a big topic, so let's break it down:</p>\n<ul>\n<li><strong>All-Time Top Scorers:</strong>  The all-time top scorer in professional soccer is <strong>Cristiano Ronaldo</strong>, with over 850 goals across his career. He's closely followed by <strong>Lionel Messi</strong>, who has scored over 800 goals. These two are considered the greatest players of their generation.</li>\n<li><strong>International Goals:</strong>  When it comes to goals scored for their national teams, <strong>Cristiano Ronaldo</strong> holds the record with over 120 goals for Portugal.  <strong>Lionel Messi</strong> is again close behind with over 100 goals for Argentina.</li>\n<li><strong>Club Goals:</strong>  In terms of goals scored for a single club, <strong>Lionel Messi</strong> holds the record with over 700 goals for Barcelona.  <strong>Cristiano Ronaldo</strong> is also a top scorer for Real Madrid, with over 450 goals.</li>\n<li><strong>Other Notable Scorers:</strong>  Other players who have scored a huge number of goals include:<ul>\n<li><strong>Pel\u00e9</strong> (Brazil): Over 1,200 goals in his career, though some records are disputed.</li>\n<li><strong>Gerd M\u00fcller</strong> (Germany): Over 700 goals in his career, a prolific striker.</li>\n<li><strong>Rom\u00e1rio</strong> (Brazil): Over 700 goals in his career, known for his speed and finishing.</li>\n</ul>\n</li>\n</ul>\n<p>It's important to note that records can change as players continue their careers.  But these are some of the most prolific goal scorers in soccer history! </p>",
+        "data_response": "[\n  [\"Player\", \"Goals\"],\n  [\"Cristiano Ronaldo\", 850],\n  [\"Lionel Messi\", 800],\n  [\"Pel\u00e9\", 1200], \n  [\"Gerd M\u00fcller\", 700],\n  [\"Rom\u00e1rio\", 700],\n  [\"Cristiano Ronaldo (International)\", 120],\n  [\"Lionel Messi (International)\", 100],\n  [\"Lionel Messi (Barcelona)\", 700],\n  [\"Cristiano Ronaldo (Real Madrid)\", 450]\n]",
+        "format": "bar graph"
+    },
+    {
+        "context": "Some context...",
+        "question": "tell me about NASA's voyager",
+        "textual_response": "<p>The Voyager program, consisting of Voyager 1 and Voyager 2, was launched by NASA in 1977 to explore the outer planets of our Solar System. Voyager 2 was launched first on August 20, 1977, followed by Voyager 1 on September 5, 1977. These probes have provided groundbreaking insights into Jupiter, Saturn, Uranus, and Neptune, as well as their moons and rings. Voyager 1 holds the record for being the farthest human-made object from Earth, currently at a distance of 140 AU from the Sun. Both probes continue to communicate with Earth, sending back valuable data from the outer reaches of our Solar System.</p>\n<p>Format: textual display</p>",
+        "data_response": "",
+        "format": "None"
+    },
+    {
+        "context": "Some context...",
+        "question": "tell me about NASA's voyager",
+        "textual_response": "<p>NASA's Voyager program involved the launch of two space probes, Voyager 1 and Voyager 2, in 1977 to study the outer planets of our Solar System. Voyager 2 was launched on August 20, 1977, followed by Voyager 1 on September 5, 1977. Voyager 2 was designed to explore Jupiter, Saturn, Uranus, and Neptune, making it the only spacecraft to visit both Uranus and Neptune. On the other hand, Voyager 1 was intended to study the outer Solar System and has become the farthest man-made object from Earth, currently located at a distance of 140 astronomical units (AU) from the Sun. Both spacecraft have provided valuable data about the outer planets and continue to communicate with Earth through the Deep Space Network.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "Soccer players with the most number of goals \u26bd",
+        "textual_response": "<p>Based on the information provided in the context, the soccer players with the most number of goals are as follows:<br />\n1. Archie Thompson - 13 goals in a single match (world record)<br />\n2. Mark Baena - 86 goals in the USL First Division<br />\n3. George Smith - Hat-trick in 1933<br />\n4. John Catliff - 18 goals for the Canadian national team<br />\n5. Willie Crilley - Record holder for Alloa Athletic</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "What is Privacy by Design? \ud83d\udd0e",
+        "textual_response": "<p>Privacy by Design is an approach to systems engineering that prioritizes privacy considerations throughout the entire design process. It emphasizes embedding privacy features and protections into the design of systems, products, and services from the outset, rather than addressing privacy as an afterthought. This proactive approach aims to ensure that privacy is a fundamental component of the design and development process, aligning with the principles of value-sensitive design.</p>\n<p>The concept of Privacy by Design originated from a collaborative effort involving the Information and Privacy Commissioner of Ontario, Canada, the Dutch Data Protection Authority, and the Netherlands Organisation for Applied Scientific Research in 1995. It was introduced in a report on \"Privacy-enhancing technologies\" and has since gained recognition as a foundational framework for integrating privacy into technological innovations.</p>\n<p>Key principles of Privacy by Design include:</p>\n<ol>\n<li>Proactive not Reactive: Privacy considerations should be incorporated into systems from the outset, anticipating and preventing privacy risks.</li>\n<li>Privacy as the Default Setting: Privacy protections should be the default mode of operation, requiring minimal user intervention to ensure privacy.</li>\n<li>Privacy Embedded into Design: Privacy features should be an integral part of the design and architecture of systems, products, and services.</li>\n<li>Full Functionality: Privacy measures should not compromise the functionality and usability of systems, ensuring a seamless user experience.</li>\n<li>End-to-End Security: Privacy protections should be applied throughout the entire lifecycle of data processing, from collection to disposal.</li>\n</ol>\n<p>Privacy by Design reflects a commitment to upholding privacy rights and values in the digital age, promoting ethical and responsible data practices.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "ccpa vs gdpr",
+        "textual_response": "<p>CcpA, also known as Catabolite Control Protein A, is a master regulator of carbon metabolism in gram-positive bacteria. It functions as a transcription regulator and is allosterically regulated by protein-protein interactions. CcpA interacts with phosphorylated forms of Hpr and Crh, modulating DNA sequence specificity to regulate transcription. On the other hand, GDPR, or General Data Protection Regulation, is a regulation aimed at strengthening and unifying data protection for individuals within the European Union. It gives control over personal data back to citizens and residents, simplifies the regulatory environment for international business, and replaces the data protection directive of 1995.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "GDPR vs CCPA",
+        "textual_response": "<p>The GDPR is a regulation by the European Union that aims to strengthen and unify data protection for individuals within the EU. It focuses on giving control back to citizens over their personal data and simplifying the regulatory environment for international business. On the other hand, the CCPA is a state law in California that grants California residents specific rights regarding their personal information. While the GDPR applies to all individuals within the EU, the CCPA specifically targets residents of California.</p>\n<p>One key difference between the GDPR and CCPA is their scope of applicability. The GDPR applies to all businesses that process personal data of individuals in the EU, regardless of the business's location. In contrast, the CCPA applies to businesses that collect personal information of California residents and meet certain criteria related to revenue and data processing volume.</p>\n<p>Another difference is in the rights granted to individuals. The GDPR provides individuals with rights such as the right to access their data, the right to be forgotten, and the right to data portability. The CCPA grants California residents rights such as the right to know what personal information is being collected and shared, the right to opt-out of the sale of their data, and the right to request deletion of their data.</p>\n<p>Despite these differences, both the GDPR and CCPA share the common goal of enhancing data privacy and giving individuals more control over their personal information. They both require businesses to be transparent about their data practices and to implement measures to protect personal data.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "history of google",
+        "textual_response": "<p>Google began in 1995 as a research project by Larry Page and Sergey Brin, both Ph.D. students at Stanford University. The company was officially founded in 1998, and an initial public offering (IPO) took place in 2004. Larry Page and Sergey Brin incorporated Google as a privately held company on September 4, 1998. Over the years, Google has expanded its services to include online advertising technologies, search, cloud computing, software, and hardware. In August 2015, Google announced plans to reorganize its various interests as a conglomerate called Alphabet Inc., with Google as its leading subsidiary. Sundar Pichai was appointed CEO of Google, replacing Larry Page, who became CEO of Alphabet.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "history of google",
+        "textual_response": "<p>Google began in 1995 as a research project by Larry Page and Sergey Brin, who were Ph.D. students at Stanford University. The search engine company has since grown into an American multinational technology company specializing in Internet-related services and products. Google's history includes the development of Gmail in 2004, a free webmail service that has become integrated with various other Google products and services. The evolution of the Google logo is also noteworthy, with several iterations over the years, including a revised logo in 2015. In 2015, Google announced plans to reorganize its interests under a conglomerate called Alphabet Inc., with Google remaining the umbrella company for Alphabet's Internet interests.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "Who is Sabrina Carpenter",
+        "textual_response": "<p>Sabrina Carpenter is an American singer, songwriter, and actress born on May 11, 1999. She gained recognition for her role as Maya Hart in the Disney Channel series \"Girl Meets World\" and has since pursued a successful music career. Carpenter released her debut EP \"Can't Blame a Girl for Trying\" in 2014, followed by two full-length albums: \"Eyes Wide Open\" in 2015 and \"Evolution\" in 2016. Her music is characterized by a pop sound with influences from folk, pop rock, and teen pop. In addition to her music, Carpenter has also appeared in various television shows and movies, showcasing her versatility as an artist.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "NASA voyagers distances",
+        "textual_response": "<p>The Voyager 1 spacecraft, launched on September 5, 1977, is currently at a distance of 140 AU from the Sun as of September 22, 2017. It holds the record for being the farthest spacecraft from Earth and the farthest man-made object in the solar system. On the other hand, Voyager 2, launched on August 20, 1977, is also part of the Voyager program and has visited the outer planets. It is the only spacecraft to have visited Uranus and Neptune. The distances of these spacecraft from Earth are crucial in understanding their positions in space and the vastness of their explorations.</p>",
+        "data_response": "[[\"Spacecraft\", \"Distance from Earth (AU)\"], [\"Voyager 1\", 140], [\"Voyager 2\", \"Unknown\"]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "How tall is the statue of liberty",
+        "textual_response": "<p>The Statue of Liberty in New York City stands at a height of 151 feet (46 meters) from the base to the tip of the torch. This iconic statue was a gift from France to the United States and has become a symbol of freedom and democracy. In comparison, the Goddess of Democracy statue created during the Tiananmen Square protests of 1989 was 33 feet (10 meters) tall, the Flame of Liberty in Paris measures approximately 3.5 meters in height, Miss Freedom atop the Georgia State Capitol is over 26 feet tall, and Liberty Hall in Dublin was formerly the tallest storeyed building in Ireland at 59.4 meters.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what is goddess of democracy",
+        "textual_response": "<p>The Goddess of Democracy, also known as the Goddess of Democracy and Freedom, is a symbolic statue that originated during the Tiananmen Square protests of 1989 in China. Standing at 10 meters tall, the statue was constructed as a representation of the spirit of democracy and liberty, embodying the aspirations of the protesters for political reform and freedom. Despite its destruction by government forces, the Goddess of Democracy has become a powerful symbol of resistance and the fight for democratic values. Replicas of the statue have been erected in various locations worldwide, including Hong Kong, San Francisco, and Washington D.C., serving as enduring reminders of the pursuit of democracy and human rights.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "What is G-Idle",
+        "textual_response": "<p>G-Idle is a South Korean multinational girl group formed by Cube Entertainment in 2018. The group consists of six members: Miyeon, Minnie, Soojin, Soyeon, Yuqi, and Shuhua. G-Idle gained popularity for their unique music style, incorporating elements of K-pop, hip hop, EDM, and more. They have released several successful albums and singles, with hits like \"LATATA,\" \"HANN,\" and \"Oh My God.\" The group has also received critical acclaim for their performances and songwriting abilities, with member Soyeon being particularly praised for her skills as a rapper and producer. G-Idle has a strong international fanbase and has performed at various music festivals and events around the world.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "When did World War 2 end",
+        "textual_response": "<p>World War II officially ended in 1945, with the surrender of Japan in August and Germany in May. The surrender of Japan to the Allied Powers on 14 and 15 August 1945 marked the end of the war in Asia, while the final battles in Europe concluded in late April and early May of the same year. The events of 1945 were pivotal in bringing an end to the global conflict that had ravaged nations for years. The surrender of both Japan and Germany signified the conclusion of World War II and the beginning of a new era in world history.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what are some long term consequences of World War 2",
+        "textual_response": "<p>The long-term consequences of World War II were profound and far-reaching. One major consequence was the decline of the old great powers and the rise of two superpowers, the Soviet Union and the United States. This shift led to the beginning of the Cold War, characterized by espionage, political subversion, and proxy wars. The aftermath of the war also saw the division of Europe into the US-led Western Bloc and the Soviet-led Eastern Bloc, with the Iron Curtain separating the two. Additionally, the war resulted in the mass destruction of cities and had long-lasting effects on the economy of many countries involved. The attempt of the Nazi regime to exterminate several nations led to the deaths of millions of people, including several million Jews, and the ruin of several states. The consequences of Nazism profoundly affected many countries, communities, and people, leaving a lasting impact on the world.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "What happened to Germany after World War 2",
+        "textual_response": "<p>After World War II, Germany faced a long and challenging process of reconstruction. The country suffered heavy losses, with millions of Germans killed and cities severely damaged from bombing. Germany was divided between the East and West blocs, losing territories in the east to Poland and the Soviet Union. The country was stripped of its war gains and had to pay war reparations to the Allied governments. Millions of German-speaking refugees arrived in Germany from Central and Eastern Europe, and many Germans were kept as forced laborers for several years. The post-war expulsion of Germans from Eastern Europe formed a major part of the geopolitical and ethnic reconfiguration of the region. Overall, the consequences of Nazism and the acts of the Nazi German state profoundly affected many countries and people, leading to the ruin of several states and the deaths of millions.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "How are cookies collected on the internet?",
+        "textual_response": "<p>Cookies on the internet are collected through various methods, including legitimate website functions and malicious activities. Legitimate websites use cookies to remember user preferences, login information, and shopping cart items. These cookies are stored on the user's computer by the web browser and are sent back to the website with each request, allowing the website to provide a personalized experience. However, cookies can also be collected through malicious means, such as through packet sniffing, as seen in the case of Firesheep. This tool intercepts unencrypted session cookies from websites like Facebook and Twitter over Wi-Fi networks, allowing attackers to take over user sessions. Another method is cookiejacking, where hackers trick users into dragging objects on the screen to steal session cookies, potentially gaining access to sensitive information like usernames and passwords. Additionally, anonymous web browsing tools like proxy servers and VPNs can be used to hide a user's identity, but they are not foolproof and can still be susceptible to data collection and tracking through cookies and other means.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "how does VPN hide user's identity and how does it fail sometimes",
+        "textual_response": "<p>VPNs hide a user's identity by encrypting their internet traffic, making it unreadable to anyone trying to intercept it. This encryption ensures that sensitive information, such as login credentials or personal data, remains secure. Additionally, VPNs route the encrypted traffic through a secure server, which assigns a different IP address to the user, masking their true location and identity. This allows users to browse the internet anonymously and access geo-restricted content.</p>\n<p>However, VPNs can fail to protect a user's identity in certain situations. One common issue is a DNS leak, where DNS requests are not properly encrypted, revealing the user's browsing history to their ISP. Additionally, some organizations or governments employ VPN blocking techniques to prevent users from bypassing network firewalls, compromising the anonymity provided by VPNs. In these cases, users may unknowingly expose their true IP address and identity, undermining the security benefits of using a VPN.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "how does public private key pair work",
+        "textual_response": "<p>Public-private key pairs work on the principle of asymmetric cryptography, where two different keys are used for encryption and decryption. The public key is shared openly and is used to encrypt data, while the private key is kept secret and is used to decrypt the data. When someone wants to send a secure message to another party, they use the recipient's public key to encrypt the message. Only the recipient, who holds the corresponding private key, can decrypt and read the message. This system ensures secure communication over insecure channels, as even if the public key is intercepted, the message remains encrypted and can only be decrypted by the intended recipient with their private key.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "What does the major informatics study",
+        "textual_response": "<p>Informatics is a broad field that encompasses various disciplines related to information processing, technology, and systems. Major areas of study within informatics include information engineering, information systems, information technology, statistics, health informatics, materials informatics, and business informatics. These areas focus on different aspects of managing, processing, and utilizing information to improve various sectors such as healthcare, business, materials science, and communication. Informatics involves the interaction between humans and information, the construction of interfaces, technologies, and systems, and the social impact of information technologies. Students studying informatics learn about computational, mathematical, biological, cognitive, and social aspects of information processing, preparing them for careers in a wide range of industries where data and information management are crucial.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "Tell me about University of washington and its history",
+        "textual_response": "<p>The University of Washington, commonly known as UW or U-Dub, is a prominent public flagship research university located in Seattle, Washington. Established in 1861, the university has a rich history of academic excellence and innovation. Over the years, UW has grown to become a leading institution known for its cutting-edge research, diverse academic programs, and vibrant campus community. The university's commitment to fostering intellectual growth, cultural diversity, and social responsibility has made it a hub of learning and innovation in the Pacific Northwest and beyond.</p>\n<p>The history of the University of Washington is marked by significant milestones and achievements. From its humble beginnings in the 19th century to its current status as a renowned research institution, UW has played a pivotal role in shaping the educational landscape of the region. Over the years, the university has expanded its academic offerings, established strong partnerships with industry and government, and made notable contributions to various fields of study. Today, the University of Washington stands as a beacon of academic excellence, driving innovation and progress in the fields of science, technology, arts, and humanities.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "table of top 10 universities in the US west coast",
+        "textual_response": "<p>The top 10 universities on the US West Coast are known for their academic excellence, diverse programs, and notable achievements. Among these institutions, the University of California, Los Angeles (UCLA) stands out as a prestigious public research university offering a wide range of undergraduate and graduate programs. Stanford University, located in Silicon Valley, is renowned for its innovation and research in various fields. The University of California, Berkeley is another top-ranking institution known for its strong emphasis on research and academic rigor. Other notable universities include the University of Southern California (USC), University of Washington, University of California, San Diego (UCSD), University of California, Irvine (UCI), University of California, Santa Barbara (UCSB), University of Oregon, and University of California, Davis (UC Davis).</p>",
+        "data_response": "[[\"University\", \"Location\", \"Ranking\"], [\"University of California, Los Angeles (UCLA)\", \"Los Angeles, California\", 1], [\"Stanford University\", \"Stanford, California\", 2], [\"University of California, Berkeley\", \"Berkeley, California\", 3], [\"University of Southern California (USC)\", \"Los Angeles, California\", 4], [\"University of Washington\", \"Seattle, Washington\", 5], [\"University of California, San Diego (UCSD)\", \"San Diego, California\", 6], [\"University of California, Irvine (UCI)\", \"Irvine, California\", 7], [\"University of California, Santa Barbara (UCSB)\", \"Santa Barbara, California\", 8], [\"University of Oregon\", \"Eugene, Oregon\", 9], [\"University of California, Davis (UC Davis)\", \"Davis, California\", 10]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "uw ischool",
+        "textual_response": "<p>The University of Washington Information School, commonly referred to as the iSchool, is an academic institution that offers undergraduate and graduate degrees in various fields related to information science. Formerly known as the Graduate School of Library and Information Sciences (GSLIS), the iSchool at the University of Washington changed its focus and name in the late 1990s. The iSchool provides programs such as Bachelor of Science (BS), Master of Library and Information Science (MLIS), Master of Science in Information Management (MSIM), and Doctor of Philosophy (PhD) degrees. It is known for its interdisciplinary approach to information studies, encompassing areas such as library science, information management, and technology.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "what are some advantages and disadvantages of RAG",
+        "textual_response": "<p>RAG (Radio-activated guard box) devices have the advantage of being designed to deter wolves from preying on livestock, specifically targeting wolves with radio tracking collars. These devices were conceived to provide a non-lethal method of protecting livestock from wolf attacks, potentially reducing conflict between ranchers and wildlife. However, the limited commercial production of RAG devices indicates a potential disadvantage in terms of availability and widespread implementation. Additionally, the effectiveness of RAG devices in deterring wolves may vary based on factors such as wolf behavior and adaptation.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "What are some advantages and disadvantages of retrieval augmented generation",
+        "textual_response": "<p>Retrieval augmented generation has several advantages, including improved long-term memory retention through the testing effect. By actively retrieving information during the learning process, individuals can enhance their ability to recall that information later on. This technique also promotes deeper learning and understanding of the material, as it requires active engagement with the content. Additionally, retrieval augmented generation can help identify gaps in knowledge and areas that require further review, allowing for targeted studying and more efficient learning. However, a potential disadvantage of this approach is that it may require more time and effort compared to passive learning methods. It can also be challenging for individuals who struggle with test anxiety or performance pressure, as the testing component may induce stress.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    },
+    {
+        "context": "Some context...",
+        "question": "key events in the world of chess in 2016",
+        "textual_response": "<p>In 2016, the world of chess witnessed several significant events. The Women's World Chess Championship saw Mariya Muzychuk defend her title against challenger Hou Yifan in a closely contested match. The Candidates Tournament was won by Sergey Karjakin, who then went on to challenge reigning World Chess Champion Magnus Carlsen in a thrilling World Chess Championship match. Carlsen emerged victorious in the end, retaining his title. Additionally, the 42nd Chess Olympiad held in Baku, Azerbaijan, showcased top chess talent from around the world, with both Open and Women's tournaments taking place. The 2016 US Chess Championship featured some of the top US players competing for the prestigious title. Overall, 2016 was a year filled with intense competition and memorable moments in the world of chess.</p>",
+        "data_response": "[[\"Event\", \"Description\"], [\"Women's World Chess Championship 2016\", \"Mariya Muzychuk vs. Hou Yifan\"], [\"Candidates Tournament\", \"Won by Sergey Karjakin\"], [\"World Chess Championship 2016\", \"Magnus Carlsen vs. Sergey Karjakin\"], [\"42nd Chess Olympiad\", \"Held in Baku, Azerbaijan\"], [\"2016 US Chess Championship\", \"Top US players competing\"]]",
+        "format": "table"
+    },
+    {
+        "context": "Some context...",
+        "question": "whos Hou Yi Fan in chess?",
+        "textual_response": "<p>Hou Yifan is a Chinese chess grandmaster and former chess prodigy who has achieved significant success in the world of chess. She has been the Women's World Chess Champion three times, making her the youngest ever to win the title. Additionally, she holds the record for being the youngest female player ever to qualify for the title of Grandmaster. Her accomplishments in the chess world have solidified her reputation as a talented and skilled player, with a bright future ahead of her in the world of competitive chess.</p>",
+        "data_response": "[]",
+        "format": "textual display"
+    }
+]

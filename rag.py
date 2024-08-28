@@ -1,21 +1,22 @@
 import dspy
-from dspy.teleprompt import BootstrapFewShot
+from dspy.teleprompt import BootstrapFewShotWithRandomSearch
 from dspy.retrieve.weaviate_rm import WeaviateRM
-from weaviate_init import re_instantiate_weaviate
+from weaviate_init import instantiate_weaviate
 import os
 import json
+import logging
 
+TRAINING_SET_PATH = "training_set.json"
 PREMAI_API_KEY = os.getenv("PREMAI_API_KEY")
 turbo = dspy.PremAI(model="gpt-3.5-turbo", project_id=5609, api_key=PREMAI_API_KEY, temperature=0.2, max_tokens=4000)
 colbertv2_wiki17_abstracts = dspy.ColBERTv2(url='http://20.102.90.50:2017/wiki17_abstracts')
-with re_instantiate_weaviate() as weaviate_client:
+with instantiate_weaviate() as weaviate_client:
     weaviate_rm = WeaviateRM(weaviate_collection_name="Privacy_Data", weaviate_client=weaviate_client)
-dspy.configure(lm=turbo, rm=colbertv2_wiki17_abstracts)
-
+dspy.settings.configure(lm=turbo, rm=colbertv2_wiki17_abstracts, backoff_time=5)
 class GenerateAnswer(dspy.Signature):
     context = dspy.InputField(desc="May contain useful information")
     question = dspy.InputField()
-    textual_response = dspy.OutputField(desc="at least two paragraphs using your own knowledge and the context, include details")
+    textual_response = dspy.OutputField(desc="at least two paragraphs using your own knowledge and the context, include details, in html format")
     data_response = dspy.OutputField(desc="a google.visualization.arrayToDataTable array of arrays in json format if applicable")
     format = dspy.OutputField(
         desc="""the most appropriate format to represent the data (formats: textual display, bar graph, table, line graph, geo chart)
@@ -44,75 +45,27 @@ class Assess(dspy.Signature):
     assessment_answer = dspy.OutputField(desc="Yes or No")
 
 def validate_prediction(example, pred, trace=None):
-    relevance_question = f"The data should be helpful in answering {pred.question}. Is the data provided helpful? Yes if data is None"
-    data_format_correctness_question = f"""The data should be in an array of arrays format that 
-                                    can be interpreted by google.visualization.arrayToDataTable or should be None. Does the provided data do that?"""
-    format_relevance_question = f"Is the format appropriate in answering {pred.question}?"
-    text_relevance_question = f"Does the text provide enough text to answer the question {pred.question}?"
-    format_correctness_question = f"Does it make sense to use this format on the data? (i.e format should be textual display if data is None)"
-    def safe_predict(*args, **kwargs):
-        try:
-            return dspy.Predict(*args, **kwargs)
-        except Exception as e:
-            print(f"Error during prediction: {e}")
-            return None
-    with dspy.context(lm=gpt4T):
-       data_relevance = safe_predict(Assess)(
-            pred_question=pred.question,
-            pred_text=pred.textual_response,
-            pred_data=pred.data_response, 
-            pred_format=pred.format, 
-            assessment_question=relevance_question
-        )
-       data_format_correctness = safe_predict(Assess)(
-            pred_question=pred.question,
-            pred_text=pred.textual_response,
-            pred_data=pred.data_response, 
-            pred_format=pred.format, 
-            assessment_question=data_format_correctness_question
-        )
-       format_relevance = safe_predict(Assess)(
-            pred_question=pred.question,
-            pred_text=pred.textual_response,
-            pred_data=pred.data_response, 
-            pred_format=pred.format, 
-            assessment_question=format_relevance_question
-       )
-       text_relevance = safe_predict(Assess)(
-            pred_question=pred.question,
-            pred_text=pred.textual_response,
-            pred_data=pred.data_response, 
-            pred_format=pred.format, 
-            assessment_question=text_relevance_question
-       )
-       format_correctness = safe_predict(Assess)(
-            pred_question=pred.question,
-            pred_text=pred.textual_response,
-            pred_data=pred.data_response, 
-            pred_format=pred.format, 
-            assessment_question=format_correctness_question
-       )
-    assessments = [data_relevance, data_format_correctness, format_relevance, text_relevance, format_correctness]
-    assessments = [m for m in assessments if m is not None]
-    if not assessments:
-        print("All predictions failed.")
-        return False
-    data_relevance, data_format_correctness, format_relevance, text_relevance, format_correctness = (
-        [m.assessment_answer.lower() == 'yes' for m in assessments]
-    )
-    score = data_relevance + data_format_correctness + format_relevance + text_relevance + format_correctness
-    return score >= 5
+    data_format_correct = True
+    try:
+        json.loads(pred.data_response)
+    except:
+        data_format_correct = False
+
+    if trace is None:
+        return data_format_correct
+    else:
+        return int(data_format_correct)
 
 def load_trainset():
-    if os.path.exists("fine_tuning_data.json"):
-        with open("fine_tuning_data.json", "r") as f:
+    if os.path.exists(TRAINING_SET_PATH):
+        with open(TRAINING_SET_PATH, "r") as f:
             training_set = json.load(f)
         training_set = [
             dspy.Example(
-                context=obj["context"][0],
+                context=obj["context"],
                 question=obj["question"],
-                textual_response=obj["textual_response"],
-                data_response=obj["data_response"],
+                textual_response=obj["textual_response"][:200],
+                data_response=str(obj["data_response"]),
                 format=obj["format"]
             )
             for obj in training_set
@@ -123,17 +76,20 @@ def load_trainset():
         return None
 
 def load_rag(num_passages):
-    if os.path.exists("compiled_rag.json"):
-        rag = RAG(num_passages=num_passages)
-        rag.load("compiled_rag.json")
-    else:
-        trainset = load_trainset()
-        if trainset is None:
-            return RAG(num_passages=num_passages)
-        teleprompter = BootstrapFewShot(metric=validate_prediction, max_bootstrapped_demos=2, max_labeled_demos=3)
-        rag = teleprompter.compile(RAG(num_passages=num_passages), trainset=trainset)
-        rag.save("compiled_rag.json")
-    return rag
+    try:
+        if os.path.exists("compiled_rag_random.json"):
+            rag = RAG(num_passages=num_passages)
+            rag.load("compiled_rag_random.json")
+        else:
+            trainset = load_trainset()
+            if trainset is None:
+                return RAG(num_passages=num_passages)
+            teleprompter = BootstrapFewShotWithRandomSearch(metric=validate_prediction, max_bootstrapped_demos=2, max_labeled_demos=3, num_candidate_programs=3, num_threads=4)
+            rag = teleprompter.compile(student=RAG(num_passages=num_passages), trainset=trainset)
+            rag.save("compiled_rag_random.json")
+        return rag
+    except:
+        logging.error("An error occured", exc_info=True)
 
 rag = load_rag(num_passages=5)
 def get_dspy_answer(question):

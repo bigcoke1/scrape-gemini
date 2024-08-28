@@ -1,0 +1,41 @@
+{
+  "retrieve": {
+    "k": 5
+  },
+  "generate_answer": {
+    "lm": null,
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "context": "Some context...",
+        "question": "gdp 2024 ranking in geo chart",
+        "rationale": "produce the format. We can use a geo chart to visually represent the GDP rankings of different countries in 2024.",
+        "textual_response": "<p>The GDP rankings of countries in 2024 show that the United States remains the largest economy in the world, followed by China and Japan. The United States has a GDP of approximately $24.8 trillion, while China's GDP is around $17.6 trillion. Japan comes in third with a GDP of $5.4 trillion. These rankings are based on data from the International Monetary Fund (IMF) and reflect the economic strength of these countries in the global market.<\/p>",
+        "data_response": "[[\"Country\", \"GDP (in trillion $)\"], [\"United States\", 24.8], [\"China\", 17.6], [\"Japan\", 5.4], [\"Germany\", 4.4], [\"India\", 3.1], [\"United Kingdom\", 3.0], [\"France\", 2.9], [\"Italy\", 2.6], [\"Brazil\", 2.5], [\"Canada\", 2.3]]",
+        "format": "geo chart"
+      },
+      {
+        "augmented": true,
+        "context": "Some context...",
+        "question": "what is amazon web service",
+        "rationale": "produce the format. We will provide a brief overview of Amazon Web Services (AWS) and its key features to help understand its significance in the field of cloud computing.",
+        "textual_response": "<p>Amazon Web Services (AWS) is a comprehensive, evolving cloud computing platform provided by Amazon. It offers a wide range of global cloud-based products including computing power, storage, databases, analytics, networking, machine learning, and artificial intelligence. AWS services are used by millions of customers worldwide, ranging from startups to large enterprises, to power a wide variety of workloads. One of the key advantages of AWS is its scalability, allowing users to easily scale resources up or down based on demand, paying only for what they use.<\/p>\n<p>Some of the key features of AWS include high availability, security, flexibility, and cost-effectiveness. AWS provides a secure and reliable infrastructure that enables businesses to deploy applications and services quickly and securely. With a pay-as-you-go pricing model, users can reduce costs by only paying for the resources they consume. Additionally, AWS offers a wide range of tools and services to help developers build, deploy, and manage applications more efficiently.<\/p>",
+        "data_response": "[]",
+        "format": "textual display"
+      },
+      {
+        "context": "Some context...",
+        "question": "who is faouzia ouihya",
+        "textual_response": "<p>Faouzia Ouihya is a 24-year-old Moroccan-Canadian singer, songwriter, and musician. Born on July 5, 2000, in Casablanca, Morocco, she rose to fame after winning the Audience Award and Grand Prix in",
+        "data_response": "[[\"Category\", \"Data\"], [\"Nationality\", \"Moroccan-Canadian\"], [\"Born\", \"July 5, 2000\"], [\"Birthplace\", \"Casablanca, Morocco\"], [\"Musical Genre\", \"Pop, R&amp;B, Moroccan influences\"], [\"Notable Collaborations\", \"David Guetta, John Legend, Galantis\"], [\"Awards\", \"Audience Award and Grand Prix at La Chicane \u00e9lectrique (2015)\"], [\"Active Years\", \"2015-present\"], [\"Famous For\", \"Powerful vocals, unique musical style, global recognition\"]]",
+        "format": "bar graph"
+      }
+    ],
+    "signature_instructions": "Given the fields `context`, `question`, produce the fields `textual_response`, `data_response`, `format`.",
+    "signature_prefix": "Format:",
+    "extended_signature_instructions": "Given the fields `context`, `question`, produce the fields `textual_response`, `data_response`, `format`.",
+    "extended_signature_prefix": "Format:"
+  }
+}
