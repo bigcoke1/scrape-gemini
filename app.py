@@ -20,6 +20,7 @@ import os
 import sqlite3
 import time
 import datetime
+from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -110,18 +111,23 @@ def get_response():
     if query and username:
         try:
             start_time = time.time()
-            text_response, data_response, format = get_dspy_answer(query)
+            with ThreadPoolExecutor(max_workers=2) as executor:
+                future_dspy = executor.submit(get_dspy_answer, query)
+                future_links = executor.submit(search_google, query)
+                
+            text_response, data_response, format = future_dspy.result()
             text_response = markdown.markdown(text_response, extensions=['nl2br'])
             print(f"Got AI response in {time.time() - start_time} seconds")
-            current_datetime = get_date()
-            links = search_google(query)
+            links = future_links.result()
+            print(f"Got links in {time.time() - start_time} seconds")
             links = [link for link in links if link is not None]
             links = list(set(links))
             json_links = json.dumps(links)
+            
             con = sqlite3.connect(USER_DATA)
             cur = con.cursor()
             cur.execute("INSERT INTO chat (username, query, response, date, links, data, format) VALUES (?, ?, ?, ?, ?, ?, ?)", 
-                        [username, query, text_response, current_datetime, json_links, data_response, format])
+                        [username, query, text_response, get_date(), json_links, data_response, format])
             con.commit()
             id = cur.lastrowid
             con.close()

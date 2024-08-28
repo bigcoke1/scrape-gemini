@@ -348,20 +348,22 @@
     try {
       e.preventDefault();
       let query = qs("#textbox input").value;
+      qs("#textbox input").value = "";
       displayEntry(query, false);
       await generateResponse(query);
-
-      qs("#textbox button").disabled = false;
-      qs("#textbox input").value = "";
     } catch (err) {
       console.log(err);
       handleError();
+    } finally {
+      qs("#textbox button").disabled = false;
+      qs("#textbox input").disabled = false;
     }
   }
 
   async function generateResponse(query) {
     let loading = displayLoading();
     qs("#textbox button").disabled = true;
+    qs("#textbox input").disabled = true;
     let username = getCookie("username");
     let params = new FormData();
     params.append("query", query);
@@ -591,7 +593,7 @@
 
   function populateLinks(linkBox, links) {
     // Create a text node for the initial text and the "References:" label
-    linkBox.appendChild(document.createTextNode("\nFor More Inforamtion: "));
+    linkBox.appendChild(document.createTextNode("\n For More Information: "));
     let list = document.createElement("ol");
     for (let i = 0; i < links.length; i++) {
       // Create a text node for the link index and description
