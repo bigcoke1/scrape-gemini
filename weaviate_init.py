@@ -19,6 +19,34 @@ def instantiate_weaviate() -> weaviate.Client:
     )
     return client
 
+def init_db(files, username):
+    with instantiate_weaviate() as client:
+        client.collections.delete(username)
+        data = []
+        for file in files:
+            with open(f"user_databases/{username}/{file}", "r") as f:
+                new_data = json.load(f)
+            if isinstance(new_data, list):
+                data.extend(new_data)
+            else:
+                data.append(new_data)
+
+        questions = client.collections.create(
+            name=username,
+            vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_azure_openai(resource_name="easonmopenai", deployment_id="weaviate"),  # If set to "none" you must always provide vectors yourself. Could be any other "text2vec-*" also.
+            generative_config=wvc.config.Configure.Generative.azure_openai(resource_name="easonmopenai", deployment_id="weaviate")  # Ensure the `generative-openai` module is used for generative queries
+        )
+
+        questions = client.collections.get(username)
+        questions.data.insert_many(data)
+
+        response = questions.query.near_text(
+            query="Taylor Swift",
+            limit=2
+        )
+
+        print(response.objects[0].properties)
+    
 if __name__ == "__main__":
     try: 
         client = instantiate_weaviate()
@@ -33,7 +61,7 @@ if __name__ == "__main__":
         json_path = ""
         if json_path:
             with open(json_path, "r") as f:
-                data = json.loads(f)  # Load data
+                data = json.load(f)  # Load data
         else:
             data = [{"Answer": "example", "Question": "this is an example"}]
 

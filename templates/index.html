@@ -46,12 +46,16 @@
                 <p>Email: </p>
                 <button id="home-btn">Home</button>
                 <button id="signout-btn">Sign out</button>
+                <section id="db-section">
+                    Advanced: Customize Database (JSON) <input type="file" id="db-input" accept=".json,application/json" multiple>
+                </section>
             </section>
         </section>
         <section id="home" class="hidden">
             <section id="ui" class="shadow">
                 <h1>Scrape Insight</h1>
                 <section id="ui-buttons">
+                    <button id="db-btn"><img src="../static/images/database.png" alt="customize database"></button>
                     <button id="clear-btn"><img src="../static/images/clearhistory.png" alt="clear history"></button>
                     <button id="account-btn"><img src="../static/images/account.png" alt="account info"></button>
                 </section>
@@ -75,6 +79,9 @@
                     </form>
                 </section>
             </section>
+        </section>
+        <section id="database-page">
+            <section id="database-list"></section>
         </section>
     </body>
 </html>

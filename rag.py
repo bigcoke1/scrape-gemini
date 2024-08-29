@@ -13,6 +13,7 @@ colbertv2_wiki17_abstracts = dspy.ColBERTv2(url='http://20.102.90.50:2017/wiki17
 with instantiate_weaviate() as weaviate_client:
     weaviate_rm = WeaviateRM(weaviate_collection_name="Privacy_Data", weaviate_client=weaviate_client)
 dspy.settings.configure(lm=turbo, rm=colbertv2_wiki17_abstracts, backoff_time=5)
+
 class GenerateAnswer(dspy.Signature):
     context = dspy.InputField(desc="May contain useful information")
     question = dspy.InputField()
@@ -24,14 +25,22 @@ class GenerateAnswer(dspy.Signature):
     )
 
 class RAG(dspy.Module):
-    def __init__(self, num_passages):
+    def __init__(self, num_passages, custom_rm=None):
         super().__init__()
         self.retrieve = dspy.Retrieve(k=num_passages)
         self.generate_answer = dspy.ChainOfThought(GenerateAnswer)
+        self.custom_rm = custom_rm
 
     def forward(self, question, context=None):
         if not context:
-            context = self.retrieve(question).passages
+            if self.custom_rm is not None:
+                try:
+                    dspy.settings.configure(rm=self.custom_rm)
+                    context = self.retrieve(question).passages
+                except:
+                    logging.error("An error occurred", exc_info=True)
+            dspy.settings.configure(rm=colbertv2_wiki17_abstracts)
+            context = context + self.retrieve(question).passages
         pred = self.generate_answer(context=context, question=question)
         return dspy.Prediction(context=context, question=question, textual_response=pred.textual_response, data_response=pred.data_response, format=pred.format)
 
@@ -75,24 +84,24 @@ def load_trainset():
     else:
         return None
 
-def load_rag(num_passages):
+def load_rag(num_passages, custom_rm):
     try:
         if os.path.exists("compiled_rag_random.json"):
-            rag = RAG(num_passages=num_passages)
+            rag = RAG(num_passages=num_passages, custom_rm=custom_rm)
             rag.load("compiled_rag_random.json")
         else:
             trainset = load_trainset()
             if trainset is None:
-                return RAG(num_passages=num_passages)
+                return RAG(num_passages=num_passages, custom_rm=custom_rm)
             teleprompter = BootstrapFewShotWithRandomSearch(metric=validate_prediction, max_bootstrapped_demos=2, max_labeled_demos=3, num_candidate_programs=3, num_threads=4)
-            rag = teleprompter.compile(student=RAG(num_passages=num_passages), trainset=trainset)
+            rag = teleprompter.compile(student=RAG(num_passages=num_passages, custom_rm=custom_rm), trainset=trainset)
             rag.save("compiled_rag_random.json")
         return rag
     except:
         logging.error("An error occured", exc_info=True)
 
-rag = load_rag(num_passages=5)
-def get_dspy_answer(question):
+def get_dspy_answer(question, username):
+    rag = load_rag(num_passages=5, custom_rm=init_rm(username))
     pred = rag(question)
     print(f"Question: {question}")
     print(f"Predicted Textual Response: {pred.textual_response}")
@@ -100,6 +109,14 @@ def get_dspy_answer(question):
     print(f"Predicted Format: {pred.format}")
     print(f"Retrieved Contexts (truncated): {[c[:200] + '...' for c in pred.context]}")
     return pred.textual_response, pred.data_response, pred.format
+
+def init_rm(username):
+    try:
+        weaviate_client = instantiate_weaviate()
+        weaviate_rm = WeaviateRM(weaviate_collection_name=username, weaviate_client=weaviate_client, weaviate_collection_text_key="passage")
+        return weaviate_rm
+    except:
+        return None
 
 if __name__ == "__main__":
     question = input(">>> ")

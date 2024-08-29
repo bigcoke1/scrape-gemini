@@ -27,6 +27,8 @@
     id("account-btn").addEventListener("click", displayAccount);
     id("home-btn").addEventListener("click", displayHome);
     id("pfp-input").addEventListener("change", savePfp);
+
+    id("db-input").addEventListener("change", uploadDatabase);
     let exampleQuestions = qsa("#example-questions button");
 
     exampleQuestions.forEach(button => {
@@ -36,6 +38,27 @@
       });
     });
     await checkCookie();
+  }
+
+  async function uploadDatabase() {
+    try {
+      let params = new FormData();
+      let files = id("db-input").files;
+      for (let i = 0; i < files.length; i++) {
+        params.append("files[]", files[i]);
+        params.append("filenames[]", files[i].name);
+      }
+      params.append("username", getCookie("username"));
+      let res = await fetch(URL + "/upload-db", {
+        method: "POST",
+        body: params
+      });
+      await statusCheck(res);
+      alert("Database updated!")
+    } catch (err) {
+      handleError(err);
+      console.log(err);
+    }
   }
 
   async function makeAccountRequest(username) {
@@ -467,12 +490,12 @@
         return str.replace(/[^a-zA-Z0-9\s]|[\r\n]/g, '');
       }
       format = removeSpecialCharacters(format)
-      let [data, modifiedFormat] = processDataResponse(dataResponse, format);
-      const numRows = data.length;
-      data = google.visualization.arrayToDataTable(data);
+      let [modifiedData, modifiedFormat] = processDataResponse(dataResponse, format);
+      const numRows = modifiedData.length;
+      let data = google.visualization.arrayToDataTable(modifiedData);
       let chartHeight = 600;
       let options = {
-        title: query,
+        title: modifiedData[0][0] + " vs " + modifiedData[0][1],
         titleTextStyle: {
           fontSize: 20,
         },
@@ -531,7 +554,7 @@
   
       chartBox.style.height = chartHeight + 50 + "px";
   
-      populateChartButtons(chart, chartBox, chatId, dataResponse);
+      populateChartButtons(chart, chartBox, chatId, modifiedData);
     } catch (err) {
       console.log(err)
       chartBox.remove()

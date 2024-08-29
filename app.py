@@ -35,6 +35,7 @@ def before_request():
 #my lib
 from google_init import *
 from rag import *
+from weaviate_init import init_db
 
 SERVER_ERROR_MSG = "Internal server error"
 PARAM_ERROR_MSG = "Invalid params error"
@@ -63,7 +64,7 @@ def register():
             res = cur.execute("SELECT username FROM user WHERE username = ?", [username])
             if username and password and email and not res.fetchone():
                 password = ph.hash(password)
-                cur.execute("INSERT INTO user (username, password, email) VALUES (?, ?, ?)", [username, password, email])
+                cur.execute("INSERT INTO user (username, password, email, databases) VALUES (?, ?, ?, ?)", [username, password, email , "[]"])
                 con.commit()
                 con.close()
                 return Response("successful", status=200, mimetype="text/plain")
@@ -112,14 +113,14 @@ def get_response():
         try:
             start_time = time.time()
             with ThreadPoolExecutor(max_workers=2) as executor:
-                future_dspy = executor.submit(get_dspy_answer, query)
+                future_dspy = executor.submit(get_dspy_answer, query, username)
                 future_links = executor.submit(search_google, query)
                 
             text_response, data_response, format = future_dspy.result()
             text_response = markdown.markdown(text_response, extensions=['nl2br'])
-            print(f"Got AI response in {time.time() - start_time} seconds")
+           
             links = future_links.result()
-            print(f"Got links in {time.time() - start_time} seconds")
+            print(f"Got AI response in {time.time() - start_time} seconds")
             links = [link for link in links if link is not None]
             links = list(set(links))
             json_links = json.dumps(links)
@@ -336,6 +337,41 @@ def upload():
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
 
+@app.route('/upload-db', methods=['POST'])
+def upload_db():
+    try:
+        files = request.files.getlist('files[]')
+        filenames = request.form.getlist("filenames[]")
+        username = request.form["username"]
+        if files and filenames and username:
+            con = sqlite3.connect(USER_DATA)
+            cur = con.cursor()
+            if not os.path.exists(f"user_databases/{username}"):
+                os.makedirs(f"user_databases/{username}")
+            for index in range(0, len(files)):
+                with open(f"user_databases/{username}/{filenames[index]}", 'w') as regular_file:
+                    json.dump(json.load(files[index].stream), regular_file)
+            result = cur.execute("SELECT databases FROM user WHERE username = ?", [username])
+            existing_files = result.fetchone()[0]
+            existing_files = json.loads(existing_files)
+            if existing_files is None:
+                existing_files = []
+            filenames.extend(existing_files)
+            filenames = list(set(filenames))
+            init_db(filenames, username)
+            filenames = str(filenames)
+            print(filenames)
+            print("Databse intialized")
+            cur.execute("UPDATE user SET databases = ? WHERE username = ?", [filenames, username])
+            con.commit()
+            con.close()
+            return Response("Database initialized", status=200, mimetype="text/plain")
+        else:
+            return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
+    except:
+        logging.error("An error occured", exc_info=True)
+        return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
+    
 def run():
     app.run(host="0.0.0.0", port=5000)
 
