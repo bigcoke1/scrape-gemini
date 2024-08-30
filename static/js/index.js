@@ -26,9 +26,11 @@
     });
     id("account-btn").addEventListener("click", displayAccount);
     id("home-btn").addEventListener("click", displayHome);
+    id("home-btn2").addEventListener("click", displayHome);
     id("pfp-input").addEventListener("change", savePfp);
 
     id("db-input").addEventListener("change", uploadDatabase);
+    id("db-btn").addEventListener("click", displayDatabasePage);
     let exampleQuestions = qsa("#example-questions button");
 
     exampleQuestions.forEach(button => {
@@ -38,6 +40,67 @@
       });
     });
     await checkCookie();
+  }
+
+  async function displayDatabasePage() {
+    id("home").classList.add("hidden");
+    id("login").classList.add("hidden");
+    id("register").classList.add("hidden");
+    id("account").classList.add("hidden");
+    qs("body > section:nth-child(1)").style.display = "flex";
+    id("database-page").classList.remove("hidden");
+
+    await makeDatabaseRequest();
+  }
+
+  async function makeDatabaseRequest() {
+    try {
+      let username = getCookie("username");
+      console.log(username)
+      let res = await fetch(URL + "/get-databases/" + username);
+      await statusCheck(res);
+      res = await res.json();
+      populateDatabases(res);
+    } catch (err) {
+      handleError(err);
+      console.log(err);
+    }
+  }
+
+  function populateDatabases(res) {
+    id("database-list").innerHTML = "";
+    for (let i = 0; i < res.length; i++) {
+      let file = res[i];
+      let section = document.createElement("section");
+      let paragraph = document.createElement("p");
+      paragraph.textContent = file;
+      section.appendChild(paragraph);
+      let deleteButton = document.createElement("button");
+      deleteButton.addEventListener("click", async () => {
+        await makeDeleteDbRequest(file);
+      });
+      section.appendChild(deleteButton);
+      id("database-list").prepend(section);
+    }
+  }
+
+  async function makeDeleteDbRequest(file) {
+    try {
+      let params = new FormData();
+      let username = getCookie("username");
+      params.append("username", username);
+      params.append("filename", file);
+      let res = await fetch(URL + "/delete-database", {
+        method: "POST",
+        body: params
+      });
+      await statusCheck(res);
+      res = await res.json();
+      populateDatabases(res);
+    } catch (err) {
+      handleError();
+      console.log(err);
+    }
   }
 
   async function uploadDatabase() {
@@ -145,6 +208,7 @@
     id("register").classList.add("hidden");
     id("account").classList.remove("hidden");
     qs("body > section:nth-child(1)").style.display = "flex";
+    id("database-page").classList.add("hidden");
 
     let accountInfo = qsa("#account p");
     accountInfo[0].textContent = "Username: " + getCookie("username");
@@ -183,6 +247,7 @@
     id("login").classList.remove("hidden");
     id("register").classList.add("hidden");
     id("account").classList.add("hidden");
+    id("database-page").classList.add("hidden");
     qs("body > section:nth-child(1)").style.display = "flex";
   }
 
@@ -196,6 +261,7 @@
     id("login").classList.add("hidden");
     id("register").classList.remove("hidden");
     id("account").classList.add("hidden");
+    id("database-page").classList.add("hidden");
     qs("body > section:nth-child(1)").style.display = "flex";
   }
 
@@ -206,6 +272,7 @@
     id("chat").innerHTML = "";
     id("account").classList.add("hidden");
     qs("body > section:nth-child(1)").style.display = "none";
+    id("database-page").classList.add("hidden");
 
     let img = qs("#account-btn img");
     img.onerror = function () {

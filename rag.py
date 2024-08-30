@@ -33,6 +33,7 @@ class RAG(dspy.Module):
 
     def forward(self, question, context=None):
         if not context:
+            context = []
             if self.custom_rm is not None:
                 try:
                     dspy.settings.configure(rm=self.custom_rm)

@@ -540,3 +540,135 @@ Error: No such command 'urn'.
 127.0.0.1 - - [07/Aug/2024 17:21:01] "POST /getresponse HTTP/1.0" 200 -
 127.0.0.1 - - [07/Aug/2024 17:21:01] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
 127.0.0.1 - - [07/Aug/2024 17:21:50] "GET / HTTP/1.0" 200 -
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [30/Aug/2024 02:49:03] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "[36mGET /static/css/style.css HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "GET /static/js/index.js HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "[33mGET /..static/images/account.png HTTP/1.0[0m" 404 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "[36mGET /static/images/database.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "[36mGET /static/images/clearhistory.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "[36mGET /static/images/account.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "[36mGET /static/images/arrow.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "[36mGET /static/images/pfps/HunziKing.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:49:03] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:49:25] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:49:25] "[36mGET /static/images/AI.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:49:32] "POST /getresponse HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:49:32] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:08] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:50:13] "POST /getresponse HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:13] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:13] "[36mGET /static/images/drive.png HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:50:26] "POST /delete HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:27] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:28] "POST /delete HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:28] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:39] "POST /delete HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:39] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:43] "POST /delete HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:43] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:50:53] "[36mGET /static/images/loading.gif HTTP/1.0[0m" 304 -
+127.0.0.1 - - [30/Aug/2024 02:51:00] "POST /getresponse HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:51:00] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:51:06] "POST /delete HTTP/1.0" 200 -
+127.0.0.1 - - [30/Aug/2024 02:51:06] "GET /get-all-chat/HunziKing HTTP/1.0" 200 -
+Question: How far is the sun to each planet in the solar system? 🌞
+Predicted Textual Response: <p>The distances of each planet in the solar system from the Sun vary due to their elliptical orbits. Here are the average distances of each planet from the Sun:</p>
+<table>
+  <tr>
+    <th>Planet</th>
+    <th>Distance from Sun (AU)</th>
+  </tr>
+  <tr>
+    <td>Mercury</td>
+    <td>0.39 AU</td>
+  </tr>
+  <tr>
+    <td>Venus</td>
+    <td>0.72 AU</td>
+  </tr>
+  <tr>
+    <td>Earth</td>
+    <td>1.00 AU</td>
+  </tr>
+  <tr>
+    <td>Mars</td>
+    <td>1.52 AU</td>
+  </tr>
+  <tr>
+    <td>Jupiter</td>
+    <td>5.20 AU</td>
+  </tr>
+  <tr>
+    <td>Saturn</td>
+    <td>9.58 AU</td>
+  </tr>
+  <tr>
+    <td>Uranus</td>
+    <td>19.22 AU</td>
+  </tr>
+  <tr>
+    <td>Neptune</td>
+    <td>30.05 AU</td>
+  </tr>
+</table>
+Predicted Data Response: []
+Predicted Format: table
+Retrieved Contexts (truncated): ["Taylor Swift's Eras Tour has captivated audiences worldwide by offering a meticulously crafted journey through an artist's diverse musical catalog, blending nostalgic hits with fresh performances. Its...", "Taylor Swift's journey to becoming the most popular pop star is a testament to her talent, versatility, and strategic career choices. Starting her career as a country singer-songwriter in Nashville, S...", "Titius–Bode law | The Titius–Bode law (sometimes termed just Bode's law) is a hypothesis that the bodies in some orbital systems, including the Sun's, orbit at semi-major axes in a function of planeta...", 'Astronomical unit | The astronomical unit (symbol: au or ua) is a unit of length, roughly the distance from Earth to the Sun. However, that distance varies as Earth orbits the Sun, from a maximum (aph...', 'V774104 | V774104 is a trans-Neptunian object (TNO) with a radius roughly half that of Pluto or somewhat smaller. Currently it is approximately 103 AU from the Sun, a distance of 15.4 billion kilomete...', 'Neptune | Neptune is the eighth and farthest known planet from the Sun in the Solar System. In the Solar System, it is the fourth-largest planet by diameter, the third-most-massive planet, and the den...', 'Family Portrait (Voyager) | The Family Portrait, or sometimes "Portrait of the Planets", is an image of the Solar System acquired by "Voyager 1" on February 14, 1990 from a distance of approximately 6...']
+Got AI response in 7.211522817611694 seconds
+Question: How far is each planet to the sun in a bar chart
+Predicted Textual Response: <p>The average distance of each planet to the Sun varies within our solar system. According to the context, Earth's orbit has an average distance of 149.60 million km (92.96 million mi) from the Sun. The astronomical unit (AU) is defined as the average distance from Earth to the Sun, which is approximately 150 million kilometers. The Titius-Bode law suggests a pattern of semi-major axes for planets, with each planet being approximately twice as far from the Sun as the one before. These details provide insights into the distances of planets in our solar system from the Sun, showcasing the vastness of space and the unique positions of each celestial body.</p>
+Predicted Data Response: [["Planet", "Average Distance to Sun (in million km)"], ["Mercury", 57.91], ["Venus", 108.2], ["Earth", 149.6], ["Mars", 227.9], ["Jupiter", 778.5], ["Saturn", 1,433.5], ["Uranus", 2,872.5], ["Neptune", 4,495.1]]
+Predicted Format: bar graph
+Retrieved Contexts (truncated): ["Taylor Swift's Eras Tour has captivated audiences worldwide by offering a meticulously crafted journey through an artist's diverse musical catalog, blending nostalgic hits with fresh performances. Its...", "Taylor Swift's journey to becoming the most popular pop star is a testament to her talent, versatility, and strategic career choices. Starting her career as a country singer-songwriter in Nashville, S...", "Earth's orbit | Earth's orbit is the trajectory along which Earth travels around the Sun. The average distance between the Earth and the Sun is 149.60 million km (92.96 million mi), and one complete o...", 'Astronomical unit | The astronomical unit (symbol: au or ua) is a unit of length, roughly the distance from Earth to the Sun. However, that distance varies as Earth orbits the Sun, from a maximum (aph...', "Titius–Bode law | The Titius–Bode law (sometimes termed just Bode's law) is a hypothesis that the bodies in some orbital systems, including the Sun's, orbit at semi-major axes in a function of planeta...", '30 Arietis Bb | 30 Arietis Bb (sometimes abbreviated 30 Ari Bb) is an extrasolar planet which orbits the F-type main sequence star 30 Arietis B, located in a quadruple star system approximately 129 li...', '(336756) 2010 NV1 | (336756) 2010 NV , provisional designation 2010 NV, is a highly eccentric planet crossing trans-Neptunian object, approximately 44 kilometers in diameter. It is on a retrograde com...']
+Got AI response in 5.263182163238525 seconds
+Question: How far is the sun to each planet in the solar system? 🌞
+Predicted Textual Response: <p>The distances from the Sun to each planet in the Solar System vary significantly due to their elliptical orbits. Here are the average distances in Astronomical Units (AU) from the Sun to each planet:</p>
+<table>
+  <tr>
+    <th>Planet</th>
+    <th>Distance from Sun (AU)</th>
+  </tr>
+  <tr>
+    <td>Mercury</td>
+    <td>0.39 AU</td>
+  </tr>
+  <tr>
+    <td>Venus</td>
+    <td>0.72 AU</td>
+  </tr>
+  <tr>
+    <td>Earth</td>
+    <td>1.00 AU</td>
+  </tr>
+  <tr>
+    <td>Mars</td>
+    <td>1.52 AU</td>
+  </tr>
+  <tr>
+    <td>Jupiter</td>
+    <td>5.20 AU</td>
+  </tr>
+  <tr>
+    <td>Saturn</td>
+    <td>9.58 AU</td>
+  </tr>
+  <tr>
+    <td>Uranus</td>
+    <td>19.22 AU</td>
+  </tr>
+  <tr>
+    <td>Neptune</td>
+    <td>30.05 AU</td>
+  </tr>
+</table>
+Predicted Data Response: []
+Predicted Format: table
+Retrieved Contexts (truncated): ["Taylor Swift's Eras Tour has captivated audiences worldwide by offering a meticulously crafted journey through an artist's diverse musical catalog, blending nostalgic hits with fresh performances. Its...", "Taylor Swift's journey to becoming the most popular pop star is a testament to her talent, versatility, and strategic career choices. Starting her career as a country singer-songwriter in Nashville, S...", "Titius–Bode law | The Titius–Bode law (sometimes termed just Bode's law) is a hypothesis that the bodies in some orbital systems, including the Sun's, orbit at semi-major axes in a function of planeta...", 'Astronomical unit | The astronomical unit (symbol: au or ua) is a unit of length, roughly the distance from Earth to the Sun. However, that distance varies as Earth orbits the Sun, from a maximum (aph...', 'V774104 | V774104 is a trans-Neptunian object (TNO) with a radius roughly half that of Pluto or somewhat smaller. Currently it is approximately 103 AU from the Sun, a distance of 15.4 billion kilomete...', 'Neptune | Neptune is the eighth and farthest known planet from the Sun in the Solar System. In the Solar System, it is the fourth-largest planet by diameter, the third-most-massive planet, and the den...', 'Family Portrait (Voyager) | The Family Portrait, or sometimes "Portrait of the Planets", is an image of the Solar System acquired by "Voyager 1" on February 14, 1990 from a distance of approximately 6...']
+Got AI response in 6.634876489639282 seconds
+Error in sys.excepthook:
+
+Original exception was:

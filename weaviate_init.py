@@ -39,13 +39,6 @@ def init_db(files, username):
 
         questions = client.collections.get(username)
         questions.data.insert_many(data)
-
-        response = questions.query.near_text(
-            query="Taylor Swift",
-            limit=2
-        )
-
-        print(response.objects[0].properties)
     
 if __name__ == "__main__":
     try: 

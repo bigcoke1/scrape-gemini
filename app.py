@@ -359,7 +359,7 @@ def upload_db():
             filenames.extend(existing_files)
             filenames = list(set(filenames))
             init_db(filenames, username)
-            filenames = str(filenames)
+            filenames = json.dumps(filenames)
             print(filenames)
             print("Databse intialized")
             cur.execute("UPDATE user SET databases = ? WHERE username = ?", [filenames, username])
@@ -371,7 +371,50 @@ def upload_db():
     except:
         logging.error("An error occured", exc_info=True)
         return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
-    
+
+@app.route("/get-databases/<username>", methods=["GET"])
+def get_databases(username):
+    try:
+        con = sqlite3.connect(USER_DATA)
+        cur = con.cursor()
+        result = cur.execute("SELECT databases FROM user WHERE username = ?", [username])
+        databases = result.fetchone()[0]
+        databases = json.loads(databases)
+        return jsonify(databases)
+    except:
+        logging.error("An error occured", exc_info=True)
+        return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
+
+@app.route("/delete-database", methods=["POST"])
+def delete_database():
+    try:
+        filename = request.form["filename"]
+        username = request.form["username"]
+
+        con = sqlite3.connect(USER_DATA)
+        cur = con.cursor()
+        result = cur.execute("SELECT databases FROM user WHERE username = ?", [username])
+        databases = result.fetchone()[0]
+        databases = json.loads(databases)
+        databases.remove(filename)
+        databases_str = json.dumps(databases)
+        print(databases_str)
+        cur.execute("UPDATE user SET databases = ? WHERE username = ?", [databases_str, username])
+        con.commit()
+        con.close()
+        
+        path = f"user_databases/{username}/{filename}"
+        if os.path.exists(path):
+            os.remove(path)
+        
+        init_db(files=databases, username=username)
+        print("Database updated")
+        return jsonify(databases)
+
+    except:
+        logging.error("An error occured", exc_info=True)
+        return Response(SERVER_ERROR_MSG, status=500, mimetype="text/plain")
+ 
 def run():
     app.run(host="0.0.0.0", port=5000)
 
