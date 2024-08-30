@@ -76,6 +76,7 @@
       paragraph.textContent = file;
       section.appendChild(paragraph);
       let deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
       deleteButton.addEventListener("click", async () => {
         await makeDeleteDbRequest(file);
       });
@@ -117,6 +118,8 @@
         body: params
       });
       await statusCheck(res);
+      res = await res.json();
+      populateDatabases(res);
       alert("Database updated!")
     } catch (err) {
       handleError(err);

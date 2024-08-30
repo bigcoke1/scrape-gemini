@@ -359,13 +359,13 @@ def upload_db():
             filenames.extend(existing_files)
             filenames = list(set(filenames))
             init_db(filenames, username)
-            filenames = json.dumps(filenames)
+            filenames_str = json.dumps(filenames)
             print(filenames)
             print("Databse intialized")
-            cur.execute("UPDATE user SET databases = ? WHERE username = ?", [filenames, username])
+            cur.execute("UPDATE user SET databases = ? WHERE username = ?", [filenames_str, username])
             con.commit()
             con.close()
-            return Response("Database initialized", status=200, mimetype="text/plain")
+            return jsonify(filenames)
         else:
             return Response(PARAM_ERROR_MSG, status=400, mimetype="text/plain")
     except:
