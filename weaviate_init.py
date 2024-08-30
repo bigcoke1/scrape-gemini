@@ -31,14 +31,15 @@ def init_db(files, username):
             else:
                 data.append(new_data)
 
-        questions = client.collections.create(
-            name=username,
-            vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_azure_openai(resource_name="easonmopenai", deployment_id="weaviate"),  # If set to "none" you must always provide vectors yourself. Could be any other "text2vec-*" also.
-            generative_config=wvc.config.Configure.Generative.azure_openai(resource_name="easonmopenai", deployment_id="weaviate")  # Ensure the `generative-openai` module is used for generative queries
-        )
+        if data:
+            questions = client.collections.create(
+                name=username,
+                vectorizer_config=wvc.config.Configure.Vectorizer.text2vec_azure_openai(resource_name="easonmopenai", deployment_id="weaviate"),  # If set to "none" you must always provide vectors yourself. Could be any other "text2vec-*" also.
+                generative_config=wvc.config.Configure.Generative.azure_openai(resource_name="easonmopenai", deployment_id="weaviate")  # Ensure the `generative-openai` module is used for generative queries
+            )
 
-        questions = client.collections.get(username)
-        questions.data.insert_many(data)
+            questions = client.collections.get(username)
+            questions.data.insert_many(data)
     
 if __name__ == "__main__":
     try: 

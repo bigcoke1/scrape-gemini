@@ -39,7 +39,7 @@ class RAG(dspy.Module):
                     dspy.settings.configure(rm=self.custom_rm)
                     context = self.retrieve(question).passages
                 except:
-                    logging.error("An error occurred", exc_info=True)
+                    pass
             dspy.settings.configure(rm=colbertv2_wiki17_abstracts)
             context = context + self.retrieve(question).passages
         pred = self.generate_answer(context=context, question=question)
