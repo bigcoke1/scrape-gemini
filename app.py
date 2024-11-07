@@ -42,7 +42,7 @@ PARAM_ERROR_MSG = "Invalid params error"
 HTTP_ERROR_MSG = "Wrong HTTP method"
 SCOPES = ['https://www.googleapis.com/auth/drive.file']
 CLIENT_SECRETS_FILE = "credentials.json"
-URL = "https://www.scrape-insight.com"
+URL = "http://127.0.0.1:5000/"
 
 ph = PasswordHasher()
 

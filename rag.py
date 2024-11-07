@@ -10,8 +10,10 @@ TRAINING_SET_PATH = "training_set.json"
 PREMAI_API_KEY = os.getenv("PREMAI_API_KEY")
 turbo = dspy.PremAI(model="gpt-3.5-turbo", project_id=5609, api_key=PREMAI_API_KEY, temperature=0.2, max_tokens=4000)
 colbertv2_wiki17_abstracts = dspy.ColBERTv2(url='http://20.102.90.50:2017/wiki17_abstracts')
+"""
 with instantiate_weaviate() as weaviate_client:
     weaviate_rm = WeaviateRM(weaviate_collection_name="Privacy_Data", weaviate_client=weaviate_client)
+"""
 dspy.settings.configure(lm=turbo, rm=colbertv2_wiki17_abstracts, backoff_time=5)
 
 class GenerateAnswer(dspy.Signature):
@@ -102,7 +104,7 @@ def load_rag(num_passages, custom_rm):
         logging.error("An error occured", exc_info=True)
 
 def get_dspy_answer(question, username):
-    rag = load_rag(num_passages=5, custom_rm=init_rm(username))
+    rag = load_rag(num_passages=5, custom_rm=colbertv2_wiki17_abstracts)
     pred = rag(question)
     print(f"Question: {question}")
     print(f"Predicted Textual Response: {pred.textual_response}")

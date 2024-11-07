@@ -10,3 +10,4 @@ markdown
 weaviate-client
 dspy
 selenium
+premai
